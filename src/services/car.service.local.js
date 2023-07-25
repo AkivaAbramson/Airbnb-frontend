@@ -31,38 +31,39 @@ async function query(filterBy = { txt: '', price: 0 }) {
 function getById(carId) {
     return storageService.get(STORAGE_KEY, carId)
 }
+// TODO: add following functions
 
-async function remove(carId) {
-    await storageService.remove(STORAGE_KEY, carId)
-}
+// async function remove(carId) {
+//     await storageService.remove(STORAGE_KEY, carId)
+// }
 
-async function save(car) {
-    var savedCar
-    if (car._id) {
-        savedCar = await storageService.put(STORAGE_KEY, car)
-    } else {
-        // Later, owner is set by the backend
-        car.owner = userService.getLoggedinUser()
-        savedCar = await storageService.post(STORAGE_KEY, car)
-    }
-    return savedCar
-}
+// async function save(car) {
+//     var savedCar
+//     if (car._id) {
+//         savedCar = await storageService.put(STORAGE_KEY, car)
+//     } else {
+//         // Later, owner is set by the backend
+//         car.owner = userService.getLoggedinUser()
+//         savedCar = await storageService.post(STORAGE_KEY, car)
+//     }
+//     return savedCar
+// }
 
-async function addCarMsg(carId, txt) {
-    // Later, this is all done by the backend
-    const car = await getById(carId)
-    if (!car.msgs) car.msgs = []
+// async function addCarMsg(carId, txt) {
+//     // Later, this is all done by the backend
+//     const car = await getById(carId)
+//     if (!car.msgs) car.msgs = []
 
-    const msg = {
-        id: utilService.makeId(),
-        by: userService.getLoggedinUser(),
-        txt
-    }
-    car.msgs.push(msg)
-    await storageService.put(STORAGE_KEY, car)
+//     const msg = {
+//         id: utilService.makeId(),
+//         by: userService.getLoggedinUser(),
+//         txt
+//     }
+//     car.msgs.push(msg)
+//     await storageService.put(STORAGE_KEY, car)
 
-    return msg
-}
+//     return msg
+// }
 
 function getEmptyCar() {
     return {
