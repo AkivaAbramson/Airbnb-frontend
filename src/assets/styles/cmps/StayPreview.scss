@@ -1,0 +1,22 @@
+.stay-preview {
+    height: 300px;
+    &__side {
+      padding: 0.8rem;
+      border-radius: 6px;
+      &--front {
+        position: relative;
+  
+        .tag-text {
+          color: $clr1;
+        }
+      }
+      
+    }
+  
+    &__img {
+      border-radius: 6px;
+      width: 100%;
+      object-fit: contain;
+      margin-block-end: rem(8px);
+    }
+}

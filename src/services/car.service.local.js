@@ -8,10 +8,10 @@ const STORAGE_KEY = 'car'
 export const carService = {
     query,
     getById,
-    save,
-    remove,
+    // save,
+    // remove,
     getEmptyCar,
-    addCarMsg
+    // addCarMsg
 }
 window.cs = carService
 
