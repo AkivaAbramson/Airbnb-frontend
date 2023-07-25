@@ -1,5 +1,5 @@
 <template>
-  <div class="container home">
+  <div class="container explore">
     <h2>Reviews</h2>
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <ul class="review-list">

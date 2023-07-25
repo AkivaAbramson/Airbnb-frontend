@@ -1,5 +1,5 @@
 <template>
-  <div class="container home">
+  <div class="container explore">
     <ul class="car-list">
       <li v-for="car in cars" :key="car._id">
         <p>
