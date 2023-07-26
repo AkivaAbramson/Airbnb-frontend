@@ -10,6 +10,14 @@
 .text-center {
     text-align: center;
 }
+
+// Font Styles
+.bold {
+    font-weight: bold;
+}
+.underline {
+    text-decoration-line: underline;
+}
 // flex helpers
 
 .flex {
@@ -25,8 +33,14 @@
     &.justify-center {
         justify-content: center;
     }
+    &.justify-between {
+        justify-content: space-between;
+    }
     &.align-center {
         align-items: center;
+    }
+    &.align-end {
+        align-items: end;
     }
 }
 
