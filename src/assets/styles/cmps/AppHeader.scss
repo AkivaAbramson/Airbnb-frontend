@@ -1,8 +1,10 @@
-header {
-    background-color: $clr5;
-    padding: 10px;
+.small-header {
+    height: 80px;
+    font-size: 1rem;
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid rgb(235,235,235);
 
     .loggedin-user {
         background-color: $clr1;
@@ -23,7 +25,7 @@ header {
         }
     }
     nav {
-        background-color: $clr4;
+
         padding: 5px 0;
     }
     nav a:not(:first-child) {
