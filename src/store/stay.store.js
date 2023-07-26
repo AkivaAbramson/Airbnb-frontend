@@ -8,16 +8,14 @@ export const stayStore = {
         stays: []
     },
     getters: {
-        stays({stays}) { return stays },
+        stays({ stays }) { return stays },
     },
     mutations: {
         setStays(state, { stays }) {
             state.stays = stays
         },
-        
     },
     actions: {
-        
         async loadStays(context) {
             try {
                 const stays = await stayService.query()
@@ -27,7 +25,5 @@ export const stayStore = {
                 throw err
             }
         },
-        
-
     }
 }
