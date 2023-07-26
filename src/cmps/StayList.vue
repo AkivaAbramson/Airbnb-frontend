@@ -1,6 +1,6 @@
 <template lang="">
     <section class="stay-list">
-        <ul v-if="stays.length" class="clean-list">
+        <ul v-if="stays.length" class="ul-list">
             <StayPreview 
             v-for="stay in stays" 
             :key="stay._id"   
@@ -28,6 +28,7 @@ export default {
     },
     created() {
       
+      
     
   },
     computed: {
@@ -37,9 +38,4 @@ export default {
   }
 </script>
 
-<!-- <style>
-.stay-list {
-  display: grid;  
-  grid-template-columns: repeat(auto-fill, 15rem);
-}
-</style> -->
+
