@@ -16,7 +16,7 @@
 <script>
 import StayPreview from './StayPreview.vue'
 export default {
-    date(){
+    data(){
       return {
         user: null
       }

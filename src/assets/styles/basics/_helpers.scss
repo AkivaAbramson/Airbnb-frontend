@@ -28,6 +28,9 @@
     &.align-center {
         align-items: center;
     }
+    &.space-between {
+        justify-content: space-between;
+    }
 }
 
 //list
@@ -35,7 +38,7 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
-  }
+}
 
 // Media helpers
 
