@@ -1,35 +1,17 @@
 @font-face {
-    font-family: Cereal;
-    font-weight: 400;
-    src: url(../../fonts/Cereal/AirbnbCereal-Book.ttf);
+    font-family: 'Circular';
+    font-weight: normal;
+    src: url(src/assets/fonts/Circular/Airbnb_Cereal-Book.woff2) format(woff2);
 }
 
 @font-face {
-    font-family: Cereal;
-    font-weight: 300;
-    src: url(../../fonts/Cereal/AirbnbCereal-Light.ttf);
+    font-family: 'Circular';
+    font-weight: bold;
+    src: url(src/assets/fonts/Circular/Airbnb_Cereal-Medium.woff2) format(woff2);
 }
 
 @font-face {
-    font-family: Cereal;
-    font-weight: 500;
-    src: url(../../fonts/Cereal/AirbnbCereal-Medium.ttf);
-}
-
-@font-face {
-    font-family: Cereal;
-    font-weight: 600;
-    src: url(../../fonts/Cereal/AirbnbCereal-Bold.ttf);
-}
-
-@font-face {
-    font-family: Cereal;
-    font-weight: 700;
-    src: url(../../fonts/Cereal/AirbnbCereal-ExtraBold.ttf);
-}
-
-@font-face {
-    font-family: Cereal;
-    font-weight: 800;
-    src: url(../../fonts/Cereal/AirbnbCereal-Black.ttf);
+    font-family: 'Circular';
+    font-weight: bolder;
+    src: url(src/assets/fonts/Circular/Airbnb_Cereal-Bold.woff2) format(woff2);
 }

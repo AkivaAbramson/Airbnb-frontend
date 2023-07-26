@@ -1,8 +1,9 @@
 // Colors
+$clr0: #222222;
 $clr1: #ce2e6c;
 $clr2: #4f3a65;
 $clr3: #574f7d;
-$clr4: #95adbe;
+$clr4: #717171;
 $clr5: #dff0ea;
 $clr6: #fff;
 $clrBase: rgb(34, 34, 34);
@@ -10,4 +11,6 @@ $clrBase: rgb(34, 34, 34);
 // Breakpoints
 $mobile-breakpoint: 460px;
 $narrow-breakpoint: 720px;
+$tablet-breakpoint: 840px;
 $normal-breakpoint: 960px;
+$wide-breakpoint: 1500px;
