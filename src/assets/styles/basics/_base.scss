@@ -2,30 +2,12 @@
     box-sizing: border-box;
 }
 
-// ::selection {
-//     background-color: $clr1;
-//     color: $clr6;
-// }
-
-// html {
-//     font-family: montserrat;
-//     line-height: 1.6;
-//     color: $clr2;
-// }
-
 body {
     padding: 0;
     margin: 0;
 }
 
-img {
-    width: 100%;
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 0.6em;
+    line-height: 1;
 }
-
-// a {
-//     text-decoration: none;
-// }
-// a:hover {
-//     text-decoration: underline;
-// }
-

@@ -6,6 +6,7 @@ import StayIndex from './views/StayIndex.vue'
 import LoginSignup from './views/LoginSignup.vue'
 import UserDetails from './views/UserDetails.vue'
 import StayDetails from './views/StayDetails.vue'
+import StayEdit from './views/StayEdit.vue'
 
 const routes = [
   {
@@ -32,7 +33,12 @@ const routes = [
     path: '/user/:id',
     name: 'UserDetails',
     component: UserDetails
-  }
+  },
+  {
+    path: '/stay/edit/:stayId?',
+    name: 'StayEdit',
+    component: StayEdit
+  },
 ]
 
 

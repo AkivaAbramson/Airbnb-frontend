@@ -1,5 +1,5 @@
 <template>
-    <section class="header-filter">
+    <section class="header-filter main-layout">
         <ul class="main-labels clean-list">
             <li class="label" v-for="label in labels" :key="labels">
                 <button class="label-button">

@@ -18,6 +18,7 @@
       </section>
   
       <nav>
+        <RouterLink to="/stay/edit/">Airanbnb your home</RouterLink>
         <RouterLink to="/login">Login / Signup</RouterLink>
       </nav>
   
