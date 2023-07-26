@@ -5,6 +5,7 @@
             v-for="stay in stays" 
             :key="stay._id"   
             :stay="stay" 
+            @removed="$emit('removed', stay._id)"
              
             />
           </ul>
