@@ -33,7 +33,7 @@
             .rate-star {
                 font-size: rem(18px);
                 position: relative;
-                margin-top: -4px;
+                // margin-top: -4px;
 
             }
         }
@@ -50,14 +50,25 @@
             color: $clr4;
         }
     }
+    .prev-img-container{
+        position: relative;
 
-
-
-    .preview-img {
-        border-radius: 10px;
-        object-fit: cover; 
-        aspect-ratio: 1 / 1; 
-        max-width: 100%;
-        margin-bottom: 0.5em
+        .preview-img {
+            border-radius: 10px;
+            object-fit: cover; 
+            aspect-ratio: 1 / 1; 
+            max-width: 100%;
+            margin-bottom: 0.5em
+        }
+        .heart-icon {
+            position: absolute;
+            top: 10px; /* Adjust the distance from the top */
+            right: 10px; /* Adjust the distance from the right */
+            z-index: 1; /* Make sure the heart icon is above the image */
+        }
+        
     }
+
+
+
 }
