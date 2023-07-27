@@ -1,6 +1,6 @@
 <template>
     <section v-if="stay" class="stay-details">
-        <section>
+        <section class="header-details">
             <h1>{{ stay.name }}</h1>
             <div class="top-details flex justify-between align-end">
                 <div>
@@ -21,8 +21,19 @@
                 <img :src="getImgSrc(i)">
             </div>
         </section>
-        <section class="">
+        <section class="main-details">
+            <section>
+                <article class="grid-host">
+                    <h2>Hosted by {{ stay.host.fullname }}</h2>
+                    <img :src="stay.host.imgUrl">
+                    <ol class="clean-list">
+                        <li>{{ stay.capacity }} guests</li>
+                    </ol>
+                </article>
+            </section>
+            <section>
 
+            </section>
         </section>
     </section>
 </template>

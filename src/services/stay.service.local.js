@@ -70,7 +70,7 @@ function getEmptyStay() {
       "host": {
         "_id": "u101",
         "fullname": "Davit Pok",
-        "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small",
+        "imgUrl": "https://a0.muscache.com/im/pictures/user/User-369818264/original/8fbc6d95-73f9-452a-b427-76a7a4ea4335.jpeg?im_w=240",
       },
       "loc": {
         "country": "Portugal",
@@ -125,7 +125,7 @@ function getEmptyStay() {
 //         "host": {
 //           "_id": "u101",
 //           "fullname": "Davit Pok",
-//           "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small",
+//           "imgUrl": "https://a0.muscache.com/im/pictures/user/User-369818264/original/8fbc6d95-73f9-452a-b427-76a7a4ea4335.jpeg?im_w=240",
 //         },
 //         "loc": {
 //           "country": "Portugal",
