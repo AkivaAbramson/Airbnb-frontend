@@ -1,12 +1,17 @@
 <template>
     <li class="stay-preview" v-for="imgUrl in stay.imgUrls" :key="imgUrl">
-        <div class="prev-img-container">
-            <img class="preview-img" :src="imgUrl" />
-            <div class="heart-icon">
-                <svg @click="toggleHeart" :class="{ liked: isLiked }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" style="display: block; fill: rgba(0, 0, 0, 0.5); height: 24px; width: 24px; stroke: white; stroke-width: 2; overflow: visible;"><path d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z"></path></svg>
+        <RouterLink  :to="'/stay/' + stay._id">
+            <div class="prev-img-container">
+                <img class="preview-img" :src="imgUrl" />
+                <div class="heart-icon">
+                    <svg @click.prevent="toggleHeart" :class="{ liked: isLiked }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 24px; width: 24px; stroke: white; stroke-width: 2; overflow: visible;">
+                        <path d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z"></path>
+                    </svg>
+                </div>
             </div>
-            <div class="actions">
-                <button @click="$emit('removed')" class="btn">
+        </RouterLink>
+            <!-- <div class="actions">
+              <button @click="$emit('removed')" class="btn">
                   <span>x</span>
               </button>
               <RouterLink :to="'/stay/edit/' + stay._id" class="btn">
@@ -15,8 +20,7 @@
               <RouterLink  :to="'/stay/' + stay._id" class="btn">
                   <span>Details</span>
               </RouterLink>
-            </div>
-        </div>
+            </div> -->
         <div class="preview-details">
             <section class="preview-data">
                 <h3 class="black-bold preview-loc">{{ stay.loc.country }}, {{ stay.loc.city }}</h3>
@@ -31,7 +35,7 @@
             
         </div>
 
-        <!-- <h6>{{ stay.summary }}</h6> -->
+        
 
     </li>
 </template>
@@ -50,6 +54,7 @@ export default {
         toggleHeart(){
             this.isLiked = !this.isLiked
             
+            
         }
     },
     computed: {
@@ -58,3 +63,5 @@ export default {
     
 }
 </script>
+
+
