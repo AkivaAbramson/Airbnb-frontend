@@ -130,6 +130,53 @@
                 grid-column: 1 / -1;
             }
         }
+
+        .stay-desc {
+            font-size: 1rem;
+            padding-block: 2rem;
+        }
+
+        .amenities {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(282.2px, 1fr));
+            font-size: 1rem;
+            margin-block: 3rem;
+
+            h2 {
+                margin-block-end: 1.5rem;
+                grid-row: 1;
+                grid-column: 1 / -1;
+            }
+
+            .amenity {
+                margin-block-end: 1rem;
+            }
+        }
+
+        .notable-features {
+            padding-block-end: 2rem;
+            margin-block-start: 2rem;
+
+            .feature {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                margin-block-start: 1.5rem;
+
+                p {
+                    margin: 0.125rem 0;
+                    color: $clr4;
+                }
+            }
+        }
+
+        svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-inline-end: 1rem;
+        }
     }
 
+    .shadow {
+        border-block-end: 1px solid $clrShadow;
+    }
 }

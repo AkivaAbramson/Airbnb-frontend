@@ -21,25 +21,74 @@
                 <img :src="getImgSrc(i)">
             </div>
         </section>
-        <section class="main-details">
+        <section class="main-details shadow">
             <section>
-                <article class="grid-host">
+                <article class="grid-host shadow">
                     <h2>Hosted by {{ stay.host.fullname }}</h2>
                     <img :src="stay.host.imgUrl">
                     <ol class="clean-list">
                         <li>{{ stay.capacity }} guests</li>
                     </ol>
                 </article>
+                <ul class="notable-features shadow clean-list">
+                    <li class="feature">
+                        <svg v-html="getSvg('Dedicated workspace')"></svg>
+                        <div>
+                            <h3>
+                                Dedicated workspace
+                            </h3>
+                            <p>
+                                A room with wifi that is well-suited for working.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="feature">
+                        <svg v-html="getSvg('checkin')"></svg>
+                        <div>
+                            <h3>
+                                Self check-in
+                            </h3>
+                            <p>
+                                Check yourself in with the lockbox
+                            </p>
+                        </div>
+                    </li>
+                    <li class="feature">
+                        <svg v-html="getSvg('calendar')"></svg>
+                        <div>
+                            <h3>
+                                Free cancellation for 48 hours.
+                            </h3>
+                        </div>
+                    </li>
+                </ul>
+                <article class="stay-desc shadow">
+                    <p>{{ stay.summary }}</p>
+                </article>
+                <ul class="amenities clean-list">
+                    <h2>What this place offers</h2>
+                    <li v-for="i in Math.min(10, stay.amenities.length)"
+                    class="flex align-center amenity">
+                        <svg v-html="getSvg(stay.amenities[i - 1])"></svg>
+                        {{ stay.amenities[i - 1] }}
+                    </li>
+                </ul>
             </section>
-            <section>
-
-            </section>
+            <Order :stay="stay"></Order>
+        </section>
+        <section class="reviews shadow">
+            Reviews
+        </section>
+        <section class="stay-map">
+            Map
         </section>
     </section>
 </template>
   
 <script>
 import { stayService } from '../services/stay.service.local'
+import { svgService } from '../services/svg.service'
+import Order from '../cmps/Order.vue'
 export default {
     name: 'StayDetails',
     data() {
@@ -74,6 +123,9 @@ export default {
                 small: i > 1,
                 top: i < 4
             }
+        },
+        getSvg(iconName) {
+            return svgService.getSvg(iconName)
         }
     },
     computed: {
@@ -88,6 +140,9 @@ export default {
             return this.stay.loc.city + ', ' + this.stay.loc.country
         }
     },
+    components: {
+        Order
+    }
 }
 </script>
   
