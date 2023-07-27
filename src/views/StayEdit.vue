@@ -82,7 +82,7 @@ export default {
                 this.$router.push('/')
             } catch (err) {
                 showErrorMsg("Couldn't add/update stay")
-                throw new Error(err)
+                
             }
         },
     }
