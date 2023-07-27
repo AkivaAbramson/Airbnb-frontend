@@ -3,7 +3,7 @@
         height: 6rem;
         display: grid;
         grid-auto-flow: column;
-        grid-template-columns: repeat(auto-fill, 3rem);
+        grid-auto-columns: max-content;
         overflow-y: hidden;
         overflow-x: auto;
         gap: 2rem;
@@ -12,7 +12,6 @@
             border:0;
             background-color: #fff;
             height: 3rem;
-            width: 3.5rem;
     
     
             img {
