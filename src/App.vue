@@ -1,6 +1,6 @@
 <template>
   <section>
-    <AppHeader />
+    <AppHeader class="stay-details" />
     <RouterView/>
     <UserMsg/>
   </section>

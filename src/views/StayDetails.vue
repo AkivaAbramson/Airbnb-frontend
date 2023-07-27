@@ -11,8 +11,8 @@
                     <span class="bold underline">{{ getLocName }}</span>
                 </div>
                 <div>
-                    <button class="btn btn-top bold underline">Edit</button>
-                    <button class="btn btn-top bold underline">Save</button>
+                    <RouterLink :to="'/stay/edit/' + stay._id" class="btn btn-top underline">Edit</RouterLink>
+                    <button class="btn btn-top underline">Save</button>
                 </div>
             </div>
         </section>
@@ -20,6 +20,9 @@
             <div v-for="i in 5" :class="getImgClass(i)">
                 <img :src="getImgSrc(i)">
             </div>
+        </section>
+        <section class="">
+
         </section>
     </section>
 </template>
