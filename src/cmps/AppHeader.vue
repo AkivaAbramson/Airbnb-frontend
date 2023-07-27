@@ -37,8 +37,8 @@
         <img :src="loggedInUser.imgUrl" />
       </section>
   
-      <AppHeaderFilter class="main-layout"></AppHeaderFilter>
     </header>
+    <AppHeaderFilter class="main-layout"></AppHeaderFilter>
   
   </section>
   
