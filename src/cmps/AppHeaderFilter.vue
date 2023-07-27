@@ -1,5 +1,5 @@
 <template>
-    <section class="header-filter main-layout">
+    <section class="header-filter main-layout flex">
         <ul class="main-labels clean-list">
             <li class="label" v-for="label in labels" :key="labels">
                 <button class="label-button">
@@ -10,7 +10,7 @@
         </ul>
         <div class="main-filters">
             <button class="filter-button">
-                <div>p</div>
+                <div></div>
                 <p>Filters</p>
             </button>
         </div>
