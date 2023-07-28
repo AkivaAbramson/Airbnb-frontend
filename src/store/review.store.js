@@ -24,7 +24,7 @@ export const reviewStore = {
             try {
                 review = await reviewService.add(review)
                 context.commit({ type: 'addReview', review })
-                context.dispatch({ type: 'increaseScore' })
+                // context.dispatch({ type: 'increaseScore' })
 
                 return review
             } catch (err) {

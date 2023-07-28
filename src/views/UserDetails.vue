@@ -2,7 +2,7 @@
   <section v-if="user">
     <h1>User Details - {{ user.fullname }}</h1>
     <h2 v-if="isMe">Its me</h2>
-    <h3>{{ user.username }} score: {{ user.score }}</h3>
+    <!-- <h3>{{ user.username }} score: {{ user.score }}</h3> -->
     <img style="max-width: 200px;" :src="user.imgUrl" />
     <ul>
       <li v-for="review in user.givenReviews" :key="review._id">
@@ -63,8 +63,7 @@ export default {
       }
     },
     onUserUpdate(updatedUser) {
-      showSuccessMsg(`This user ${updatedUser.fullname} just got updated from socket,
-       new score: ${updatedUser.score}`)
+      showSuccessMsg(`This user ${updatedUser.fullname} just got updated from socket,`)
       this.user = updatedUser
     },
     unmounted() {
