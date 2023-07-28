@@ -97,9 +97,9 @@ export const userStore = {
             }
 
         },
-        // async increaseScore({ commit }) {
+        // async addToWishlist({ commit }, {stayId}) {
         //     try {
-        //         const score = await userService.changeScore(100)
+        //         await userService.update(stayId)
         //         commit({ type: 'setUserScore', score })
         //     } catch (err) {
         //         console.log('userStore: Error in increaseScore', err)
