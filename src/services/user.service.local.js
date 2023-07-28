@@ -13,7 +13,7 @@ export const userService = {
     getById,
     remove,
     update,
-    changeScore
+    // changeScore
 }
 
 window.userService = userService
@@ -31,9 +31,9 @@ function remove(userId) {
     return storageService.remove('user', userId)
 }
 
-async function update({_id, score}) {
+async function update({_id}) {
     const user = await storageService.get('user', _id)
-    user.score = score
+    // user.score = score
     await storageService.put('user', user)
 
     // Handle case in which admin updates other user's details
@@ -50,7 +50,7 @@ async function login(userCred) {
 }
 
 async function signup(userCred) {
-    userCred.score = 10000
+    
     if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
     const user = await storageService.post('user', userCred)
     return saveLocalUser(user)
@@ -69,7 +69,7 @@ async function changeScore(by) {
 }
 
 function saveLocalUser(user) {
-    user = {_id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score}
+    user = {_id: user._id, fullname: user.fullname, imgUrl: user.imgUrl}
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
@@ -80,9 +80,9 @@ function getLoggedinUser() {
 
 // Initial data
 // ;(async ()=>{
-//     await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123',score: 10000, isAdmin: false})
-//     await userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123', score: 10000, isAdmin: true})
-//     await userService.signup({fullname: 'Muki G', username: 'muki', password:'123', score: 10000})
+//     await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123',isAdmin: false})
+//     await userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123',isAdmin: true})
+//     await userService.signup({fullname: 'Muki G', username: 'muki', password:'123',})
 // })()
 
 // user = {_id, fullname, username, password, wishlist: [{stayid, stay.name, stayImgs}]}
