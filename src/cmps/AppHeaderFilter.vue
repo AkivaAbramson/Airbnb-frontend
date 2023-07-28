@@ -1,5 +1,8 @@
 <template>
     <section class="header-filter main-layout flex">
+        <section>
+
+        </section>
         <ul class="main-labels clean-list">
             <li class="label" v-for="label in labels" :key="labels">
                 <button class="label-button">
@@ -11,7 +14,7 @@
         <div class="main-filters">
             <button class="filter-button">
                 <div class="filter-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 14px; width: 14px; fill: currentcolor;"><path d="M5 8a3 3 0 0 1 2.83 2H14v2H7.83A3 3 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.83 4H2V4h6.17A3 3 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" style="height: 14px; width: 14px; fill: currentcolor;"><path d="M5 8a3 3 0 0 1 2.83 2H14v2H7.83A3 3 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.83 4H2V4h6.17A3 3 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path></svg>
                 </div>
                 <p>Filters</p>
             </button>
