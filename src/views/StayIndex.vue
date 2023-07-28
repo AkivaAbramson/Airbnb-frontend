@@ -1,5 +1,5 @@
 <template>
-  <section class="stay-index main-layout">
+  <section class="stay-index home-layout">
     <!-- <pre>{{stays}}</pre> -->
     
     <!-- <StayFilter @filter="setFilterBy" /> -->

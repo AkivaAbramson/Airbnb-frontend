@@ -1,6 +1,6 @@
 <template>
 
-  <section class="main-layout">
+  <section class="home-layout">
     <header class="small-header">
       <nav>
         <RouterLink to="/">
