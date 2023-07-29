@@ -1,4 +1,159 @@
 .order {
     display: grid;
     justify-self: end;
+    align-items: center;
+    grid-template-columns: 1fr;
+    grid-auto-rows: max-content;
+    width: 80%;
+    height: fit-content;
+    padding: 1.5rem;
+    border: 1px solid $clrShadow;
+    border-radius: 0.75rem;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px 0px;
+
+    >* {
+        min-width: 0;
+    }
+
+    .order-top {
+        align-items: baseline;
+        flex-wrap: wrap;
+
+        .rate-and-rev {
+            display: flex;
+            align-items: end;
+            height: 1.75rem;
+        }
+
+        svg {
+            margin: 0;
+        }
+
+        .svg-star {
+            width: 0.75rem;
+            height: 0.75rem;
+        }
+
+        .cmp-rev {
+            text-decoration: none;
+            font-weight: normal;
+            color: $clr4;
+        }
+
+        .top-price {
+            font-size: 1.375rem;
+
+            &:after {
+                content: ' night';
+                font-size: 1rem;
+                font-weight: normal;
+            }
+        }
+    }
+
+    .user-input {
+        border: 1px solid $clr8;
+        border-radius: 0.5rem;
+        margin: 1.5rem 0 1rem;
+
+        .dates {
+            border-block-end: 1px solid $clr8;
+
+            button:nth-child(1) {
+                border-inline-end: 1px solid $clr8;
+            }
+        }
+
+        button {
+            background-color: transparent;
+            text-align: start;
+            border: none;
+            width: 100%;
+            font-family: 'Circular';
+            font-size: 0.875rem;
+            overflow: hidden;
+
+            span {
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                padding-inline: 0.75rem;
+            }
+
+            .title {
+                text-transform: uppercase;
+                font-size: 0.625rem;
+                margin-block-start: 0.625rem;
+                margin-block-end: 0.125rem;
+            }
+
+            :nth-child(2) {
+                padding-block-end: 0.625rem;
+                line-height: 1.125rem;
+            }
+        }
+    }
+
+    .btn-reserve {
+        position: relative;
+        --mouse-x: 0;
+        --mouse-y: 0;
+
+        height: 3rem;
+        width: 100%;
+        font: bold 1rem 'Circular';
+        color: white;
+        border-radius: 0.5rem;
+        background-color: transparent;
+        background-repeat: repeat;
+        background-image: linear-gradient(to right, rgb(189, 30, 89) 0%, rgb(146, 23, 77) 50%, rgb(134, 20, 83) 100%);
+        
+        &:before {
+            content: 'Reserve';
+            display: grid;
+            position: absolute;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            z-index: 2;
+        }
+
+        &::after {
+            content: '';
+            display: grid;
+            align-items: center;
+            border-radius: 0.5rem;
+            height: 100%;
+            width: 100%;
+            background-image: radial-gradient(circle at center center, rgb(108, 13, 99) 0%, rgb(108, 13, 99) 10%, rgb(134, 20, 83) 27.5%, rgb(146, 23, 77) 45%, rgb(189, 30, 89) 70%, rgb(215, 4, 102) 100%);
+            background-position: calc(var(--mouse-x, 0) * 1px) calc(var(--mouse-y, 0) * 1px);
+            background-size: 200% 200%;
+            transition: opacity 1.25s;
+            opacity: 0;
+        }
+
+        &:hover::after {
+            opacity: 1;
+        }
+    }
+
+    .price {
+        font-size: 1rem;
+
+        .notify {
+            text-align: center;
+            margin-block-start: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .price-calc {
+            padding-block: 1.5rem;
+            margin-block-end: 1.5rem;
+
+            div:first-child:first-child {
+                margin-block-end: 1rem;
+            }
+        }
+    }
 }
