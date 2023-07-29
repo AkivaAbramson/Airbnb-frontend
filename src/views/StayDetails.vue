@@ -4,7 +4,7 @@
             <h1>{{ stay.name }}</h1>
             <div class="top-details flex justify-between align-end">
                 <div>
-                    <RateAndRev class="header-spacer" :stay="stay" />
+                    <RateAndRev class="header-spacer" :reviews="stay.reviews" />
                     <span class="bold underline">{{ locName }}</span>
                 </div>
                 <div>
@@ -73,9 +73,7 @@
             </section>
             <Order :stay="stay"></Order>
         </section>
-        <section class="reviews shadow">
-            Reviews
-        </section>
+        <StayReviews class="small" :reviews="stay.reviews" />
         <section class="stay-map">
             Map
         </section>
@@ -87,6 +85,7 @@ import { stayService } from '../services/stay.service.local'
 import { svgService } from '../services/svg.service'
 import Order from '../cmps/Order.vue'
 import RateAndRev from '../cmps/RateAndRev.vue'
+import StayReviews from './StayReviews.vue'
 export default {
     name: 'StayDetails',
     data() {
@@ -134,7 +133,8 @@ export default {
     },
     components: {
         Order,
-        RateAndRev
+        RateAndRev,
+        StayReviews
     }
 }
 </script>

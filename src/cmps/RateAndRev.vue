@@ -1,10 +1,10 @@
 <template>
-    <span v-if="stay.reviews?.length" class="rate-and-rev">
+    <span v-if="reviews?.length" class="rate-and-rev">
         <span>
             <span class="svg-star" v-html="getSvg('star')"></span>
-            <span class="bold cmp-rate">{{ rate }} · </span>
+            <span class="bold cmp-rate">{{ rate }}</span>
         </span>
-        <span class="bold underline cmp-rev">{{ stay.reviews.length }} reviews</span>
+        <span class="bold underline cmp-rev">{{ count }}</span>
     </span>
 </template>
 
@@ -12,7 +12,7 @@
 import { svgService } from '../services/svg.service'
 
 export default {
-    props: ['stay'],
+    props: ['reviews'],
     methods: {
         getSvg(iconName) {
             return svgService.getSvg(iconName)
@@ -21,11 +21,20 @@ export default {
     computed: {
         rate() {
             let rating = 0
-            for (const review of this.stay.reviews) {
-                rating += review.rate
+            let count = 0
+            for (const review of this.reviews) {
+                for (const cat in review.rate) {
+                    rating += review.rate[cat] ?? 0
+                    count++
+                }
             }
-            return rating / this.stay.reviews.length
+            const avg = parseInt(rating * 100 / count) / 100
+            return avg === parseInt(avg) ? avg.toFixed(1) : avg
         },
+        count() {
+            const count = this.reviews.length
+            return count + ' review' + (count > 1 ? 's' : '')
+        }
     },
 }
 </script>

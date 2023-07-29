@@ -1,6 +1,17 @@
 .stay-details {
-    $normal-width: 1120px;
-    $min-margin-sides: 80px;
+    --normal-width: 1120px;
+    --min-margin-sides: 1.5rem;
+    $normal-width: var(--normal-width);
+    $min-margin-sides: var(--min-margin-sides);
+
+    @media (min-width: 745px) {
+        --min-margin-sides: 40px;
+    }
+
+    @media (min-width: 1128px) {
+        --min-margin-sides: 80px;
+    }
+
     display: grid;
     grid-template-columns: minmax($min-margin-sides, 1fr) minmax(auto, $normal-width) minmax($min-margin-sides, 1fr);
     font-family: 'Circular';
@@ -182,5 +193,10 @@
 
     .svg-star {
         margin-inline-end: 0.25rem;
+    }
+    
+    .cmp-rate::after {
+        content: '·';
+        margin-inline: calc((2 / 7) * 1em);
     }
 }

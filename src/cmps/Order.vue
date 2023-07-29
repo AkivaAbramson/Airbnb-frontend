@@ -2,7 +2,7 @@
     <section class='order'>
         <article class="order-top flex justify-between">
             <span class="top-price bold">${{ price }}</span>
-            <RateAndRev :stay="stay" />
+            <RateAndRev :reviews="stay.reviews" />
         </article>
         <article class="user-input">
             <div class="dates flex">
@@ -68,12 +68,12 @@ export default {
             return '24/10/2023'
         },
         guestCount() {
-            const num = 2
-            return num + ' guest' + (num > 1 ? 's' : '')
+            const count = 2
+            return count + ' guest' + (count > 1 ? 's' : '')
         },
         nightsTxt() {
-            const num = this.nights()
-            return num + ' night' + (num > 1 ? 's' : '')
+            const count = this.nights()
+            return count + ' night' + (count > 1 ? 's' : '')
         },
         priceNights() {
             return this.nights() * this.stay.price

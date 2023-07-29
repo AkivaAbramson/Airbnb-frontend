@@ -1,0 +1,119 @@
+.reviews {
+    $topGap: 3rem;
+    $botGap: 3rem;
+    $titleGap: 1.5rem;
+    $reviewGap: 1.5rem;
+
+    padding-block: $topGap $botGap;
+
+    h2 {
+        font-size: 1.375rem;
+        padding-block-end: $titleGap;
+    }
+
+    .review-cats {
+        flex-wrap: wrap;
+        width: 100%;
+
+        li {
+            align-self: start;
+            width: 1fr;
+            min-width: 50%;
+            flex-basis: 300px;
+            font-size: 1rem;
+            padding-block-end: 0.75rem;
+
+            .cat-title {
+                width: 75%;
+            }
+
+            .score {
+                position: relative;
+                width: 25%;
+                height: 0.25rem;
+                margin-inline-end: 20%;
+                border-radius: 0.125rem;
+                background-color: $clrShadow;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    width: calc((var(--score) / 5) * 100%);
+                    height: 100%;
+                    border-radius: 0.125rem;
+                    background-color: $clr0;
+
+                }
+
+                &::after {
+                    content: var(--scoreTxt);
+                    position: absolute;
+                    text-align: end;
+                    left: calc(100% + 0.625rem);
+                    width: 1rem;
+                    bottom: 0;
+                    transform: translateY(37.5%);
+                    font-size: 0.75rem;
+                    font-weight: bold;
+                }
+            }
+        }
+
+    }
+
+    .reviews-content {
+        margin-block-start: 1.5rem;
+
+        li {
+            display: grid;
+            grid-template-columns: 2.5rem 1fr;
+            margin-block-end: 2.5rem;
+            width: 100%;
+
+            @media (min-width: 1128px) {
+                width: 50%;
+                padding-inline-end: calc(10% - 1.75rem);
+            }
+
+            img {
+                grid-column: 1;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                border-radius: 100%;
+            }
+
+            div:not(.review) {
+                margin-inline-start: 0.75rem;
+
+                h3 {
+                    font-size: 1rem;
+                }
+
+                span {
+                    display: block;
+                    color: $clr4;
+                    line-height: 1.25rem;
+                }
+            }
+
+            .review {
+                display: -webkit-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-break: strict;
+                grid-column: 1 / -1;
+                -webkit-box-orient: vertical;
+                margin-block-start: 1rem;
+                font-size: 1rem;
+                line-height: 1.5rem;
+            }
+        }
+    }
+
+    &.small {
+        .review {
+            -webkit-line-clamp: 4;
+        }
+    }
+}
