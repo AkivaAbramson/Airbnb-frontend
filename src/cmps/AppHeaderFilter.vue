@@ -1,8 +1,8 @@
 <template>
     <section class="header-filter main-layout flex">
 
-        <carousel :itemsToShow="5">
-            <slide class="main-labels" v-for="label in labels" :key="labels">
+        <carousel :itemsToShow="10">
+            <slide class="main-labels" v-for="label in labels" :key="label">
                 <button class="label-button" 
                     @mouseenter="showArrowsPagination = true"
                     @mouseleave="showArrowsPagination = false">

@@ -1,17 +1,37 @@
 .small-header {
+    display: flex;
+    justify-content: space-between;
     height: 80px;
     font-family: Circular;
     font-weight: normal;
     font-size: 1rem;
-    display: flex;
     align-items: center;
-    justify-content: space-between;
     border-bottom: 1px solid rgb(235,235,235);
 
     .search-container {
+        display: flex;
+        flex-wrap: nowrap;
         padding: 1rem;
-        border: #919191 solid 1px;
-        border-radius: 10% / 50%;
+        border: #E0E0E0 solid 1px;
+        border-radius: 7% / 50%;
+        color: #797979;
+
+        & > * {
+            height: 1.5rem;
+        }
+
+        & > *:not(:last-child) {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .any {
+            color: black;
+            border-right: #E0E0E0 solid 1px;
+            font-weight: bolder;
+        }
     }
 
     .profile-menu {
