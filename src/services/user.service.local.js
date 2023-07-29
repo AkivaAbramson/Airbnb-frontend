@@ -1,5 +1,6 @@
 import { storageService } from './async-storage.service'
-
+import { stayService } from './stay.service.local'
+// import { stayService } from './stay.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -13,7 +14,7 @@ export const userService = {
     getById,
     remove,
     update,
-    // changeScore
+    addToWishlist,
 }
 
 window.userService = userService
@@ -60,12 +61,18 @@ async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
 }
 
-async function changeScore(by) {
+async function addToWishlist(stayId) {
     const user = getLoggedinUser()
     if (!user) throw new Error('Not loggedin')
-    user.score = user.score + by || by
+    const stayToadd = await stayService.getById(stayId)
+    if(user.wishlist){
+        user.wishlist.push(stayToadd)
+    } else {
+        user.wishlist = [stayToadd]
+    }
+
     await update(user)
-    return user.score
+    return user.wishlist
 }
 
 function saveLocalUser(user) {

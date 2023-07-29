@@ -6,7 +6,8 @@ export const userStore = {
     state: {
         loggedinUser: null,
         users: [],
-        isLoading: false
+        isLoading: false,
+        wishlist: []
     },
     getters: {
         users({ users }) { return users },
@@ -16,6 +17,9 @@ export const userStore = {
         },
         usersIsLoading({isLoading}) {
             return isLoading
+        },
+        wishlist({wishlist}){
+            return wishlist
         }
     },
     mutations: {
@@ -32,6 +36,16 @@ export const userStore = {
         removeUser(state, { userId }) {
             state.users = state.users.filter(user => user._id !== userId)
         },
+        setWishlist(state, { wishlist }) {
+            state.wishlist = wishlist;
+        },
+        addToWishlist(state, { stayToadd }) {
+            if(state.loggedinUser.wishlist){
+                state.loggedinUser.wishlist.push(stayToadd)
+            } else{
+                state.loggedinUser.wishlist = [stayToadd]
+            }
+        }
         // setUserScore(state, { score }) {
         //     state.loggedinUser.score = score
         // },
@@ -97,14 +111,17 @@ export const userStore = {
             }
 
         },
-        // async addToWishlist({ commit }, {stayId}) {
-        //     try {
-        //         await userService.update(stayId)
-        //         commit({ type: 'setUserScore', score })
-        //     } catch (err) {
-        //         console.log('userStore: Error in increaseScore', err)
-        //         throw err
-        //     }
-        // }
+        async addToWishlist({ commit }, {stayId}) {
+            try {
+                const stayToadd = await userService.addToWishlist(stayId)
+                commit({ type: 'addToWishlist', stayToadd })
+                // console.log('hi')
+
+            } catch (err) {
+                console.log('userStore: Error in addToWishlist', err)
+                throw err
+            }
+            
+        }
     }
 }
