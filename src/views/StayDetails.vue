@@ -4,11 +4,8 @@
             <h1>{{ stay.name }}</h1>
             <div class="top-details flex justify-between align-end">
                 <div>
-                    <span v-if="stay.reviews?.length" class="header-spacer">
-                        <span class="bold">{{ getRate }} · </span>
-                        <span class=" bold underline">{{ stay.reviews.length }} reviews</span>
-                    </span>
-                    <span class="bold underline">{{ getLocName }}</span>
+                    <RateAndRev class="header-spacer" :stay="stay" />
+                    <span class="bold underline">{{ locName }}</span>
                 </div>
                 <div>
                     <RouterLink :to="'/stay/edit/' + stay._id" class="btn btn-top underline">Edit</RouterLink>
@@ -49,7 +46,7 @@
                                 Self check-in
                             </h3>
                             <p>
-                                Check yourself in with the lockbox
+                                Check yourself in with the lockbox.
                             </p>
                         </div>
                     </li>
@@ -89,6 +86,7 @@
 import { stayService } from '../services/stay.service.local'
 import { svgService } from '../services/svg.service'
 import Order from '../cmps/Order.vue'
+import RateAndRev from '../cmps/RateAndRev.vue'
 export default {
     name: 'StayDetails',
     data() {
@@ -126,22 +124,17 @@ export default {
         },
         getSvg(iconName) {
             return svgService.getSvg(iconName)
-        }
+        },
+        
     },
     computed: {
-        getRate() {
-            let rating = 0
-            for (const review of this.stay.reviews) {
-                rating += review.rate
-            }
-            return rating / this.stay.reviews.length
-        },
-        getLocName() {
+        locName() {
             return this.stay.loc.city + ', ' + this.stay.loc.country
         }
     },
     components: {
-        Order
+        Order,
+        RateAndRev
     }
 }
 </script>
