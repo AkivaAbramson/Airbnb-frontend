@@ -1,10 +1,16 @@
 <template>
-    <button class="btn btn-fancy" @mousemove="onHover($event)">
+    <button class="btn btn-fancy" @mousemove="onHover($event)" :style="`--content: ${txt}`">
     </button>
 </template>
 
 <script>
 export default {
+    props: ['content'],
+    data() {
+        return {
+            txt: JSON.stringify(this.content)
+        }
+    },
     methods: {
         onHover(ev) {
             const btn = ev.target
@@ -21,6 +27,8 @@ export default {
     --mouse-x: 0;
     --mouse-y: 0;
 
+    border: none;
+    cursor: pointer;
     height: 3rem;
     width: 100%;
     font: bold 1rem 'Circular';
@@ -31,10 +39,11 @@ export default {
     background-image: linear-gradient(to right, rgb(189, 30, 89) 0%, rgb(146, 23, 77) 50%, rgb(134, 20, 83) 100%);
 
     &:before {
-        content: 'Reserve';
+        content: var(--content);
         display: grid;
         position: absolute;
         align-items: center;
+        font: bold 1rem 'Circular';
         height: 100%;
         width: 100%;
         z-index: 2;
@@ -56,25 +65,6 @@ export default {
 
     &:hover::after {
         opacity: 1;
-    }
-}
-
-.price {
-    font-size: 1rem;
-
-    .notify {
-        text-align: center;
-        margin-block-start: 1rem;
-        font-size: 0.875rem;
-    }
-
-    .price-calc {
-        padding-block: 1.5rem;
-        margin-block-end: 1.5rem;
-
-        div:first-child:first-child {
-            margin-block-end: 1rem;
-        }
     }
 }
 </style>

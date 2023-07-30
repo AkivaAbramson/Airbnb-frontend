@@ -21,11 +21,13 @@
                     Total
                 </div>
             </article>
+            <FancyBtn :content="'Reserve'" />
         </section>
     </section>
 </template>
 
 <script>
+import FancyBtn from '../cmps/FancyBtn.vue'
 
 export default {
     created() {
@@ -60,6 +62,9 @@ export default {
             const count = 2
             return count + ' guest' + (count > 1 ? 's' : '')
         },
+    },
+    components: {
+        FancyBtn,
     }
 }
 </script>

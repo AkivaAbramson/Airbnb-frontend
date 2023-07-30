@@ -20,7 +20,7 @@
                 <span>{{ guestCount }}</span>
             </button>
         </article>
-        <FancyBtn />
+        <FancyBtn :content="'Reserve'" />
         <article class="price" v-if="nights()">
             <div class="notify">{{ `You won't be charged yet` }}</div>
             <div class="price-calc shadow">
