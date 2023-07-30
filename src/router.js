@@ -7,6 +7,7 @@ import LoginSignup from './views/LoginSignup.vue'
 import UserDetails from './views/UserDetails.vue'
 import StayDetails from './views/StayDetails.vue'
 import StayEdit from './views/StayEdit.vue'
+import StayBook from './views/StayBook.vue'
 
 const routes = [
   {
@@ -39,6 +40,11 @@ const routes = [
     name: 'StayEdit',
     component: StayEdit
   },
+  {
+    path: '/book/stays/:stayId',
+    name: 'StayBook',
+    component: StayBook
+  }
 ]
 
 

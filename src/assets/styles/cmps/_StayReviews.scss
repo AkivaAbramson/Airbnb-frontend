@@ -63,11 +63,14 @@
     }
 
     .reviews-content {
+        flex-wrap: wrap;
         margin-block-start: 1.5rem;
 
         li {
             display: grid;
             grid-template-columns: 2.5rem 1fr;
+            grid-template-rows: 2.5rem;
+            margin: 0;
             margin-block-end: 2.5rem;
             width: 100%;
 
@@ -77,8 +80,6 @@
             }
 
             img {
-                grid-column: 1;
-                aspect-ratio: 1 / 1;
                 object-fit: cover;
                 border-radius: 100%;
             }
@@ -98,12 +99,11 @@
             }
 
             .review {
-                display: -webkit-box;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 line-break: strict;
                 grid-column: 1 / -1;
-                -webkit-box-orient: vertical;
+                margin: 0;
                 margin-block-start: 1rem;
                 font-size: 1rem;
                 line-height: 1.5rem;
@@ -113,7 +113,9 @@
 
     &.small {
         .review {
-            -webkit-line-clamp: 4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
         }
     }
 }

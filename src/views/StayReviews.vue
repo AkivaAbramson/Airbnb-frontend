@@ -12,7 +12,7 @@
                     <div class="score" :style="`--score: ${score(cat)}; --scoreTxt: ${JSON.stringify(score(cat))};`"></div>
                 </li>
             </ul>
-            <ul class="reviews-content clean-list">
+            <ul class="reviews-content clean-list flex">
                 <li v-for="i in Math.min(6, reviews.length)" :key="reviews[i - 1].id">
                     <img :src="reviews[i - 1].by.imgUrl">
                     <div>
@@ -41,8 +41,8 @@ export default {
         }
     },
     methods: {
-        date(time) {
-            return time
+        date(timeStamp) {
+            return (new Intl.DateTimeFormat(undefined, { month: 'short', year: 'numeric' }).format(timeStamp))
         },
         score(cat) {
             let score = 0

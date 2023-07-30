@@ -20,8 +20,7 @@
                 <span>{{ guestCount }}</span>
             </button>
         </article>
-        <button class="btn btn-reserve" @mousemove="onMoveReserve($event)">
-        </button>
+        <FancyBtn />
         <article class="price" v-if="nights()">
             <div class="notify">{{ `You won't be charged yet` }}</div>
             <div class="price-calc shadow">
@@ -44,28 +43,25 @@
 
 <script>
 import RateAndRev from './RateAndRev.vue';
-
+import FancyBtn from './FancyBtn.vue';
 export default {
     props: ['stay'],
+    data() {
+        return {
+            dateIn: '2023-10-19',
+            dateOut: '2023-10-25',
+        }
+    },
     methods: {  
         nights() {
-            return 5
-        },
-        onMoveReserve(ev) {
-            const btn = ev.target
-            btn.style.setProperty('--mouse-x', ev.pageX - btn.offsetLeft)
-            btn.style.setProperty('--mouse-y', ev.pageY - btn.offsetTop)
+            const checkin = new Date(this.dateIn).getTime()
+            const checkout = new Date(this.dateOut).getTime()
+            return parseInt((checkout - checkin) / 1000 / 60 / 60 / 24)
         },
     },
     computed: {
         price() {
             return this.stay.price
-        },
-        checkin() {
-            return '19/10/2023'
-        },
-        checkout() {
-            return '24/10/2023'
         },
         guestCount() {
             const count = 2
@@ -77,10 +73,17 @@ export default {
         },
         priceNights() {
             return this.nights() * this.stay.price
-        }
+        },
+        checkin() {
+            return new Date(this.dateIn).toLocaleDateString()
+        },
+        checkout() {
+            return new Date(this.dateOut).toLocaleDateString()
+        },
     },
     components: {
         RateAndRev,
+        FancyBtn,
     }
 }
 </script>
