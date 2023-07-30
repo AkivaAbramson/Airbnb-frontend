@@ -97,4 +97,23 @@
             }
         }
     }
+
+    .price {
+        font-size: 1rem;
+
+        .notify {
+            text-align: center;
+            margin-block-start: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .price-calc {
+            padding-block: 1.5rem;
+            margin-block-end: 1.5rem;
+
+            div:first-child:first-child {
+                margin-block-end: 1rem;
+            }
+        }
+    }
 }
