@@ -29,7 +29,7 @@ export default {
                 }
             }
             const avg = parseInt(rating * 100 / count) / 100
-            return avg === parseInt(avg) ? avg.toFixed(1) : avg
+            return avg === parseInt(avg) ? avg.toFixed(1) : avg.toFixed(2)
         },
         count() {
             const count = this.reviews.length

@@ -14,7 +14,6 @@
             <article class="shadow">
                 stay details
             </article>
-            <article>Choose how to pay</article>
             <article>
                 Price details
                 <div>
