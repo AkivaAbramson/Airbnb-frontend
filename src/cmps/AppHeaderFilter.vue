@@ -1,10 +1,29 @@
 <template>
     <section class="header-filter main-layout flex">
-
-        <carousel :itemsToShow="10">
+        <!-- <swiper class="parallax-slider" :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }" parallax grabCursor
+            @swiper="onSwiperInitialized">
+            <div class="parallax-slider-navigation">
+                <div class="nav-indicator prevArrow">
+                    <font-awesome-icon :icon="['fas', 'chevron-left']" />
+                </div>
+                <div class="nav-indicator nextArrow">
+                    <font-awesome-icon :icon="['fas', 'chevron-right']" />
+                </div>
+            </div>
+            <swiper-slide class="parallax-slide" v-for="label in labels" :key="labels">
+                <div class="parallax-slide-image" :data-swiper-parallax="parallaxAmount"
+                    :data-swiper-parallax-opacity="0.5">
+                    <img :src="image.imageUrl" />
+                </div>
+                <div class="label-button">
+                    <img :src="label.imgUrl">
+                    <p>{{ label.name }}</p>
+                </div>
+            </swiper-slide>
+        </swiper> -->
+        <!-- <carousel :breakpoints="breakpoints" :itemsToShow="12.5">
             <slide class="main-labels" v-for="label in labels" :key="label">
-                <button class="label-button" 
-                    @mouseenter="showArrowsPagination = true"
+                <button class="label-button" @mouseenter="showArrowsPagination = true"
                     @mouseleave="showArrowsPagination = false">
                     <img :src="label.imgUrl">
                     <p>{{ label.name }}</p>
@@ -15,7 +34,8 @@
                 <navigation />
             </template>
 
-        </carousel>
+        </carousel> -->
+
 
         <div class="main-filters">
             <button class="filter-button">
@@ -34,8 +54,19 @@
 </template>
 
 <script>
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+// Import Swiper Vue.js components
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+// Import Swiper styles
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+
+
+
 export default {
     data() {
         return {
@@ -144,10 +175,21 @@ export default {
         }
     },
     components: {
-        Carousel,
-        Slide,
-        Pagination,
-        Navigation,
+        Swiper,
+        SwiperSlide,
+    },
+    setup() {
+        const onSwiper = (swiper) => {
+            console.log(swiper);
+        };
+        const onSlideChange = () => {
+            console.log('slide change');
+        };
+        return {
+            onSwiper,
+            onSlideChange,
+            modules: [Navigation, Pagination, Scrollbar, A11y],
+        };
     },
 }
 </script>
