@@ -1,8 +1,8 @@
 <template>
   <div className="upload-preview">
     <img v-if="imgUrl" :src="imgUrl" :style="{ maxWidth: '200px', float: 'right' }" />
-    <label for="imgUpload">{{ uploadMsg }}</label>
-    <input type="file" @change="uploadImg" accept="img/*" id="imgUpload" />
+    <label for="imgUpload" class="custom-file-button">{{uploadMsg}}</label>
+    <input type="file" @change="uploadImg" accept="img/*" id="imgUpload" style="display: none"/>
   </div>
 </template>
 
@@ -31,9 +31,28 @@ export default {
   },
   computed: {
     uploadMsg() {
-      if (this.imgUrl) return 'Upload Another?'
-      return this.isUploading ? 'Uploading....' : 'Upload Image'
+      // if (this.imgUrl) return 'Upload Another?'
+      return this.isUploading ? 'Uploading....' : 'Add Picture '
     }
   }
 }
 </script>
+
+<style>
+.custom-file-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: rgb(244, 182, 66);
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* When hovering the custom button, change its background color */
+.custom-file-button:hover {
+  background-color: orange}
+
+.upload-preview{
+  
+}
+</style>

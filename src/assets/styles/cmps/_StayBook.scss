@@ -1,0 +1,28 @@
+.book {
+    padding-inline: 1.5rem;
+
+    @media (min-width: 745px) {
+        padding-inline: 40px;
+    }
+
+    @media (min-width: 1128px) {
+        padding-inline: 80px;
+    }
+
+    font-family: 'Circular';
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .book-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 1fr);
+        
+        
+    }
+
+    .shadow {
+        border-block-end: 1px solid $clrShadow;
+    }
+}

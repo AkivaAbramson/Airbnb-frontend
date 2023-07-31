@@ -6,47 +6,61 @@
     font-weight: normal;
     font-size: 1rem;
     align-items: center;
-    border-bottom: 1px solid rgb(235, 235, 235);
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(235,235,235);
 
-    .search-container {
+    .search-container{
+        // position: absolute;
         display: flex;
-        flex-wrap: nowrap;
+        justify-content: space-between;
         align-items: center;
+        font-size: 14px;
+        line-height: 22px;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        height: 48px;
+        min-width: 350px;
+        max-width: 350px;
+        flex: 1;
         padding: 1rem;
-        border: #E0E0E0 solid 1px;
-        border-radius: 7% / 50%;
-        color: #797979;
-
-        &>* {
-            height: 1.5rem;
+        margin-inline: 30px;
+        border: #e5e0e0 solid 1px;
+        border-radius: 30px;
+        box-shadow: 0px 0px 4px rgba(58, 57, 57, 0.2);
+        // border-radius: 10% / 50%;
+        :first-child{
+            margin-inline-start: 7px;
         }
+    }
 
-        &>*:not(:last-child) {
-            padding-left: 1rem;
-            padding-right: 1rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .any {
-            color: black;
-            border-right: #E0E0E0 solid 1px;
-            font-weight: bolder;
-        }
-
-        .search-icon {
-            // display: flex;
-            // justify-content: center;
-            // align-items: center;
-            padding: 12px;
-            align-items: center;
-            aspect-ratio: 1/1;
-            fill: white;
-            border: #ff385c solid 1px;
-            border-radius: 50%;
-            background-color: #ff385c;
-
-        }
+    .search-divider{
+        color: rgb(232, 230, 230);
+        width: 1px; /* Adjust the width of the line */
+        height: 25px; /* Adjust the height of the line */
+        background-color: #dedada; 
+        // margin: 0 10px; 
+        font-size: 2px;
+        font-weight: 200;
+    }
+    
+    .search-icon{
+        position: relative;
+        right: -2%;
+        width: 32px; 
+        height: 32px; 
+        background-color: #ff385c;
+        border-radius: 50%;
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        // margin-inline-end: 0;
+    }
+    .search-icon svg {
+        position: relative;
+        right: 8%;
+        padding: 4px; 
     }
 
     .profile-menu {
@@ -56,12 +70,11 @@
         border: #DDD solid 1px;
         border-radius: 40% / 50%;
         padding: 10px;
-
-        .bar-icon {
-            margin-right: 13px;
-            height: 1rem;
-            width: 1rem;
-        }
+        z-index: 3;
+    }
+    .light-search-font{
+        color: #717171;
+        font-weight: 400;
     }
 
     .loggedin-user {
@@ -86,15 +99,21 @@
         display: flex;
         padding: 5px 0;
     }
-
-    nav a:not(:first-child) {
-        // border-top: 1px solid $clr1;
-        padding: 0 5px;
-        margin: 10px;
-    }
-
-    // nav .active {
-    //     color: $clr1;
-    // }
-
+    
+   
+    
 }
+
+.modal {
+    /* Add your styles to create a modal */
+    /* This will be a basic example, and you can add more styles as needed */
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }

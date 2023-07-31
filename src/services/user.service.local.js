@@ -1,5 +1,6 @@
 import { storageService } from './async-storage.service'
-
+import { stayService } from './stay.service.local'
+// import { stayService } from './stay.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -13,7 +14,8 @@ export const userService = {
     getById,
     remove,
     update,
-    // changeScore
+    addToWishlist,
+    removeFromWishlist
 }
 
 window.userService = userService
@@ -60,12 +62,36 @@ async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
 }
 
-async function changeScore(by) {
+async function addToWishlist(stayId) {
     const user = getLoggedinUser()
-    if (!user) throw new Error('Not loggedin')
-    user.score = user.score + by || by
+    if (!user) throw new Error('No logged in user')
+    const stayToAdd = await stayService.getById(stayId)
+    
+    if (user.wishlist.includes(stayToAdd)) return user.wishlist
+    if (user.wishlist) {
+        user.wishlist.push(stayToAdd)
+    } else {
+        user.wishlist = [stayToAdd]
+    }
+
     await update(user)
-    return user.score
+    return user.wishlist
+}
+
+async function removeFromWishlist(stayId) {
+    const user = getLoggedinUser()
+    if (!user) throw new Error('No logged in user')
+    const stayToRemove = await stayService.getById(stayId)
+
+    const idx = user.wishlist.indexOf(stayToRemove)
+    if (idx <= 0) {
+        user.wishlist.splice(idx, 1)
+    } else {
+        throw new Error('Remove error: Stay is not part of user\'s wishlist')
+    }
+
+    await update(user)
+    return user.wishlist
 }
 
 function saveLocalUser(user) {

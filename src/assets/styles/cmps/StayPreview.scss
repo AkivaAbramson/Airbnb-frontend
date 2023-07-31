@@ -10,6 +10,10 @@
 
         color: $clr0;
 
+        // img{
+        //     // border-radius: 10px;
+        // }
+
         .preview-data {
 
 
@@ -17,12 +21,12 @@
             flex-direction: column;
             align-items: flex-start;
             font-size: rem(13px);
-            > * {
-                // margin-bottom: 0.4em;
-            }
-            h3 {}
+            // > * {
+            //     // margin-bottom: 0.4em;
+            // }
+            // h3 {}
 
-            h4 {}
+            // h4 {}
 
             .preview-price{
                 margin-top: 6px;
