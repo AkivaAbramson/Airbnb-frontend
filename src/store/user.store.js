@@ -5,27 +5,45 @@ import { userService } from '../services/user.service.local'
 export const userStore = {
     state: {
         loggedinUser: null,
-        users: [],
+        users: [
+            {
+                "fullname": "Edgar",
+                "imgUrl": "https://a0.muscache.com/im/pictures/d17abb7c-beb0-4dbe-976e-fc633de18b4b.jpg?aki_policy=profile_small",
+                "password": "75091963",
+                "wishlist": "[]",
+                "username": "Edgar",
+                "_id": "622f3401e36c59e6164fab4d"
+            },
+            {
+                "fullname": "Patty And Beckett",
+                "imgUrl": "https://res.cloudinary.com/dtaiyvzq5/image/upload/v1670700573/tovimdeubexsdzmzdycu.webp",
+                "password": "36133410",
+                "whishlist": "[]",
+                "username": "Patty",
+                "id": "36133410",
+                "_id": "622f3403e36c59e6164faf93"
+            },
+        ],
         isLoading: false,
-        wishlist: []
+        // wishlist: []
     },
     getters: {
         users({ users }) { return users },
         loggedinUser({ loggedinUser }) { return loggedinUser },
-        usersExcludeMe({users, loggedinUser}) {
+        usersExcludeMe({ users, loggedinUser }) {
             return users.filter(u => u._id !== loggedinUser._id)
         },
-        usersIsLoading({isLoading}) {
+        usersIsLoading({ isLoading }) {
             return isLoading
         },
-        wishlist({wishlist}){
+        wishlist({ wishlist }) {
             return wishlist
         }
     },
     mutations: {
         setLoggedinUser(state, { user }) {
             // Yaron: needed this workaround as score not reactive from birth
-            state.loggedinUser = (user)? {...user} : null
+            state.loggedinUser = (user) ? { ...user } : null
         },
         setUsers(state, { users }) {
             state.users = users
@@ -39,11 +57,11 @@ export const userStore = {
         setWishlist(state, { wishlist }) {
             state.wishlist = wishlist;
         },
-        addToWishlist(state, { stayToadd }) {
-            if(state.loggedinUser.wishlist){
-                state.loggedinUser.wishlist.push(stayToadd)
-            } else{
-                state.loggedinUser.wishlist = [stayToadd]
+        addToWishlist(state, { stayToadd: stayToAdd }) {
+            if (state.loggedinUser.wishlist) {
+                state.loggedinUser.wishlist.push(stayToAdd)
+            } else {
+                state.loggedinUser.wishlist = [stayToAdd]
             }
         }
         // setUserScore(state, { score }) {
@@ -82,16 +100,16 @@ export const userStore = {
             }
         },
         async loadUsers({ commit }) {
-            commit({type: 'setIsLoading', isLoading: true})
+            commit({ type: 'setIsLoading', isLoading: true })
             try {
                 const users = await userService.getUsers()
                 commit({ type: 'setUsers', users })
-                commit({type: 'setIsLoading', isLoading: false})
+                commit({ type: 'setIsLoading', isLoading: false })
             } catch (err) {
                 console.log('userStore: Error in loadUsers', err)
                 throw err
             }
-        },        
+        },
         async removeUser({ commit }, { userId }) {
             try {
                 await userService.remove(userId)
@@ -111,17 +129,26 @@ export const userStore = {
             }
 
         },
-        async addToWishlist({ commit }, {stayId}) {
+        async addToWishlist({ commit }, { stayId }) {
             try {
-                const stayToadd = await userService.addToWishlist(stayId)
-                commit({ type: 'addToWishlist', stayToadd })
+                const stayToAdd = await userService.addToWishlist(stayId)
+                commit({ type: 'addToWishlist', stayToAdd: stayToAdd })
                 // console.log('hi')
 
             } catch (err) {
                 console.log('userStore: Error in addToWishlist', err)
                 throw err
             }
-            
+        },
+        async removeFromWishlist({ commit }, { stayId }) {
+            try {
+                const stayToRemove = await userService.removeFromWishlist(stayId)
+                commit({ type: 'removeFromWishlist', stayToRemove: stayToRemove })
+                console.log('removed!');
+            } catch (err) {
+                console.log('userStroe: Error occured while trying to remove from Wishlist. Please try again later.', err)
+                throw err
+            }
         }
     }
 }

@@ -1,9 +1,10 @@
 .small-header {
+    display: flex;
+    justify-content: space-between;
     height: 80px;
     font-family: Circular;
     font-weight: normal;
     font-size: 1rem;
-    display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgb(235,235,235);
@@ -64,6 +65,8 @@
     }
 
     .profile-menu {
+        // justify-content: center;
+        align-items: center;
         display: inline-flex;
         border: #DDD solid 1px;
         border-radius: 30px;
@@ -78,18 +81,21 @@
     .loggedin-user {
         border-radius: 1em;
         color: whitesmoke;
-        span{
+
+        span {
             background-color: $clr2;
             padding: 4px;
             margin: 10px;
             border-radius: 50%;
         }
+
         img {
             width: 2em;
             height: 2em;
             border-radius: 50%;
         }
     }
+
     nav {
         display: flex;
         padding: 5px 0;

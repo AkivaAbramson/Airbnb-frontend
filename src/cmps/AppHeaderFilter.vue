@@ -1,29 +1,72 @@
 <template>
     <section class="header-filter main-layout flex">
-        <section>
-
-        </section>
-        <ul class="main-labels clean-list">
-            <li class="label" v-for="label in labels" :key="labels">
-                <button class="label-button">
+        <!-- <swiper class="parallax-slider" :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }" parallax grabCursor
+            @swiper="onSwiperInitialized">
+            <div class="parallax-slider-navigation">
+                <div class="nav-indicator prevArrow">
+                    <font-awesome-icon :icon="['fas', 'chevron-left']" />
+                </div>
+                <div class="nav-indicator nextArrow">
+                    <font-awesome-icon :icon="['fas', 'chevron-right']" />
+                </div>
+            </div>
+            <swiper-slide class="parallax-slide" v-for="label in labels" :key="labels">
+                <div class="parallax-slide-image" :data-swiper-parallax="parallaxAmount"
+                    :data-swiper-parallax-opacity="0.5">
+                    <img :src="image.imageUrl" />
+                </div>
+                <div class="label-button">
+                    <img :src="label.imgUrl">
+                    <p>{{ label.name }}</p>
+                </div>
+            </swiper-slide>
+        </swiper> -->
+        <!-- <carousel :breakpoints="breakpoints" :itemsToShow="12.5">
+            <slide class="main-labels" v-for="label in labels" :key="label">
+                <button class="label-button" @mouseenter="showArrowsPagination = true"
+                    @mouseleave="showArrowsPagination = false">
                     <img :src="label.imgUrl">
                     <p>{{ label.name }}</p>
                 </button>
-            </li>
-        </ul>
+            </slide>
+
+            <template #addons>
+                <navigation />
+            </template>
+
+        </carousel> -->
+
+
         <div class="main-filters">
             <button class="filter-button">
                 <div class="filter-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" style="height: 14px; width: 14px; fill: currentcolor;"><path d="M5 8a3 3 0 0 1 2.83 2H14v2H7.83A3 3 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.83 4H2V4h6.17A3 3 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                        style="height: 14px; width: 14px; fill: currentcolor;">
+                        <path
+                            d="M5 8a3 3 0 0 1 2.83 2H14v2H7.83A3 3 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.83 4H2V4h6.17A3 3 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z">
+                        </path>
+                    </svg>
                 </div>
                 <p>Filters</p>
             </button>
         </div>
     </section>
-
 </template>
 
 <script>
+// Import Swiper Vue.js components
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+// Import Swiper styles
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+
+
+
 export default {
     data() {
         return {
@@ -128,8 +171,28 @@ export default {
                 //     name: "",
                 //     imgUrl: ""
                 // }
-            ]
+            ],
         }
-    }
+    },
+    components: {
+        Swiper,
+        SwiperSlide,
+    },
+    setup() {
+        const onSwiper = (swiper) => {
+            console.log(swiper);
+        };
+        const onSlideChange = () => {
+            console.log('slide change');
+        };
+        return {
+            onSwiper,
+            onSlideChange,
+            modules: [Navigation, Pagination, Scrollbar, A11y],
+        };
+    },
 }
 </script>
+  
+
+
