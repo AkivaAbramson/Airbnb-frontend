@@ -1,0 +1,40 @@
+
+.dest-container{
+        background-color: white;
+        position: absolute;
+        top: 90px;
+        right: 46%;
+        left: 21.5%;
+        height: 72vh;
+        border-radius: 32px;
+        z-index: 3;
+        font-family: Circular;
+        font-weight: normal;
+        font-size: 1rem;
+        border-bottom: 1px solid rgb(235,235,235);
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 8px 16px rgba(0,0,0,0.1);
+        padding: 40px;
+        
+        .map-container{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+            gap: 40px 5px; // Add gap between grid items
+            margin-top: 25px;
+        
+            .map-preview {
+                text-align: center;
+        
+                .map-img{
+                    width: 125px;
+                    height: 125px;
+                    border-radius: 20px;
+                    border: 1px solid lightgray;
+                    &:hover{
+                        border: 1px solid black;
+
+                    }
+                }
+            }
+        }
+    
+    }
