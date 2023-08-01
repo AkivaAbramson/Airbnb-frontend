@@ -48,8 +48,8 @@ export default {
         }
     },
     methods: {
-        date(timeStamp) {
-            return (new Intl.DateTimeFormat(undefined, { month: 'short', year: 'numeric' }).format(timeStamp))
+        date(strDate) {
+            return (new Intl.DateTimeFormat(undefined, { month: 'short', year: 'numeric' }).format(new Date(strDate)))
         },
         score(cat) {
             let score = 0
