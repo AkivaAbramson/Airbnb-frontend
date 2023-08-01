@@ -92,7 +92,7 @@
                 border-radius: 100%;
             }
 
-            div:not(.review) {
+            .by {
                 margin-inline-start: 0.75rem;
 
                 h3 {
@@ -107,23 +107,45 @@
             }
 
             .review {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                line-break: strict;
+                --max-lines: 16;
+                
                 grid-column: 1 / -1;
                 margin: 0;
                 margin-block-start: 1rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-break: strict;
+
+                span {
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                }
+            }
+
+            .show {
+                grid-column: 1 / -1;
+                cursor: pointer;
+                width: fit-content;
+                font-weight: bold;
                 font-size: 1rem;
-                line-height: 1.5rem;
+                margin-block-start: 0.5rem;
             }
         }
     }
 
     &.small {
-        .review {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
+        .reviews-content {
+            .review {
+                --max-lines: 4;
+                span {
+                }
+            }
         }
+    }
+        
+    .clamped {
+        display: -webkit-box;
+        -webkit-line-clamp: calc(var(--max-lines) - 1);
+        -webkit-box-orient: vertical;
     }
 }

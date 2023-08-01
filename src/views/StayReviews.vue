@@ -15,13 +15,16 @@
             <ul class="reviews-content clean-list flex">
                 <li v-for="i in Math.min(6, reviews.length)" :key="reviews[i - 1].id">
                     <img :src="reviews[i - 1].by.imgUrl">
-                    <div>
+                    <div class="by">
                         <h3>{{ reviews[i - 1].by.fullname }}</h3>
                         <span>{{ date(reviews[i - 1].at) }}</span>
                     </div>
-                    <div class="review">
-                        {{ reviews[i - 1].txt }}
+                    <div class="review" :class="{ clamped: isClamped[i - 1] }">
+                        <span :id="`review${i - 1}`">
+                            {{ reviews[i - 1].txt }}
+                        </span>
                     </div>
+                    <div v-if="isClamped[i - 1]" class="show bold underline">Show more</div>
                 </li>
             </ul>
         </article>
@@ -35,9 +38,13 @@ import RateAndRev from '../cmps/RateAndRev.vue'
 export default {
     name: 'StayReviews',
     props: ['reviews'],
+    mounted() {
+        window.addEventListener('resize', this.checkClamped)
+        this.checkClamped()
+    },
     data() {
         return {
-            elTxts: []
+            isClamped: [],
         }
     },
     methods: {
@@ -51,6 +58,14 @@ export default {
             }
             return ((score * 100 / this.reviews.length) / 100).toFixed(1)
         },
+        checkClamped() {
+            for (let i = 0; i < 6; i++) {
+                const elTxt = document.getElementById(`review${i}`)
+                if (!elTxt) continue
+                const lineHeight = parseFloat(getComputedStyle(elTxt).lineHeight)
+                this.isClamped[i] = (elTxt.offsetHeight / lineHeight) > parseInt(getComputedStyle(elTxt).getPropertyValue('--max-lines'))
+            }
+        }
     },
     computed: {
         cats() {

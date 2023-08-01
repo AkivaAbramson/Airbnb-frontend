@@ -6,7 +6,8 @@ export const utilService = {
     randomPastTime,
     saveToStorage,
     loadFromStorage,
-    formatNumber
+    formatNumber,
+    formatPlural
 }
 
 function makeId(length = 6) {
@@ -65,4 +66,15 @@ function loadFromStorage(key) {
 
 function formatNumber(num) {
     return num.toLocaleString()
+}
+
+function formatPlural(countMap, delim = '') {
+    const plurals = []
+    for (const key in countMap) {
+        const count = countMap[key]
+        if (count) {
+            plurals.push(`${count} ${key}${count > 1 ? 's' : ''}`)
+        }
+    }
+    return plurals.join(delim)
 }
