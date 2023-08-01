@@ -105,6 +105,7 @@ export default {
         async loadStay() {
             try {
                 this.stay = await stayService.getById(this.stayId)
+                this.updateQuery()
             } catch (err) {
                 throw 'Failed to load stay '
             }
@@ -123,7 +124,11 @@ export default {
         getSvg(iconName) {
             return svgService.getSvg(iconName)
         },
-
+        updateQuery() {
+            if (!(this.$route.query.adult > 0)) {
+                this.$router.replace({ query: { ...this.$route.query, adult: 1 } })
+            }
+        },
     },
     computed: {
         locName() {
@@ -131,6 +136,7 @@ export default {
         },
     },
     async beforeRouteUpdate(to, from) {
+        if (this.stayId === to.params.stayId) return
         this.stayId = null
         this.stay = null
         try {

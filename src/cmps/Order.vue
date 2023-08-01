@@ -6,7 +6,7 @@
         </article>
         <article class="user-input">
             <div class="dates flex">
-                <button class="flex column">
+                <button class="checkin flex column">
                     <span class="title">check-in</span>
                     <span>{{ checkin }}</span>
                 </button>
@@ -15,19 +15,19 @@
                     <span>{{ checkout }}</span>
                 </button>
             </div>
-            <button class="flex justify-between" @click="toggleGuestModal(true)">
+            <button class="guest-input flex justify-between" @click="toggleGuestModal(true)">
                 <div class="guests flex column">
                     <span class="title">guests</span>
                     <span>{{ guestCount }}</span>
                 </div>
-                <div>
+                <div class="svg-down" :class="{ open: showGuestModal }">
                     <span v-html="getSvg('down')"></span>
                 </div>
             </button>
             <GuestPicker v-if="showGuestModal"
             v-clickout="() => toggleGuestModal(false)"
-            :capacity="stay.capacity"
-            />
+            @guest-count="updateQuery"
+            :capacity="stay.capacity" />
         </article>
         <FancyBtn :content="'Reserve'" />
         <article class="price" v-if="nights()">
@@ -84,6 +84,9 @@ export default {
                 this.showGuestModal++
             }
             this.showGuestModal %= 3
+        },
+        updateQuery(newQuery) {
+            this.$router.replace({ query: newQuery })
         }
     },
     computed: {
@@ -91,12 +94,15 @@ export default {
             return this.stay.price
         },
         guestCount() {
-            const count = 2
-            return count + ' guest' + (count > 1 ? 's' : '')
+            let countMap = {
+                guest: parseInt(this.$route.query.adult) + parseInt(this.$route.query.child || 0),
+                infant: this.$route.query.infant,
+                pet: this.$route.query.pet,
+            }
+            return utilService.formatPlural(countMap, ', ')
         },
         nightsTxt() {
-            const count = this.nights()
-            return count + ' night' + (count > 1 ? 's' : '')
+            return utilService.formatPlural({ night: this.nights() })
         },
         priceNights() {
             return this.nights() * this.stay.price

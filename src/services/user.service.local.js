@@ -34,14 +34,14 @@ function remove(userId) {
     return storageService.remove('user', userId)
 }
 
-async function update({_id}) {
-    const user = await storageService.get('user', _id)
+async function update(updatedUser, key = 'user') {
+    // const user = await storageService.get('user', updatedUser._id)
     // user.score = score
-    await storageService.put('user', user)
+    await storageService.put(key, updatedUser)
 
     // Handle case in which admin updates other user's details
-    if (getLoggedinUser()._id === user._id) saveLocalUser(user)
-    return user
+    if (getLoggedinUser()._id === updatedUser._id) saveLocalUser(updatedUser)
+    return updatedUser
 }
 
 async function login(userCred) {
@@ -65,26 +65,33 @@ async function logout() {
 
 async function addToWishlist(stayId) {
     const user = getLoggedinUser()
+    console.log('loggedinuser', user);
     if (!user) throw new Error('No logged in user')
     const { _id, price, name, imgUrls, capacity } = await stayService.getById(stayId)
+    // TODO - change to dynnamic from hard-coded
+    const startDate = new Date('September 19, 2023')
+    const endDate = new Date('October 01 2023')
     let stayToAdd = {
         _id, price, name, imgUrls, capacity,
+        startDate, endDate,
         guests: 2,
-        startDate: new Date('September 19, 2023'),
-        endDate: new Date('October 01 2023'),
         // TODO - startDate and endDate will be dynnamic 
         days: utilService.timestampToDays(endDate - startDate),
         notes: ''
         // notes will be added by user. TODO - edit + add
     }
-    if (user.wishlist.find((stay) => stay._id === _id)) return user.wishlist
+    console.log('does user\'s wishlist exist?', user.wishlist);
     if (user.wishlist) {
+        console.log('user wishlist already exists', user.wishlist);
+        if (user.wishlist.find((stay) => stay._id === _id)) return user.wishlist
         user.wishlist.push(stayToAdd)
     } else {
+        console.log('user wishlist doesn\'t exist', user.wishlist);
         user.wishlist = [stayToAdd]
     }
-
-    await update(user)
+    console.log('user wishlist after update', user.wishlist);
+    console.log('user\'s id:', user._id);
+    await update(user, STORAGE_KEY_LOGGEDIN_USER)
     return user.wishlist
 }
 
@@ -104,7 +111,7 @@ async function removeFromWishlist(stayId) {
 }
 
 function saveLocalUser(user) {
-    user = {_id: user._id, fullname: user.fullname, imgUrl: user.imgUrl}
+    user = {_id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, wishlist: user.wishlist}
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }

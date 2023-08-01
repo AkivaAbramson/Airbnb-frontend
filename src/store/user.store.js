@@ -7,25 +7,24 @@ export const userStore = {
         loggedinUser: null,
         users: [
             {
-                "fullname": "Edgar",
-                "imgUrl": "https://a0.muscache.com/im/pictures/d17abb7c-beb0-4dbe-976e-fc633de18b4b.jpg?aki_policy=profile_small",
-                "password": "75091963",
-                "wishlist": "[]",
-                "username": "Edgar",
-                "_id": "622f3401e36c59e6164fab4d"
+                fullname: "Edgar",
+                imgUrl: "https://a0.muscache.com/im/pictures/d17abb7c-beb0-4dbe-976e-fc633de18b4b.jpg?aki_policy=profile_small",
+                password: "75091963",
+                wishlist: [],
+                username: "Edgar",
+                _id: "622f3401e36c59e6164fab4d",
             },
             {
-                "fullname": "Patty And Beckett",
-                "imgUrl": "https://res.cloudinary.com/dtaiyvzq5/image/upload/v1670700573/tovimdeubexsdzmzdycu.webp",
-                "password": "36133410",
-                "whishlist": "[]",
-                "username": "Patty",
-                "id": "36133410",
-                "_id": "622f3403e36c59e6164faf93"
+                fullname: "Patty And Beckett",
+                imgUrl: "https://res.cloudinary.com/dtaiyvzq5/image/upload/v1670700573/tovimdeubexsdzmzdycu.webp",
+                password: "36133410",
+                whishlist: [],
+                username: "Patty",
+                id: "36133410",
+                _id: "622f3403e36c59e6164faf93"
             },
         ],
         isLoading: false,
-        // wishlist: []
     },
     getters: {
         users({ users }) { return users },
@@ -36,8 +35,9 @@ export const userStore = {
         usersIsLoading({ isLoading }) {
             return isLoading
         },
-        wishlist({ wishlist }) {
-            return wishlist
+        wishlist({ loggedinUser }) {
+            console.log('user store, wishlist:', loggedinUser.wishlist);
+            return loggedinUser.wishlist
         }
     },
     mutations: {
@@ -57,12 +57,19 @@ export const userStore = {
         setWishlist(state, { wishlist }) {
             state.wishlist = wishlist;
         },
-        addToWishlist(state, { stayToadd: stayToAdd }) {
+        addToWishlist(state,  { stayToAdd }) {
+            console.log('stayToAdd', stayToAdd);
             if (state.loggedinUser.wishlist) {
                 state.loggedinUser.wishlist.push(stayToAdd)
             } else {
                 state.loggedinUser.wishlist = [stayToAdd]
             }
+            console.log('added to wishlist');
+            // console.log('user\'s wishlist:', state.loggedinUser.wishlist);
+            console.log('user', state.loggedinUser);
+        },
+        removeFromWishlist(state, { stayToRemove }) {
+
         }
         // setUserScore(state, { score }) {
         //     state.loggedinUser.score = score

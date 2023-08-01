@@ -7,7 +7,8 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     formatNumber,
-    timestampToDays
+    timestampToDays,
+    formatPlural
 }
 
 function makeId(length = 6) {
@@ -72,4 +73,15 @@ function timestampToDays(timestamp) {
     const millisecondsPerDay = 24 * 60 * 60 * 1000;
     const days = Math.floor(timestamp / millisecondsPerDay)
     return days
+}
+
+function formatPlural(countMap, delim = '') {
+    const plurals = []
+    for (const key in countMap) {
+        const count = countMap[key]
+        if (count) {
+            plurals.push(`${count} ${key}${count > 1 ? 's' : ''}`)
+        }
+    }
+    return plurals.join(delim)
 }

@@ -1,8 +1,12 @@
 <template>
     <h1>Wishlist</h1>
-    <section class="wishlist-container">
-       <StayList :stays="this.user.wishlist"/>
-       <!-- :key="this.user._id"  -->
+    <section class="wishlist-container" v-if="loggedInUser">
+        <h2>hello user</h2>
+        <StayList :stays="userWishlist"/>
+        <!-- :key="this.user._id"  -->
+    </section>
+    <section v-else>
+        <h2>You are not logged in!</h2>
     </section>
 </template>
 
@@ -12,11 +16,26 @@ import StayList from '../cmps/StayList.vue'
 
 export default {
     name: 'Wishlist',
-    props: ['user'],
     data() {
-        return {};
+        return {
+            stays: null,
+        };
     },
-    components: { 
+    created() {
+        console.log('created! user:', this.loggedInUser)
+        this.stays = this.loggedInUser.wishlist
+        console.log('stays in wishlist', this.stays);
+    },
+    computed: {
+        loggedInUser() {
+            return this.$store.getters.loggedinUser
+        },
+        userWishlist() {
+            return this.$store.getters.wishlist
+        }
+
+    },
+    components: {
         StayList,
     }
 }

@@ -42,7 +42,7 @@ const routes = [
     component: StayEdit
   },
   {
-    path: '/book/stays/:stayId',
+    path: '/book/stays/:stayId?',
     name: 'StayBook',
     component: StayBook
   },
