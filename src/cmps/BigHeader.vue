@@ -6,17 +6,17 @@
                 <h5 v-if="!destination || destination === `I'm flexible`">Search destinations</h5>
                 <span v-else>{{ destination }}</span>
             </div>
-            <span class="search-divider"></span>
+            
             <div class="check-in"  @click="checkIn" :class="{ pickedOption: openCheckin }">
                 <h3>Check in</h3>
                 <h5>Add dates</h5>
             </div>
-            <span class="search-divider"></span>
-            <div class="check-out" @click="checkIn">
+            
+            <div class="check-out" @click="checkOut" :class="{ pickedOption: openCheckOut }">
                 <h3>Check out</h3>
                 <h5>Add dates</h5>
             </div>
-            <span class="search-divider"></span>
+            
             <div class="who" @click="addGuests" :class="{ pickedOption: openGuests }">
                 <h3>Who</h3>
                 <h5 v-if="!guestCount || guestCount === '1 guest'">Add guests</h5>
@@ -35,7 +35,7 @@
         <Destinations v-if="openDest"
             @chosenDest="updateFilterBy"
         />
-        <CheckIn v-if="openCheckin" />
+        <CheckIn v-if="openCheckin|| openCheckOut" />
         <GuestPicker v-if="openGuests"
              @guest-count="updateFilterBy"
         />
@@ -56,6 +56,7 @@ export default {
             openDest: false,
             openCheckin:false,
             openGuests:false,
+            openCheckOut: false,
             filterBy: {},
 
             
@@ -67,14 +68,23 @@ export default {
             this.openDest = true
             this.openCheckin = false
             this.openGuests = false
+            this.openCheckOut = false
         },
         checkIn(){
             this.openCheckin = true
             this.openDest = false
             this.openGuests = false
+            this.openCheckOut = false
+        },
+        checkOut(){
+            this.openCheckOut = true
+            this.openCheckin = false
+            this.openDest = false
+            this.openGuests = false
         },
         addGuests(){
             this.openGuests = true
+            this.openCheckOut = false
             this.openCheckin = false
             this.openDest = false
 
@@ -86,8 +96,12 @@ export default {
         formatNumber(num) {
             return utilService.formatNumber(num)
         },
-        loadFilteredStays(){
+        async loadFilteredStays(){
+            this.$emit('closeHeader')
             this.$router.replace({ query: this.filterBy })
+            await this.$store.dispatch({ type: 'loadStays', filterBy: this.filterBy })
+
+
             console.log(this.filterBy)
 
         }
@@ -108,12 +122,12 @@ export default {
 
         },
         
-        checkin() {
-            return new Date(this.dateIn).toLocaleDateString()
-        },
-        checkout() {
-            return new Date(this.dateOut).toLocaleDateString()
-        },
+        // checkin() {
+        //     return new Date(this.dateIn).toLocaleDateString()
+        // },
+        // checkout() {
+        //     return new Date(this.dateOut).toLocaleDateString()
+        // },
     },
     components: {
         Destinations,

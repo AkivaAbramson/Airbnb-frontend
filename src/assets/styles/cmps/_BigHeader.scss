@@ -15,7 +15,7 @@
 
     .search-container {
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         align-items: center;
         font-size: 14px;
         line-height: 22px;
@@ -27,48 +27,64 @@
         min-width: 57%;
         max-width: 57%;
         flex: 1 1 0%;
-        padding: 1rem;
-        margin-inline: 30px;
+        // padding: 1rem;
+        // margin-inline: 30px;
         border: 1px solid #DDDDDD;
         border-radius: 32px;
         background-color: #EBEBEB;
         box-shadow: 0px 0px 4px rgba(58, 57, 57, 0.2);
-
+        
         :first-child {
             margin-inline-start: 7px;
         }
-
-        // .destination,
-        // .check-in,
-        // .check-out,
-        // .who,
-        // .btn-wrapper {
-        //     flex: 1;
-        //     display: flex;
-        //     align-items: center;
-        //     justify-content: center;
-        // }
-        // .destination {
-        //     justify-content: flex-start;
-        //     padding-left: 20px;
-        //   }
-        .search-divider {
-            flex: 0 0 auto;
-            color: rgb(235, 235, 235);
-            width: 1px;
-            height: 32px;
-            margin: 0 10px;
-            /* Adjust the margin as needed */
+        .destination{
+            position: relative;
+            padding-inline-start: 15px;
+            padding-inline-end: 190px;
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                height: 100%;
+                width: 1px;
+                background-color: lightgrey;
+              }
+            :hover{
+                background-color: white;
+                border-radius: 30px;
+            }
+        }
+        .check-in{
+            padding-inline-start: 15px;
+            padding-inline-end: 50px;
+            
+            :hover{
+                background-color: white;
+                border-radius: 30px;
+            }
+        }
+        .check-out{
+            padding-inline-start: 15px;
+            padding-inline-end: 30px;
+            :hover{
+                background-color: white;
+                border-radius: 30px;
+            }
+        }
+        .who{
+            padding-inline-start: 20px;
+            padding-inline-end: 115px;
+            :hover{
+                background-color: white;
+                border-radius: 30px;
+            }
         }
 
+        
+
 
     }
-
-    &.active {
-        height: 160px;
-        background-color: #ff385c;
-    }
-
     .search-divider {
         color: rgb(235, 235, 235);
         border-inline-end: 1px solid #dedada;
@@ -134,6 +150,9 @@
 
     .pickedOption {
         background-color: white;
+        border-radius: 30px;
+        padding: 0;
+        margin: 0;
     }
 
     .guest-picker {
@@ -159,14 +178,6 @@
             font-weight: 400;
         }
 
-        // .picker-divider {
-        //     border-inline-end: 1px solid black;
-        //     height: 5px;
-        //     width: 100%;
-        //     font-size: 2px;
-        //     font-weight: 200;
-        
-        // }
     }
 
 

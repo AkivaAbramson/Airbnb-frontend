@@ -3,7 +3,7 @@
     <div v-if="!smallHeader" class="overlay" @click="closeBigModal"></div>
     <AppHeader :smallHeader="smallHeader" @bigHeader="bigHeader"/>
     <Transition name="slide-up-down">
-      <BigHeader v-if="!smallHeader"/>
+      <BigHeader v-if="!smallHeader" @closeHeader="closeBigModal"/>
     </Transition>
     <RouterView />
 
