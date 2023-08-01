@@ -1,65 +1,61 @@
-.guests-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: white;
+.guest-wrapper{
     position: absolute;
     top: 90px;
     right: 20%;
     left: 50%;
-    height: 72vh;
-    border-radius: 32px;
-    z-index: 3;
-    font-family: Circular;
-    font-weight: normal;
-    font-size: 1rem;
-    border-bottom: 1px solid rgb(235,235,235);
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 8px 16px rgba(0,0,0,0.1);
-    padding: 30px;
+    // height: 72vh;
+    // border-radius: 32px;
+    // z-index: 3;
+    // font-family: Circular;
+    // font-weight: normal;
+    // font-size: 1rem;
+    // border-bottom: 1px solid rgb(235,235,235);
+    // box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 8px 16px rgba(0,0,0,0.1);
+    // padding: 30px;
     
 
-    .adults-sec, 
-    .children-sec, 
-    .infants-sec, 
-    .pets-sec{
-        display: flex;
-        justify-content: space-between;
+    // .adults-sec, 
+    // .children-sec, 
+    // .infants-sec, 
+    // .pets-sec{
+    //     display: flex;
+    //     justify-content: space-between;
 
-    }
-    .num-picker{
-        display: flex;
-        // color: #717171 ;
-        svg{
-            border: 1px solid lightgray;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            stroke: #717171;
-            stroke-width: 4.5;
-            padding: 3px;
-            // bor
-            path {
-                transform-origin: center;
-                transform: scale(0.7);
-            }
-        }
-        :hover :not(.sec-counters){
-            border: 1px solid black;
-            stroke: black;
-        }
-        > *{
-            margin: 7px;
-        }
-    }
-    .sec-counters{
-        margin-top: 11px;
-        font-weight: 300;
-    }
-    .sec-divider {
-        color: rgb(232, 230, 230);
-        border-block-end: 1px solid #dedada;
-        width: 100%;
-        font-size: 2px;
-        font-weight: 200;
-    }
+    // }
+    // .num-picker{
+    //     display: flex;
+    //     // color: #717171 ;
+    //     svg{
+    //         border: 1px solid lightgray;
+    //         border-radius: 50%;
+    //         width: 30px;
+    //         height: 30px;
+    //         stroke: #717171;
+    //         stroke-width: 4.5;
+    //         padding: 3px;
+    //         // bor
+    //         path {
+    //             transform-origin: center;
+    //             transform: scale(0.7);
+    //         }
+    //     }
+    //     :hover :not(.sec-counters){
+    //         border: 1px solid black;
+    //         stroke: black;
+    //     }
+    //     > *{
+    //         margin: 7px;
+    //     }
+    // }
+    // .sec-counters{
+    //     margin-top: 11px;
+    //     font-weight: 300;
+    // }
+    // .sec-divider {
+    //     color: rgb(232, 230, 230);
+    //     border-block-end: 1px solid #dedada;
+    //     width: 100%;
+    //     font-size: 2px;
+    //     font-weight: 200;
+    // }
 }

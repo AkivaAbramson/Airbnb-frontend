@@ -10,23 +10,23 @@
             <li>
                 <div>
                     <div class="title">Adults</div>
-                    <div>Age 13+</div>
+                    <div class="subtitle">Age 13+</div>
                 </div>
                 <div class="stepper">
                     <button class="btn" @click="changeGuestCount('adult', -1, 1, capacity - child)"
-                        :class="{ disable: adult <= 1 }">
-                        <span v-html="getSvg('minus')"></span>
-                    </button>
-                    <span class="counter">{{ adultCount }}</span>
-                    <button class="btn" @click="changeGuestCount('adult', 1, 1, capacity - child)" :class="{ disable: adult + child >= capacity }">
-                        <span v-html="getSvg('plus')"></span>
-                    </button>
-                </div>
-            </li>
+                    :class="{ disable: adult <= 1 }">
+                    <span v-html="getSvg('minus')"></span>
+                </button>
+                <span class="counter">{{ adultCount }}</span>
+                <button class="btn" @click="changeGuestCount('adult', 1, 1, capacity - child)" :class="{ disable: adult + child >= capacity }">
+                    <span v-html="getSvg('plus')"></span>
+                </button>
+            </div>
+        </li>
             <li>
                 <div>
                     <div class="title">Children</div>
-                    <div>Ages 2-12</div>
+                    <div class="subtitle">Ages 2-12</div>
                 </div>
                 <div class="stepper">
                     <button class="btn" @click="changeGuestCount('child', -1, 0, capacity - adult)" :class="{ disable: !child }">
@@ -37,11 +37,12 @@
                         <span v-html="getSvg('plus')"></span>
                     </button>
                 </div>
+
             </li>
             <li>
                 <div>
                     <div class="title">Infants</div>
-                    <div>Under 2</div>
+                    <div class="subtitle">Under 2</div>
                 </div>
                 <div class="stepper">
                     <button class="btn" @click="changeGuestCount('infant', -1, 0, 5)" :class="{ disable: !infant }">

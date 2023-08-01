@@ -52,13 +52,14 @@
         //     justify-content: flex-start;
         //     padding-left: 20px;
         //   }
-          .search-divider {
+        .search-divider {
             flex: 0 0 auto;
-            color: rgb(232, 230, 230);
+            color: rgb(235, 235, 235);
             width: 1px;
             height: 32px;
-            margin: 0 10px; /* Adjust the margin as needed */
-          }
+            margin: 0 10px;
+            /* Adjust the margin as needed */
+        }
 
 
     }
@@ -69,7 +70,7 @@
     }
 
     .search-divider {
-        color: rgb(232, 230, 230);
+        color: rgb(235, 235, 235);
         border-inline-end: 1px solid #dedada;
         height: 32px;
         font-size: 2px;
@@ -133,6 +134,39 @@
 
     .pickedOption {
         background-color: white;
+    }
+
+    .guest-picker {
+        position: absolute;
+        top: 90px;
+        right: 20%;
+        left: 50%;
+        width: 25rem;
+        height: 25rem;
+        border-radius: 25px;
+
+
+
+        .underline {
+            color: rgb(113, 113, 113);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: rgb(113, 113, 113);
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        // .picker-divider {
+        //     border-inline-end: 1px solid black;
+        //     height: 5px;
+        //     width: 100%;
+        //     font-size: 2px;
+        //     font-weight: 200;
+        
+        // }
     }
 
 
