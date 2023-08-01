@@ -3,7 +3,8 @@
         <section class="search-container">
             <div class="destination" @click="searchDest" :class="{ pickedOption: openDest }">
                 <h3>Where</h3>
-                <h5>Search destinations</h5>
+                <h5 v-if="!destination || destination === `I'm flexible`">Search destinations</h5>
+                <span v-else>{{ destination }}</span>
             </div>
             <span class="search-divider"></span>
             <div class="check-in"  @click="checkIn" :class="{ pickedOption: openCheckin }">
@@ -18,7 +19,8 @@
             <span class="search-divider"></span>
             <div class="who" @click="addGuests" :class="{ pickedOption: openGuests }">
                 <h3>Who</h3>
-                <h5>Add guests</h5>
+                <h5 v-if="!guestCount || guestCount === '1 guest'">Add guests</h5>
+                <span v-else>{{ guestCount }}</span>
             </div>
             <div class="btn-wrapper">
                 <!-- <FancyBtn class="search-icon" :content="'Search'" /> -->
@@ -30,25 +32,31 @@
                 </span>
             </div>
         </section>
-        <Destinations v-if="openDest" />
+        <Destinations v-if="openDest"
+            @chosenDest="updateQuery"
+        />
         <CheckIn v-if="openCheckin" />
-        <AddGuests v-if="openGuests" />
+        <GuestPicker v-if="openGuests"
+             @guest-count="updateQuery"
+        />
 
 
     </section>
 </template>
 
 <script>
+import { utilService } from '../services/util.service'
 import Destinations from './Destinations.vue'
 import FancyBtn from './FancyBtn.vue'
 import CheckIn from './CheckIn.vue'
-import AddGuests from './AddGuests.vue'
+import GuestPicker from './GuestPicker.vue'
 export default {
     data() {
         return {
             openDest: false,
             openCheckin:false,
             openGuests:false,
+            
 
         }
     },
@@ -68,12 +76,41 @@ export default {
             this.openCheckin = false
             this.openDest = false
 
-        }
+        },
+        updateQuery(newQuery) {
+            this.$router.replace({ query: newQuery })
+        },
+        formatNumber(num) {
+            return utilService.formatNumber(num)
+        },
+        
+    },
+    computed: {
+        guestCount() {
+            let countMap = {
+                guest: parseInt(this.$route.query.adult) + parseInt(this.$route.query.child || 0),
+                infant: this.$route.query.infant,
+                pet: this.$route.query.pet,
+            }
+            return utilService.formatPlural(countMap, ', ')
+        },
+        destination(){
+            let dest = this.$route.query.destination
+            return dest
+
+        },
+        
+        checkin() {
+            return new Date(this.dateIn).toLocaleDateString()
+        },
+        checkout() {
+            return new Date(this.dateOut).toLocaleDateString()
+        },
     },
     components: {
         Destinations,
         CheckIn,
-        AddGuests,
+        GuestPicker,
         FancyBtn
     }
 

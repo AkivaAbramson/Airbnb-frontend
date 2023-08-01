@@ -1,7 +1,7 @@
 <template>
   <section >
     <div v-if="!smallHeader" class="overlay" @click="closeBigModal"></div>
-    <AppHeader class="stay-details" :smallHeader="smallHeader" @bigHeader="bigHeader"/>
+    <AppHeader :smallHeader="smallHeader" @bigHeader="bigHeader"/>
     <Transition name="slide-up-down">
       <BigHeader v-if="!smallHeader"/>
     </Transition>

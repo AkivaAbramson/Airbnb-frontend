@@ -1,4 +1,10 @@
 .small-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 20px 80px 20px 80px;
     display: flex;
     justify-content: space-between;
     height: 80px;
@@ -7,9 +13,15 @@
     font-size: 1rem;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgb(235,235,235);
+    border-bottom: 1px solid rgb(235, 235, 235);
+    background-color: white;
 
-    .search-container{
+    .logo {
+        color: #FF385C;
+    }
+
+
+    .search-container {
         // position: absolute;
         display: flex;
         justify-content: space-between;
@@ -29,43 +41,54 @@
         border: #e5e0e0 solid 1px;
         border-radius: 30px;
         box-shadow: 0px 0px 4px rgba(58, 57, 57, 0.2);
+
         // border-radius: 10% / 50%;
-        :first-child{
+        :first-child {
             margin-inline-start: 7px;
         }
-        
-    }
-    
 
-    .search-divider{
+    }
+
+
+    .search-divider {
         color: rgb(232, 230, 230);
-        height: 25px; 
+        height: 25px;
         border-inline-end: 1px solid #dedada;
         font-size: 2px;
         font-weight: 200;
     }
-    
-    .search-icon{
+
+    .search-icon {
         position: relative;
         right: -3%;
-        width: 32px; 
-        height: 32px; 
+        width: 32px;
+        height: 32px;
         background-color: #ff385c;
         border-radius: 50%;
-        display: flex; 
-        align-items: center; 
+        display: flex;
+        align-items: center;
 
     }
+
     .search-icon svg {
         position: relative;
-        left: 3.4px; 
+        left: 3.4px;
         height: 12px;
         width: 12px;
-        
+
+    }
+
+    .profile-options {
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+
     }
 
     .profile-menu {
         // justify-content: center;
+        width: 75px;
+        height: 42px;
         align-items: center;
         display: inline-flex;
         border: #DDD solid 1px;
@@ -73,26 +96,36 @@
         padding: 10px;
         z-index: 3;
     }
-    .light-search-font{
+
+    .light-search-font {
         color: #717171;
         font-weight: 400;
     }
 
     .loggedin-user {
+        position: relative;
+        top: 10%;
+        left: 25%;
         border-radius: 1em;
         color: whitesmoke;
 
-        span {
-            background-color: $clr2;
-            padding: 4px;
-            margin: 10px;
+        // span {
+        //     background-color: $clr2;
+        //     padding: 4px;
+        //     margin: 10px;
+        //     border-radius: 50%;
+        // }
+
+        img {
+
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
         }
 
-        img {
-            width: 2em;
-            height: 2em;
-            border-radius: 50%;
+        svg {
+            height: 30px;
+            width: 30px;
         }
     }
 
@@ -100,9 +133,24 @@
         display: flex;
         padding: 5px 0;
     }
-    
-   
-    
+
+    .add-home {
+        // margin-top: 15px;
+        margin-inline-end: 15px;
+
+    }
+
+    .add-home a {
+        text-decoration: none;
+        color: black;
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 5px;
+
+    }
+
+
+
 }
 
 // .modal {

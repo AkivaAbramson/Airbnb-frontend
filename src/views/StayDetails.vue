@@ -13,16 +13,16 @@
                 </div>
             </div>
         </section>
-        <section v-if="stay.imgUrls?.length" class="image-gallery">
+        <section v-if="stayImages" class="image-gallery">
             <div v-for="i in 5" :class="getImgClass(i)">
-                <img :src="getImgSrc(i)">
+                <img :src="stayImages[i - 1]">
             </div>
         </section>
         <section class="main-details shadow">
             <section>
                 <article class="grid-host shadow">
                     <h2>Entire stay hosted by {{ stay.host.fullname }}</h2>
-                    <img :src="stay.host.imgUrl">
+                    <img v-if="hostImg" :src="hostImg">
                     <ol class="clean-list">
                         <li>{{ stay.capacity }} guests</li>
                     </ol>
@@ -90,7 +90,9 @@ export default {
     data() {
         return {
             stay: null,
-            stayId: this.$route.params.stayId
+            stayId: this.$route.params.stayId,
+            stayImages: null,
+            hostImg: null,
         }
     },
     async created() {
@@ -105,14 +107,24 @@ export default {
         async loadStay() {
             try {
                 this.stay = await stayService.getById(this.stayId)
+                this.stayImages = await this.getStayImages()
+                this.hostImg = await this.getUserImg(this.stay.host.imgUrl)
                 this.updateQuery()
             } catch (err) {
                 throw 'Failed to load stay '
             }
         },
-        getImgSrc(i) {
-            const idx = (i - 1) % this.stay.imgUrls.length
-            return this.stay.imgUrls[idx]
+        async getStayImages() {
+            const stayImages = []
+            for (let i = 0; i < Math.max(5, this.stay.imgUrls.length); i++) {
+                const res = await fetch(this.stay.imgUrls[i])
+                stayImages[i] = res.status === 200 ? this.stay.imgUrls[i] : 'src/assets/defaultStay.png'
+            }
+            return stayImages
+        },
+        async getUserImg(imgUrl) {
+            const res = await fetch(imgUrl)
+            return (res.status === 200 ? imgUrl : 'src/assets/defaultUser.svg')
         },
         getImgClass(i) {
             return {
@@ -125,9 +137,20 @@ export default {
             return svgService.getSvg(iconName)
         },
         updateQuery() {
-            if (!(this.$route.query.adult > 0)) {
-                this.$router.replace({ query: { ...this.$route.query, adult: 1 } })
+            const newQuery = Object.assign({}, this.$route.query)
+            if (!(newQuery.adult > 0)) {
+                newQuery.adult = 1
             }
+            const dayMilli = 1000 * 60 * 60 * 24
+            const startDate = (new Date(this.$route.query.startDate || 0)).getTime()
+            const endDate = (new Date(this.$route.query.endDate || 0)).getTime()
+            if (!((startDate >= (new Date((new Date()).toLocaleDateString()).getTime())) && (endDate - startDate) / dayMilli >= 1)) {
+                delete newQuery.startDate
+                delete newQuery.endDate
+                newQuery.startDate = '2023-09-07'
+                newQuery.endDate = '2023-09-23'
+            }
+            this.$router.replace({ query: newQuery })
         },
     },
     computed: {

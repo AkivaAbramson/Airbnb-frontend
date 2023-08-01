@@ -37,7 +37,7 @@
         </carousel> -->
 
 
-        <div class="main-filters">
+        <!-- <div class="main-filters">
             <button class="filter-button">
                 <div class="filter-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
@@ -49,21 +49,21 @@
                 </div>
                 <p>Filters</p>
             </button>
-        </div>
+        </div> -->
     </section>
 </template>
 
 <script>
 // Import Swiper Vue.js components
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+// import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from 'swiper/vue';
+// import { Swiper, SwiperSlide } from 'swiper/vue';
 
 // Import Swiper styles
-import 'swiper/scss';
-import 'swiper/scss/navigation';
-import 'swiper/scss/pagination';
+// import 'swiper/scss';
+// import 'swiper/scss/navigation';
+// import 'swiper/scss/pagination';
 
 
 
@@ -175,22 +175,22 @@ export default {
         }
     },
     components: {
-        Swiper,
-        SwiperSlide,
+        // Swiper,
+        // SwiperSlide,
     },
-    setup() {
-        const onSwiper = (swiper) => {
-            console.log(swiper);
-        };
-        const onSlideChange = () => {
-            console.log('slide change');
-        };
-        return {
-            onSwiper,
-            onSlideChange,
-            modules: [Navigation, Pagination, Scrollbar, A11y],
-        };
-    },
+    // setup() {
+    //     const onSwiper = (swiper) => {
+    //         console.log(swiper);
+    //     };
+    //     const onSlideChange = () => {
+    //         console.log('slide change');
+    //     };
+    //     return {
+    //         onSwiper,
+    //         onSlideChange,
+    //         modules: [Navigation, Pagination, Scrollbar, A11y],
+    //     };
+    // },
 }
 </script>
   

@@ -49,6 +49,7 @@
         justify-content: space-between;
         min-width: 6.5rem;
 
+
         .btn {
             display: flex;
             align-items: center;
@@ -59,6 +60,8 @@
             color: $clr4;
             border: 1px solid $clr8;
             border-radius: 50%;
+            background-color: white;
+
 
             &:hover {
                 color: $clr0;
