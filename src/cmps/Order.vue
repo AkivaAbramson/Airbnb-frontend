@@ -8,11 +8,11 @@
             <div class="dates flex">
                 <button class="checkin flex column">
                     <span class="title">check-in</span>
-                    <span>{{ checkin }}</span>
+                    <span :class="{empty: !startDate }">{{ checkin }}</span>
                 </button>
                 <button class="flex column">
                     <span class="title">check-out</span>
-                    <span>{{ checkout }}</span>
+                    <span :class="{empty: !endDate }">{{ checkout }}</span>
                 </button>
             </div>
             <button class="guest-input flex justify-between" @click="toggleGuestModal(true)">
@@ -24,12 +24,10 @@
                     <span v-html="getSvg('down')"></span>
                 </div>
             </button>
-            <GuestPicker v-if="showGuestModal"
-            v-clickout="() => toggleGuestModal(false)"
-            @guest-count="updateQuery"
-            :capacity="stay.capacity" />
+            <GuestPicker v-if="showGuestModal" v-clickout="() => toggleGuestModal(false)" @guest-count="updateQuery"
+                :capacity="stay.capacity" />
         </article>
-        <FancyBtn :content="'Reserve'" />
+        <FancyBtn :content="'Reserve'" @click="() => $router.push({ name: 'StayBook', params: {stayId: stay._id}, query: $route.query })" />
         <article class="price" v-if="nights()">
             <div class="notify">{{ `You won't be charged yet` }}</div>
             <div class="price-calc shadow">
@@ -60,15 +58,23 @@ export default {
     props: ['stay'],
     data() {
         return {
-            dateIn: '2023-08-08',
-            dateOut: '2023-10-25',
+            startDate: null,
+            endDate: null,
             showGuestModal: 0,
         }
     },
+    mounted() {
+        this.startDate = this.$route.query.startDate
+        this.endDate = this.$route.query.endDate
+    },
+    updated() {
+        this.startDate = this.$route.query.startDate
+        this.endDate = this.$route.query.endDate
+    },
     methods: {
         nights() {
-            const checkin = new Date(this.dateIn).getTime()
-            const checkout = new Date(this.dateOut).getTime()
+            const checkin = new Date(this.startDate).getTime()
+            const checkout = new Date(this.endDate).getTime()
             return parseInt((checkout - checkin) / 1000 / 60 / 60 / 24)
         },
         formatNumber(num) {
@@ -108,17 +114,17 @@ export default {
             return this.nights() * this.stay.price
         },
         checkin() {
-            return new Date(this.dateIn).toLocaleDateString()
+            return this.startDate ? new Date(this.startDate).toLocaleDateString() : ''
         },
         checkout() {
-            return new Date(this.dateOut).toLocaleDateString()
+            return this.endDate ? new Date(this.endDate).toLocaleDateString() : ''
         },
     },
     components: {
         RateAndRev,
         FancyBtn,
         GuestPicker,
-    }
+    },
 }
 </script>
 
