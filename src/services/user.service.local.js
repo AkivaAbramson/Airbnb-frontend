@@ -1,5 +1,6 @@
 import { storageService } from './async-storage.service'
 import { stayService } from './stay.service.local'
+import { utilService } from './util.service'
 // import { stayService } from './stay.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
@@ -65,9 +66,18 @@ async function logout() {
 async function addToWishlist(stayId) {
     const user = getLoggedinUser()
     if (!user) throw new Error('No logged in user')
-    const stayToAdd = await stayService.getById(stayId)
-    
-    if (user.wishlist.includes(stayToAdd)) return user.wishlist
+    const { _id, price, name, imgUrls, capacity } = await stayService.getById(stayId)
+    let stayToAdd = {
+        _id, price, name, imgUrls, capacity,
+        guests: 2,
+        startDate: new Date('September 19, 2023'),
+        endDate: new Date('October 01 2023'),
+        // TODO - startDate and endDate will be dynnamic 
+        days: utilService.timestampToDays(endDate - startDate),
+        notes: ''
+        // notes will be added by user. TODO - edit + add
+    }
+    if (user.wishlist.find((stay) => stay._id === _id)) return user.wishlist
     if (user.wishlist) {
         user.wishlist.push(stayToAdd)
     } else {
@@ -81,9 +91,8 @@ async function addToWishlist(stayId) {
 async function removeFromWishlist(stayId) {
     const user = getLoggedinUser()
     if (!user) throw new Error('No logged in user')
-    const stayToRemove = await stayService.getById(stayId)
 
-    const idx = user.wishlist.indexOf(stayToRemove)
+    const idx = user.wishlist.findIndex((stay) => stay._id === stayId)
     if (idx <= 0) {
         user.wishlist.splice(idx, 1)
     } else {

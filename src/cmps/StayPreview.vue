@@ -58,7 +58,8 @@ export default {
     },
     methods: {
         toggleHeart(){
-            this.isLiked = !this.isLiked 
+            this.isLiked = !this.isLiked
+            console.log('this.stay', this.stay); 
             if (this.isLiked) this.addToWishlist()
             else this.removeFromWishlist()
         },

@@ -6,7 +6,8 @@ export const utilService = {
     randomPastTime,
     saveToStorage,
     loadFromStorage,
-    formatNumber
+    formatNumber,
+    timestampToDays
 }
 
 function makeId(length = 6) {
@@ -65,4 +66,10 @@ function loadFromStorage(key) {
 
 function formatNumber(num) {
     return num.toLocaleString()
+}
+
+function timestampToDays(timestamp) {
+    const millisecondsPerDay = 24 * 60 * 60 * 1000;
+    const days = Math.floor(timestamp / millisecondsPerDay)
+    return days
 }
