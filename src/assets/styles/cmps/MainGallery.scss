@@ -22,6 +22,13 @@
     }
   }
 
+  .carousel__icon {
+    path {
+      transform-origin: center;
+      transform: scale(1.5);
+    }
+  }
+
   .carousel__prev,
   .carousel__next {
     /* Position the arrows */
@@ -32,21 +39,28 @@
     border: none;
     cursor: pointer;
     display: none;
+    margin: 0;
+    width: 27px;
+    height: 27px;
+    // font-size: 14px;
     padding: 8px;
     border-radius: 50%;
     background-color: white;
     transform: translateY(-50%) scale(1.2);
     transition: background-color 0.3s ease, transform 0.3s ease;
-    
-    &:hover {
-      // background-color: rgb(227, 218, 218);
-      /* Add styles on hover */
-    }
+
 
     &.carousel__next--disabled {
-      /* Hide the next arrow when there is no next slide */
       display: none;
+      opacity: 0;
+
     }
+
+    &.carousel__prev--disabled {
+      display: none;
+      opacity: 0;
+    }
+
   }
 
   .carousel__prev {
@@ -80,32 +94,33 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    :nth-child(n+6){
+
+    :nth-child(n+6) {
       display: none;
     }
-    
+
     .carousel__pagination-item {
-      margin: 0 4px;
+      margin: 0 4.5px;
       padding: 0;
     }
-    
+
     .carousel__pagination-button {
       /* Style each pagination circle */
-      width: 3px;
-      height: 3px;
       border-radius: 50%;
       background-color: #aaa;
       cursor: pointer;
-      
+      padding: 3px;
+      margin-inline-end: -4px;
+
       &.carousel__pagination-button--active {
         /* Style the active pagination circle */
         background-color: white;
       }
-      
-      
+
+
     }
   }
-  
+
   button.carousel__pagination-button::after {
     display: none;
   }

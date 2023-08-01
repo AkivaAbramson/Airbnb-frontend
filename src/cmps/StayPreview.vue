@@ -59,11 +59,15 @@ export default {
     methods: {
         toggleHeart(){
             this.isLiked = !this.isLiked 
-            this.addToWishlist()
+            if (this.isLiked) this.addToWishlist()
+            else this.removeFromWishlist()
         },
         addToWishlist(){
             // console.log('hi')
             this.$store.dispatch({type:'addToWishlist', stayId: this.stay._id})
+        },
+        removeFromWishlist() {
+            this.$store.dispatch({ type: 'removeFromWishlist', stayId: this.stay._id })
         }
     },
     computed: {

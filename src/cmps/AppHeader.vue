@@ -1,13 +1,13 @@
 <template>
   <section class="home-layout">
-    <header class="small-header">
+    <header class="small-header" >
       <nav>
         <RouterLink to="/">
           <span role="img" aria-label="logo">airanbnb</span>
         </RouterLink>
       </nav>
 
-      <section class="search-container">
+      <section v-if="isSearchOpened" class="search-container" @click="hideContainer">
         <span @click="locModal">Anywhere</span>
         <span class="search-divider"></span>
         <span @click="weekModal">Any week</span>
@@ -16,15 +16,15 @@
         <span class="search-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation"
             focusable="false"
-            style="fill: none; height: 20px; width: 20px; stroke: white; stroke-width: 5.33333; overflow: visible;">
+            style="fill: none; stroke: white; stroke-width: 5.33333; overflow: visible;">
             <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path>
           </svg>
         </span>
       </section>
 
-        <FilterModal v-if="location"/>
+        <!-- <FilterModal v-if="location"/>
         <FilterModal v-if="week"/>
-        <FilterModal v-if="guests"/>
+        <FilterModal v-if="guests"/> -->
 
       <nav>
         <RouterLink to="/stay/edit/">Airanbnb your home</RouterLink>
@@ -58,13 +58,16 @@
 <script>
 import AppHeaderFilter from './AppHeaderFilter.vue'
 import NavModal from './NavModal.vue'
-import FilterModal from './FilterModal.vue'
+
 export default {
   name: 'header-app',
+
+  props:['smallHeader'],
 
   data() {
 
     return {
+      isSearchOpened: true,
       modalVisible: false,
       location: false,
       week: false,
@@ -79,7 +82,7 @@ export default {
     },
   },
   created() {
-
+    // this.isSearchOpened = true
   },
   methods: {
     toggleModal() {
@@ -89,25 +92,36 @@ export default {
       this.location = true
       this.week = false
       this.guests = false
-      console.log(this.location)
+      this.$emit('bigHeader', this.location)
     },
     weekModal(){
       this.week = true
       this.location = false
       this.guests = false
+      this.$emit('bigHeader', this.week)
       console.log(this.week)
     },
     guestsModal(){
       this.guests = true
       this.location = false
       this.week = false
+      this.$emit('bigHeader', this.guests)
       console.log(this.guests)
+    },
+    hideContainer(){
+      this.isSearchOpened = false
     }
+  },
+  watch: {
+    smallHeader: {
+      handler(){
+        this.isSearchOpened = true
+      }
+    },
   },
   components: {
     AppHeaderFilter,
     NavModal,
-    FilterModal,
   }
 
   // setup() {

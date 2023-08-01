@@ -8,6 +8,7 @@ import UserDetails from './views/UserDetails.vue'
 import StayDetails from './views/StayDetails.vue'
 import StayEdit from './views/StayEdit.vue'
 import StayBook from './views/StayBook.vue'
+import Wishlist from './views/Wishlist.vue'
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
     path: '/book/stays/:stayId?',
     name: 'StayBook',
     component: StayBook
+  },
+  {
+    path: '/wishlist',
+    name: 'Wishlist',
+    component: Wishlist
   }
 ]
 

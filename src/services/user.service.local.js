@@ -15,6 +15,7 @@ export const userService = {
     remove,
     update,
     addToWishlist,
+    removeFromWishlist
 }
 
 window.userService = userService
@@ -63,12 +64,30 @@ async function logout() {
 
 async function addToWishlist(stayId) {
     const user = getLoggedinUser()
-    if (!user) throw new Error('Not loggedin')
-    const stayToadd = await stayService.getById(stayId)
-    if(user.wishlist){
-        user.wishlist.push(stayToadd)
+    if (!user) throw new Error('No logged in user')
+    const stayToAdd = await stayService.getById(stayId)
+    
+    if (user.wishlist.includes(stayToAdd)) return user.wishlist
+    if (user.wishlist) {
+        user.wishlist.push(stayToAdd)
     } else {
-        user.wishlist = [stayToadd]
+        user.wishlist = [stayToAdd]
+    }
+
+    await update(user)
+    return user.wishlist
+}
+
+async function removeFromWishlist(stayId) {
+    const user = getLoggedinUser()
+    if (!user) throw new Error('No logged in user')
+    const stayToRemove = await stayService.getById(stayId)
+
+    const idx = user.wishlist.indexOf(stayToRemove)
+    if (idx <= 0) {
+        user.wishlist.splice(idx, 1)
+    } else {
+        throw new Error('Remove error: Stay is not part of user\'s wishlist')
     }
 
     await update(user)
