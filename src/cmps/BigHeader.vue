@@ -22,7 +22,7 @@
                 <h5 v-if="!guestCount || guestCount === '1 guest'">Add guests</h5>
                 <span v-else>{{ guestCount }}</span>
             </div>
-            <div class="btn-wrapper">
+            <div class="btn-wrapper" @click="loadFilteredStays">
                 <!-- <FancyBtn class="search-icon" :content="'Search'" /> -->
                 <span class="search-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation"
@@ -33,11 +33,11 @@
             </div>
         </section>
         <Destinations v-if="openDest"
-            @chosenDest="updateQuery"
+            @chosenDest="updateFilterBy"
         />
         <CheckIn v-if="openCheckin" />
         <GuestPicker v-if="openGuests"
-             @guest-count="updateQuery"
+             @guest-count="updateFilterBy"
         />
 
 
@@ -56,6 +56,8 @@ export default {
             openDest: false,
             openCheckin:false,
             openGuests:false,
+            filterBy: {},
+
             
 
         }
@@ -77,12 +79,18 @@ export default {
             this.openDest = false
 
         },
-        updateQuery(newQuery) {
-            this.$router.replace({ query: newQuery })
+        updateFilterBy(newQuery) {
+            this.filterBy = { ...this.filterBy, ...newQuery }
+
         },
         formatNumber(num) {
             return utilService.formatNumber(num)
         },
+        loadFilteredStays(){
+            this.$router.replace({ query: this.filterBy })
+            console.log(this.filterBy)
+
+        }
         
     },
     computed: {
