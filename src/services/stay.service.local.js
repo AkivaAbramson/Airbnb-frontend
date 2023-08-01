@@ -17,7 +17,7 @@ export const stayService = {
 window.cs = stayService
 
 
-async function query(filterBy = { txt: '', price: 0, loc: '' }) {
+async function query(filterBy = { txt: '', price: 0, loc: '', destination: "I'm flexible", guests: null, }) {
 
   var stays = await storageService.query(STORAGE_KEY)
 
@@ -37,6 +37,17 @@ async function query(filterBy = { txt: '', price: 0, loc: '' }) {
       locKeys.forEach((key) => {
         locRegex.test(stay.loc[key])
       })
+    })
+  }
+
+  if (filterBy.destination !== "I'm flexible") {
+    stays = stays.filter((stay) => stay.destination === filterBy.destination)
+  }
+
+  if (filterBy.guests) {
+    const guestKeys = ['adult', 'child', 'infant', 'pet']
+    stays = stays.filter((stay) => {
+      guestKeys.forEach((key) => stay.guests[key] >= filterBy.guests[key])
     })
   }
 
