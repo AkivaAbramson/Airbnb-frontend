@@ -12,7 +12,7 @@
 import { svgService } from '../services/svg.service'
 
 export default {
-    props: ['reviews'],
+    props: ['reviews', 'bracket'],
     methods: {
         getSvg(iconName) {
             return svgService.getSvg(iconName)
@@ -29,11 +29,15 @@ export default {
                 }
             }
             const avg = parseInt(rating * 100 / count) / 100
-            return avg === parseInt(avg) ? avg.toFixed(1) : avg.toFixed(2)
+            return (!this.bracket && avg === parseInt(avg)) ? avg.toFixed(1) : avg.toFixed(2)
         },
         count() {
             const count = this.reviews.length
-            return count + ' review' + (count > 1 ? 's' : '')
+            if (this.bracket) {
+                return `(${count})`
+            } else {
+                return count + ' review' + (count > 1 ? 's' : '')
+            }
         }
     },
 }

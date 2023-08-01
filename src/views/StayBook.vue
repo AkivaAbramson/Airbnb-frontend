@@ -1,24 +1,52 @@
 <template>
-    <section class="book">
+    <section v-if="stay" class="book">
         <h1>Confirm and pay</h1>
         <section class="book-content">
             <article class="shadow">
                 <h2>Your trip</h2>
-                <div>
-                    <h3>Dates</h3>
-                    {{ dates }}
+                <div class="trip-details flex justify-between">
+                    <div class="flex column justify-between">
+                        <h3>Dates</h3>
+                        {{ dates }}
+                    </div>
+                    <button class="btn btn-edit bold underline">Edit</button>
                 </div>
-                <div>{{ guestCount }}</div>
-                <h3></h3>
-            </article>
-            <article class="shadow">
-                stay details
-            </article>
-            <article>
-                Price details
-                <div>
-                    Total
+                <div class="trip-details flex justify-between">
+                    <div class="flex column justify-between">
+                        <h3>Guests</h3>
+                        {{ guestCount }}
+                    </div>
+                    <button class="btn btn-edit bold underline">Edit</button>
                 </div>
+            </article>
+            <article class="sticky-details">
+                <article class="shadow place-details">
+                    <img v-if="stayImage" :src="stayImage" />
+                    <div class="place-desc flex column justify-between">
+                        <div>
+                            <div class="entire">Entire stay</div>
+                            <div class="stay-name">{{ stay.name }}</div>
+                        </div>
+                        <RateAndRev :reviews="stay.reviews" :bracket="true" />
+                    </div>
+                </article>
+                <article>
+                    <div class="price-details shadow">
+                        <h2>Price details</h2>
+                        <div class="flex justify-between">
+                            <span>${{ formatNumber(stay.price.toFixed(2)) }} x {{ nightsTxt }}</span>
+                            <span>${{ formatNumber(priceNights.toFixed(2)) }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="underline">Airbnb service fee</span>
+                            <span>${{ formatNumber(parseFloat(priceNights * 14 / 100).toFixed(2)) }}</span>
+                        </div>
+                    </div>
+                    <div class="bold flex justify-between">
+                        <span class="bold">Total</span>
+                        <span class="bold">${{ formatNumber(parseFloat(priceNights * 114 / 100).toFixed(2)) }}</span>
+                    </div>
+                </article>
             </article>
             <FancyBtn :content="'Reserve'" />
         </section>
@@ -26,24 +54,60 @@
 </template>
 
 <script>
+import { stayService } from '../services/stay.service.local'
+import { utilService } from '../services/util.service'
 import FancyBtn from '../cmps/FancyBtn.vue'
+import RateAndRev from '../cmps/RateAndRev.vue'
 
 export default {
-    created() {
-
+    data() {
+        return {
+            stay: null,
+            stayId: null,
+            stayImage: null,
+        }
+    },
+    async created() {
+        try {
+            await this.loadStay()
+        } catch (err) {
+            console.log(err)
+            this.$router.push('/')
+        }
     },
     methods: {
+        async loadStay() {
+            try {
+                this.stayId = this.$route.params.stayId
+                this.stay = await stayService.getById(this.stayId)
+                this.stayImage = await this.getStayImage()
+            } catch (err) {
+                throw 'Failed to load stay '
+            }
+        },
+        nights() {
+            const checkin = new Date(this.getCheckin()).getTime()
+            const checkout = new Date(this.getCheckout()).getTime()
+            return parseInt((checkout - checkin) / 1000 / 60 / 60 / 24)
+        },
         getCheckin() {
-            return new Date('2023-10-19')
+            return this.$route.query.startDate
         },
         getCheckout() {
-            return new Date('2023-10-25')
-        }
+            return this.$route.query.endDate
+        },
+        async getStayImage() {
+            const res = await fetch(this.stay.imgUrls[0])
+            return res.status === 200 ? this.stay.imgUrls[0] : 'src/assets/defaultStay.png'
+        },
+        formatNumber(num) {
+            return utilService.formatNumber(num)
+        },
     },
     computed: {
         dates() {
-            const checkin = this.getCheckin()
-            const checkout = this.getCheckout()
+            const checkin = new Date(this.getCheckin())
+            const checkout = new Date(this.getCheckout())
             let from = (new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' }).format(checkin.getTime()))
             let to = ''
             if (checkin.getYear() !== checkout.getYear()) {
@@ -58,12 +122,23 @@ export default {
             return from + ' - ' + to
         },
         guestCount() {
-            const count = 2
-            return count + ' guest' + (count > 1 ? 's' : '')
+            let countMap = {
+                guest: parseInt(this.$route.query.adult) + parseInt(this.$route.query.child || 0),
+                infant: this.$route.query.infant,
+                pet: this.$route.query.pet,
+            }
+            return utilService.formatPlural(countMap, ', ')
+        },
+        nightsTxt() {
+            return utilService.formatPlural({ night: this.nights() })
+        },
+        priceNights() {
+            return this.nights() * this.stay.price
         },
     },
     components: {
         FancyBtn,
+        RateAndRev,
     }
 }
 </script>

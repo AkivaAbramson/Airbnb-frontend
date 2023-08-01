@@ -8,8 +8,11 @@
                     <span class="bold underline">{{ locName }}</span>
                 </div>
                 <div>
-                    <RouterLink :to="'/stay/edit/' + stay._id" class="btn btn-top underline">Edit</RouterLink>
-                    <button class="btn btn-top underline">Save</button>
+                    <RouterLink v-if="false" :to="'/stay/edit/' + stay._id" class="btn btn-top underline">Edit</RouterLink>
+                    <button class="btn btn-top underline">
+                        <svg v-html="getSvg('heart')"></svg>
+                        <span>Save</span>
+                    </button>
                 </div>
             </div>
         </section>
