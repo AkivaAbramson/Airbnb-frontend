@@ -9,6 +9,7 @@ export const utilService = {
     formatNumber,
     timestampToDays,
     formatPlural,
+    trimTxt,
     calcRating
 }
 
@@ -87,6 +88,11 @@ function formatPlural(countMap, delim = '') {
     return plurals.join(delim)
 }
 
+function trimTxt(txt, maxLength = 20) {
+    if (txt.length <= maxLength) return txt
+
+    return txt.slice(0, maxLength) + '...' 
+  }
 function calcRating({reviews}) {
     // console.log('util calcRating', reviews);
     let rateSum = reviews.reduce((acc, review) => {

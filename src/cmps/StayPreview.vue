@@ -29,7 +29,7 @@
             <!-- home preview -->
             <section v-if="stay.loc" class="preview-data">
                 <h3 class="black-bold preview-loc">{{ stay.loc.country }}, {{ stay.loc.city }}</h3>
-                <h3 class="light-gray preview-name">{{ stay.name }}</h3>
+                <h3 class="light-gray preview-name"> {{ trimName }} </h3>
                 <h3 class="light-gray">{{ stay.capacity }} guests</h3>
                 <h3 class="black-bold preview-price">${{ stay.price }} <span class="black-regular">night</span></h3>
             </section>
@@ -74,7 +74,6 @@
 
 // import { FOCUSABLE_CHILDREN } from 'element-plus/es/directives/trap-focus';
 import MainGallery from './MainGallery.vue';
-import { utilService } from '../services/util.service';
 
 
 export default {
@@ -106,7 +105,8 @@ export default {
         },
         removeFromWishlist() {
             this.$store.dispatch({ type: 'removeFromWishlist', stayId: this.stay._id })
-        }
+        },
+        
     },
     computed: {
         stayDates() {
@@ -130,16 +130,12 @@ export default {
         },
         totalPrice() {
             return Number(this.stay.price) * Number(this.stay.days)
-        },
-        rating() {
-            console.log('rating computed: this.stay', this._stay);
-            return utilService.calcRating({ ...this._stay })
         }
     },
     components: {
-        MainGallery,
-    },
-
+    MainGallery,
+  },
+    
 }
 </script>
 

@@ -8,7 +8,7 @@
             <a href="#" v-if="!this.loggedinUser" @click="showSignupModal">Sign Up</a>
             <a href="#" v-if="!this.loggedinUser" @click="showLoginModal">Login</a>
             <a href="#">Trips</a>
-            <a href="#">Wishlist</a>
+            <a href="#" @click="goToWishlist">Wishlist</a>
             <hr>
             <RouterLink to="/stay/edit/">Airanbnb your home</RouterLink>
             <a class="logout-btn" v-if="this.loggedinUser" @click="doLogout">Logout</a>
@@ -117,7 +117,10 @@ export default {
             await this.$store.dispatch({ type: 'signup', userCred: this.signupCred })
             this.showSignup = false
             this.$router.push('/')
-
+            
+        },
+        goToWishlist(){
+            this.$router.push('/wishlist')
         },
         loadUsers() {
             this.$store.dispatch({ type: "loadUsers" })

@@ -46,6 +46,7 @@ export default {
                     delete newQuery['destination']
                 }
                 this.$emit('chosenDest', newQuery)
+                this.$emit('openNextModal')
         }
     },
     computed: {
