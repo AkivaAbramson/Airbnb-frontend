@@ -25,7 +25,7 @@
             <!-- home preview -->
             <section v-if="stay.loc" class="preview-data">
                 <h3 class="black-bold preview-loc">{{ stay.loc.country }}, {{ stay.loc.city }}</h3>
-                <h3 class="light-gray preview-name">{{ stay.name }}</h3>
+                <h3 class="light-gray preview-name"> {{ trimName }} </h3>
                 <h3 class="light-gray">{{ stay.capacity }} guests</h3>
                 <h3 class="black-bold preview-price">${{ stay.price }} <span class="black-regular">night</span></h3>
             </section>
@@ -49,7 +49,9 @@
                         <path fill-rule="evenodd" d="m15.1 1.58-4.13 8.88-9.86 1.27a1 1 0 0 0-.54 1.74l7.3 6.57-1.97 9.85a1 1 0 0 0 1.48 1.06l8.62-5 8.63 5a1 1 0 0 0 1.48-1.06l-1.97-9.85 7.3-6.57a1 1 0 0 0-.55-1.73l-9.86-1.28-4.12-8.88a1 1 0 0 0-1.82 0z"></path>
                     </svg> 
                 </div>
-                <!-- <h3 class="rate-num">{{ stay.reviews[0].rate.Value }}</h3> -->
+                <h3 class="rate-num">{{ stay.reviews[0].rate.Value }}</h3>
+                <!-- <RateAndRev :reviews="stay.reviews" /> -->
+
             </section>
             
         </div>
@@ -63,6 +65,8 @@
 
 // import { FOCUSABLE_CHILDREN } from 'element-plus/es/directives/trap-focus';
 import MainGallery from './MainGallery.vue';
+import RateAndRev from './RateAndRev.vue';
+import { utilService } from '../services/util.service.js'
 
 
 export default {
@@ -86,7 +90,8 @@ export default {
         },
         removeFromWishlist() {
             this.$store.dispatch({ type: 'removeFromWishlist', stayId: this.stay._id })
-        }
+        },
+        
     },
     computed: {
         stayDates() {
@@ -111,10 +116,14 @@ export default {
         totalPrice() {
             console.log('typeof days (num or str)', typeof this.stay.days)
             return Number(this.stay.price) * Number(this.stay.days)
+        },
+        trimName(){
+            return utilService.trimTxt(this.stay.name)
         }
     },
     components: {
     MainGallery,
+    RateAndRev
   },
     
 }

@@ -57,7 +57,7 @@
   <style scoped>
   .demo-date-picker {
     display: flex;
-    width: 100%;
+    width: 60%;
     padding: 0;
     flex-wrap: wrap;
   }

@@ -13,7 +13,6 @@ export const stayStore = {
     mutations: {
         setStays(state, { stays }) {
             state.stays = stays
-            console.log('setStays, stays:', state.stays)
         },
         saveStay(state, { stay }) {
             const idx = state.stays.findIndex(currStay => currStay._id === stay._id)
@@ -28,7 +27,7 @@ export const stayStore = {
     actions: {
         async loadStays(context, { filterBy }) {
             try {
-                console.log('loadStays: filterBy', filterBy);
+                // console.log('loadStays: filterBy', filterBy);
                 // const stays = await stayService.query(filterBy)
                 const stays = await stayService.query({ ...filterBy })
                 context.commit({ type: 'setStays', stays })

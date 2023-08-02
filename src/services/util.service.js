@@ -8,7 +8,8 @@ export const utilService = {
     loadFromStorage,
     formatNumber,
     timestampToDays,
-    formatPlural
+    formatPlural,
+    trimTxt,
 }
 
 function makeId(length = 6) {
@@ -85,3 +86,9 @@ function formatPlural(countMap, delim = '') {
     }
     return plurals.join(delim)
 }
+
+function trimTxt(txt, maxLength = 20) {
+    if (txt.length <= maxLength) return txt
+
+    return txt.slice(0, maxLength) + '...' 
+  }

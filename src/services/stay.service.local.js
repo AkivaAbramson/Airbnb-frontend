@@ -18,7 +18,6 @@ window.cs = stayService
 
 
 async function query(filterBy = { txt: '', price: 0, loc: '', destination: '', }) {
-  console.log('query: filterBy', filterBy);
 
   var stays = await storageService.query(STORAGE_KEY)
 
@@ -51,8 +50,6 @@ async function query(filterBy = { txt: '', price: 0, loc: '', destination: '', }
   //     guestKeys.forEach((key) => stay.guests[key] >= filterBy.guests[key])
   //   })
   // }
-
-  console.log('after filtering, stays:', stays);
 
   return stays
 }
