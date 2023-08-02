@@ -95,7 +95,6 @@ export default {
 
         },
         updateFilterBy(newQuery) {
- 
             this.filterBy = { ...this.filterBy, ...newQuery }
             
         },
@@ -134,9 +133,9 @@ export default {
     computed: {
         guestCount() {
             let countMap = {
-                guest: parseInt(this.filterBy.adult) + parseInt(this.filterBy.child || 0),
-                infant: this.filterBy.infant,
-                pet: this.filterBy.pet,
+                guest: parseInt(this.$route.query.adult) + parseInt(this.$route.query.child || 0),
+                infant: this.$route.query.infant,
+                pet: this.$route.query.pet,
             }
             console.log(this.filterBy)
             return utilService.formatPlural(countMap, ', ')

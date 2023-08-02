@@ -72,13 +72,13 @@ function getById(stayId) {
 
 function getEmptyStay() {
   return {
-    "name": "",
-    "type": "House",
-    "imgUrls": ["https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large"],
-    "price": 0,
-    "summary": "Fantastic duplex apartment with three bedrooms, located in the historic area of Porto, Ribeira (Cube)...",
-    "capacity": 8,
-    "amenities": [
+    name: "",
+    type: "House",
+    imgUrls: ["https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large"],
+    price: 0,
+    summary: "Fantastic duplex apartment with three bedrooms, located in the historic area of Porto, Ribeira (Cube)...",
+    capacity: 8,
+    amenities: [
       "TV",
       "Wifi",
       "Kitchen",
@@ -86,38 +86,39 @@ function getEmptyStay() {
       "Pets allowed",
       "Cooking basics"
     ],
-    "labels": [
+    labels: [
       "Top of the world",
       "Trending",
       "Play",
       "Tropical"
     ],
-    "host": {
-      "_id": "u101",
-      "fullname": "Davit Pok",
-      "imgUrl": "https://a0.muscache.com/im/pictures/user/User-369818264/original/8fbc6d95-73f9-452a-b427-76a7a4ea4335.jpeg?im_w=240",
+    wishlist: [],
+    host: {
+      _id: "u101",
+      fullname: "Davit Pok",
+      imgUrl: "https://a0.muscache.com/im/pictures/user/User-369818264/original/8fbc6d95-73f9-452a-b427-76a7a4ea4335.jpeg?im_w=240",
     },
-    "loc": {
-      "country": "Portugal",
-      "countryCode": "PT",
-      "city": "Porto",
-      "address": "17 Kombo st",
-      "lat": -8.61308,
-      "lng": 41.1413
+    loc: {
+      country: "Portugal",
+      countryCode: "PT",
+      city: "Porto",
+      address: "17 Kombo st",
+      lat: -8.61308,
+      lng: 41.1413
     },
     "reviews": [
       {
-        "id": "madeId",
-        "txt": "Very helpful hosts. Cooked traditional...",
-        "rate": 4,
-        "by": {
-          "_id": "u102",
-          "fullname": "user2",
-          "imgUrl": "/img/img2.jpg"
+        id: "madeId",
+        txt: "Very helpful hosts. Cooked traditional...",
+        rate: 4,
+        by: {
+          _id: "u102",
+          fullname: "user2",
+          imgUrl: "/img/img2.jpg"
         }
       }
     ],
-    "likedByUsers": ['mini-user']
+    likedByUsers: ['mini-user']
 
   }
 }

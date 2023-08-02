@@ -10,6 +10,7 @@ export const utilService = {
     timestampToDays,
     formatPlural,
     trimTxt,
+    calcRating
 }
 
 function makeId(length = 6) {
@@ -92,3 +93,12 @@ function trimTxt(txt, maxLength = 20) {
 
     return txt.slice(0, maxLength) + '...' 
   }
+function calcRating({reviews}) {
+    // console.log('util calcRating', reviews);
+    let rateSum = reviews.reduce((acc, review) => {
+        acc += review.rate.Value
+        return acc
+    }, 0)
+    console.log('rateSum:', rateSum)
+    return (rateSum / reviews.length).toFixed(2)
+}

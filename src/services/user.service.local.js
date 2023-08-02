@@ -68,12 +68,12 @@ async function addToWishlist(stayId) {
     const user = getLoggedinUser()
     console.log('loggedinuser', user);
     if (!user) throw new Error('No logged in user')
-    const { _id, price, name, imgUrls, capacity } = await stayService.getById(stayId)
+    const { _id, price, name, imgUrls, capacity, reviews } = await stayService.getById(stayId)
     // TODO - change to dynnamic from hard-coded
     const startDate = new Date('September 19, 2023')
     const endDate = new Date('October 01 2023')
     let stayToAdd = {
-        _id, price, name, imgUrls, capacity,
+        _id, price, name, imgUrls, capacity, reviews,
         startDate, endDate,
         guests: 2,
         // TODO - startDate and endDate will be dynnamic 
