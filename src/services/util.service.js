@@ -8,7 +8,8 @@ export const utilService = {
     loadFromStorage,
     formatNumber,
     timestampToDays,
-    formatPlural
+    formatPlural,
+    calcRating
 }
 
 function makeId(length = 6) {
@@ -84,4 +85,14 @@ function formatPlural(countMap, delim = '') {
         }
     }
     return plurals.join(delim)
+}
+
+function calcRating({reviews}) {
+    // console.log('util calcRating', reviews);
+    let rateSum = reviews.reduce((acc, review) => {
+        acc += review.rate.Value
+        return acc
+    }, 0)
+    console.log('rateSum:', rateSum)
+    return (rateSum / reviews.length).toFixed(2)
 }

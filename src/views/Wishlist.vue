@@ -1,11 +1,13 @@
 <template>
-    <h1>Wishlist</h1>
-    <section class="wishlist-container" v-if="loggedInUser">
-        <StayList :stays="userWishlist"/>
-        <!-- :key="this.user._id"  -->
-    </section>
-    <section v-else>
-        <h2>You are not logged in!</h2>
+    <section class="wishlist home-layout">
+
+        <h1 class="">Wishlist</h1>
+        <section class="wishlist-container" v-if="loggedInUser">
+            <StayList :stays="userWishlist" :views="wishlist"/>
+        </section>
+        <section v-else>
+            <h2>You are not logged in!</h2>
+        </section>
     </section>
 </template>
 
