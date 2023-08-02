@@ -37,7 +37,7 @@
         />
         <CheckIn v-if="openCheckin|| openCheckOut" />
         <GuestPicker v-if="openGuests"
-             @guest-count="updateFilterBy"
+             @guest-count="updateGuestsFilterBy"
         />
 
 
@@ -91,7 +91,11 @@ export default {
         },
         updateFilterBy(newQuery) {
             this.filterBy = { ...this.filterBy, ...newQuery }
-
+            // console.log(this.filterBy);
+        },
+        updateGuestsFilterBy(newQuery) {
+            this.filterBy.guests = { ...this.filterBy.guests, ...newQuery }
+            // console.log(this.filterBy);
         },
         formatNumber(num) {
             return utilService.formatNumber(num)
@@ -100,10 +104,7 @@ export default {
             this.$emit('closeHeader')
             this.$router.replace({ query: this.filterBy })
             await this.$store.dispatch({ type: 'loadStays', filterBy: this.filterBy })
-
-
             console.log(this.filterBy)
-
         }
         
     },

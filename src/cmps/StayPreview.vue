@@ -34,8 +34,12 @@
             <section v-else class="preview-data">
                 <h3 class="black-bold preview-loc">{{ stay.name }}</h3>
                 <h3 class="light-gray">{{ stay.capacity }} guests</h3>
-                <h3 class="light-gray">{{ stay.days }} nights · {{ stay.startDate }} - {{ stay.endDate }}</h3>
-                <h3 class="black-bold preview-price">${{ stay.price }} <span class="black-regular">night</span></h3>
+                <!-- <h3 class="light-gray">{{ stay.days }} nights · Saved for {{ stayDates }}</h3> -->
+                <h3 class="black-bold preview-price">
+                    ${{ stay.price }}
+                    <span class="light-gray">night · ${{ totalPrice }} total</span>
+                    <span></span>
+                </h3>
             </section>
             
             <!-- rating -->
@@ -45,7 +49,7 @@
                         <path fill-rule="evenodd" d="m15.1 1.58-4.13 8.88-9.86 1.27a1 1 0 0 0-.54 1.74l7.3 6.57-1.97 9.85a1 1 0 0 0 1.48 1.06l8.62-5 8.63 5a1 1 0 0 0 1.48-1.06l-1.97-9.85 7.3-6.57a1 1 0 0 0-.55-1.73l-9.86-1.28-4.12-8.88a1 1 0 0 0-1.82 0z"></path>
                     </svg> 
                 </div>
-                <h3 class="rate-num">{{ stay.reviews[0].rate.Value }}</h3>
+                <!-- <h3 class="rate-num">{{ stay.reviews[0].rate.Value }}</h3> -->
             </section>
             
         </div>
@@ -57,6 +61,7 @@
 
 <script>
 
+// import { FOCUSABLE_CHILDREN } from 'element-plus/es/directives/trap-focus';
 import MainGallery from './MainGallery.vue';
 
 
@@ -84,9 +89,29 @@ export default {
         }
     },
     computed: {
-        // wishDates() {
-        //     this.stay.sta
-        // }
+        stayDates() {
+            const monthsEnum = { 0: 'Jan', 1: 'Feb', 2: 'Mar', 3: 'Apr', 4: 'May', 5: 'Jun', 6: 'Jul', 7: 'Aug', 8: 'Sep', 9: 'Oct', 10: 'Nov', 11: 'Dec'}
+            let dateStr
+            // console.log(typeof this.stay.startDate);
+            const startDay = this.stay.startDate.getDate()
+            const endDay = this.stay.endDate.getDate()
+
+            if (this.stay.startDate.getMonth() === this.stay.endDate.getMonth()) {
+                const month = monthsEnum[this.stay.startDate.getMonth()]
+                dateStr = `${month} ${startDay} - ${endDay}`
+            }
+            else {
+                const month1 = monthsEnum[this.stay.startDate.getMonth()]
+                const month2 = monthsEnum[this.stay.endDate.getMonth()]
+                dateStr = `${month1} ${startDay} - ${month2} ${endDay}`
+            }
+
+            return dateStr
+        },
+        totalPrice() {
+            console.log('typeof days (num or str)', typeof this.stay.days)
+            return Number(this.stay.price) * Number(this.stay.days)
+        }
     },
     components: {
     MainGallery,

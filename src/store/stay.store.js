@@ -13,7 +13,7 @@ export const stayStore = {
     mutations: {
         setStays(state, { stays }) {
             state.stays = stays
-            console.log('hi')
+            console.log('setStays, stays:', state.stays)
         },
         saveStay(state, { stay }) {
             const idx = state.stays.findIndex(currStay => currStay._id === stay._id)

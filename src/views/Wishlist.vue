@@ -1,7 +1,6 @@
 <template>
     <h1>Wishlist</h1>
     <section class="wishlist-container" v-if="loggedInUser">
-        <h2>hello user</h2>
         <StayList :stays="userWishlist"/>
         <!-- :key="this.user._id"  -->
     </section>
