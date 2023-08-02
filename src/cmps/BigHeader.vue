@@ -37,7 +37,7 @@
         />
         <CheckIn v-if="openCheckin|| openCheckOut" />
         <GuestPicker v-if="openGuests"
-             @guest-count="updateGuestsFilterBy"
+             @guest-count="updateFilterBy"
         />
 
 
@@ -93,10 +93,10 @@ export default {
             this.filterBy = { ...this.filterBy, ...newQuery }
             // console.log(this.filterBy);
         },
-        updateGuestsFilterBy(newQuery) {
-            this.filterBy.guests = { ...this.filterBy.guests, ...newQuery }
-            // console.log(this.filterBy);
-        },
+        // updateGuestsFilterBy(newQuery) {
+        //     this.filterBy.guests = { ...this.filterBy.guests, ...newQuery }
+        //     // console.log(this.filterBy);
+        // },
         formatNumber(num) {
             return utilService.formatNumber(num)
         },

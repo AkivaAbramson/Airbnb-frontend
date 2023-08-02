@@ -34,7 +34,7 @@
             <section v-else class="preview-data">
                 <h3 class="black-bold preview-loc">{{ stay.name }}</h3>
                 <h3 class="light-gray">{{ stay.capacity }} guests</h3>
-                <!-- <h3 class="light-gray">{{ stay.days }} nights · Saved for {{ stayDates }}</h3> -->
+                <h3 class="light-gray">{{ stay.days }} nights · Saved for {{ stayDates }}</h3>
                 <h3 class="black-bold preview-price">
                     ${{ stay.price }}
                     <span class="light-gray">night · ${{ totalPrice }} total</span>
@@ -92,7 +92,7 @@ export default {
         stayDates() {
             const monthsEnum = { 0: 'Jan', 1: 'Feb', 2: 'Mar', 3: 'Apr', 4: 'May', 5: 'Jun', 6: 'Jul', 7: 'Aug', 8: 'Sep', 9: 'Oct', 10: 'Nov', 11: 'Dec'}
             let dateStr
-            // console.log(typeof this.stay.startDate);
+            console.log(typeof this.stay.startDate);
             const startDay = this.stay.startDate.getDate()
             const endDay = this.stay.endDate.getDate()
 
