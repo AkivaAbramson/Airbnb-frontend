@@ -91,7 +91,7 @@ export default {
         },
         updateFilterBy(newQuery) {
             this.filterBy = { ...this.filterBy, ...newQuery }
-            // console.log(this.filterBy);
+            // console.log('updatedFilterBy, filterBy:', this.filterBy);
         },
         // updateGuestsFilterBy(newQuery) {
         //     this.filterBy.guests = { ...this.filterBy.guests, ...newQuery }

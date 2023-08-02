@@ -17,9 +17,9 @@ export const stayService = {
 window.cs = stayService
 
 
-async function query(filterBy = { txt: '', price: 0, loc: '', destination: "I'm", guests: null, }) {
+async function query(filterBy = { txt: '', price: 0, loc: '', destination: '', }) {
   console.log('query: filterBy', filterBy);
-  console.log('flexible?', filterBy.destination);
+
   var stays = await storageService.query(STORAGE_KEY)
 
   // if (filterBy.txt) {
@@ -29,11 +29,6 @@ async function query(filterBy = { txt: '', price: 0, loc: '', destination: "I'm"
 
   if (filterBy.price) {
     stays = stays.filter(stay => stay.price <= filterBy.price)
-  }
-
-  console.log('flexible?', filterBy.destination);
-  if (filterBy.destination === "I'm flexible") {
-    console.log('flexible!');
   }
 
   // if (filterBy.loc) {
@@ -46,9 +41,9 @@ async function query(filterBy = { txt: '', price: 0, loc: '', destination: "I'm"
   //   })
   // }
 
-  // if (filterBy.destination !== "I'm flexible") {
-  //   stays = stays.filter((stay) => stay.destination === filterBy.destination)
-  // }
+  if (filterBy.destination) {
+    stays = stays.filter((stay) => stay.loc.country === filterBy.destination)
+  }
 
   // if (filterBy.guests) {
   //   const guestKeys = ['adult', 'child', 'infant', 'pet']
