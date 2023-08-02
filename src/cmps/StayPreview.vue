@@ -74,6 +74,7 @@
 
 // import { FOCUSABLE_CHILDREN } from 'element-plus/es/directives/trap-focus';
 import MainGallery from './MainGallery.vue';
+import { utilService } from '../services/util.service';
 
 
 export default {
@@ -130,6 +131,9 @@ export default {
         },
         totalPrice() {
             return Number(this.stay.price) * Number(this.stay.days)
+        },
+        trimName(){
+            return utilService.trimTxt(this.stay.name)
         }
     },
     components: {
