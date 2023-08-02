@@ -35,26 +35,28 @@
                         <h2>Price details</h2>
                         <div class="flex justify-between">
                             <span>${{ formatNumber(stay.price.toFixed(2)) }} x {{ nightsTxt }}</span>
-                            <span>${{ formatNumber(priceNights.toFixed(2)) }}</span>
+                            <span>${{ formatNumber(priceNights().toFixed(2)) }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="underline">Airbnb service fee</span>
-                            <span>${{ formatNumber(parseFloat(priceNights * 14 / 100).toFixed(2)) }}</span>
+                            <span>${{ formatNumber(parseFloat(priceNights() * 14 / 100).toFixed(2)) }}</span>
                         </div>
                     </div>
                     <div class="bold flex justify-between">
                         <span class="bold">Total</span>
-                        <span class="bold">${{ formatNumber(parseFloat(priceNights * 114 / 100).toFixed(2)) }}</span>
+                        <span class="bold">${{ formatNumber(parseFloat(totalPrice()).toFixed(2)) }}</span>
                     </div>
                 </article>
             </article>
-            <FancyBtn :content="'Reserve'" />
+            <FancyBtn :content="'Reserve'" @click="createOrder()" />
         </section>
     </section>
 </template>
 
 <script>
 import { stayService } from '../services/stay.service.local'
+import { userService } from '../services/user.service.local'
+import { storageService } from '../services/async-storage.service'
 import { utilService } from '../services/util.service'
 import FancyBtn from '../cmps/FancyBtn.vue'
 import RateAndRev from '../cmps/RateAndRev.vue'
@@ -103,6 +105,43 @@ export default {
         formatNumber(num) {
             return utilService.formatNumber(num)
         },
+        priceNights() {
+            return this.nights() * this.stay.price
+        },
+        totalPrice() {
+            return this.priceNights() * 114 / 100
+        },
+        async createOrder() {
+            const user = userService.getLoggedinUser()
+            if (!user) return
+            const order = {
+                _id: utilService.makeId(),
+                hostId: this.stay.host._id,
+                createdAt: Date.now(),
+                buyer: {
+                    _id: user._id,
+                    fullname: user.fullname,
+                },
+                totalPrice: this.totalPrice(),
+                startDate: this.$route.query.startDate,
+                endDate: this.$route.query.endDate,
+                guests: {
+                    adults: this.$route.query.adult,
+                    kids: this.$route.query.child || 0,
+                    infants: this.$route.query.infant || 0,
+                    pets: this.$route.query.pet || 0,
+                },
+                stay: {
+                    _id: this.stayId,
+                    name: this.stay.name,
+                    price: this.stay.price,
+                },
+                msgs: [],
+                status: "pending"
+            }
+            await storageService.post('order', order)
+            this.$router.push('/')
+        },
     },
     computed: {
         dates() {
@@ -131,9 +170,6 @@ export default {
         },
         nightsTxt() {
             return utilService.formatPlural({ night: this.nights() })
-        },
-        priceNights() {
-            return this.nights() * this.stay.price
         },
     },
     components: {

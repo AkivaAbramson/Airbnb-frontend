@@ -36,7 +36,7 @@ export default {
     border-radius: 0.5rem;
     background-color: transparent;
     background-repeat: repeat;
-    background-image: linear-gradient(to right, rgb(189, 30, 89) 0%, rgb(146, 23, 77) 50%, rgb(134, 20, 83) 100%);
+    background-image: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
 
     &:before {
         content: var(--content);
@@ -56,7 +56,7 @@ export default {
         border-radius: 0.5rem;
         height: 100%;
         width: 100%;
-        background-image: radial-gradient(circle at center center, rgb(108, 13, 99) 0%, rgb(108, 13, 99) 10%, rgb(134, 20, 83) 27.5%, rgb(146, 23, 77) 45%, rgb(189, 30, 89) 70%, rgb(215, 4, 102) 100%);
+        background-image: radial-gradient(circle at center center, rgb(189, 30, 89) 0%, rgb(189, 30, 89) 27.5%, rgb(215, 4, 102) 40%, rgb(227, 28, 95) 57.5%, rgb(230, 30, 77) 75%, rgb(255, 56, 92) 100%);
         background-position: calc(var(--mouse-x, 0) * 1px) calc(var(--mouse-y, 0) * 1px);
         background-size: 200% 200%;
         transition: opacity 1.25s;

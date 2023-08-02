@@ -4,7 +4,8 @@
     $titleGap: 1.5rem;
     $reviewGap: 1.5rem;
 
-    padding-block: $topGap $botGap;
+    margin-block-start: $topGap;
+    padding-block-end: $botGap;
 
     h2 {
         font-size: 1.375rem;

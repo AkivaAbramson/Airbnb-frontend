@@ -27,7 +27,7 @@
             <GuestPicker v-if="showGuestModal" v-clickout="() => toggleGuestModal(false)" @guest-count="updateQuery"
                 :capacity="stay.capacity" />
         </article>
-        <FancyBtn :content="'Reserve'" @click="() => $router.push({ name: 'StayBook', params: {stayId: stay._id}, query: $route.query })" />
+        <FancyBtn :content="'Reserve'" @click="onReserve()" />
         <article class="price" v-if="nights()">
             <div class="notify">{{ `You won't be charged yet` }}</div>
             <div class="price-calc shadow">
@@ -49,11 +49,12 @@
 </template>
 
 <script>
+import { utilService } from '../services/util.service'
+import { svgService } from '../services/svg.service'
+import { eventBus } from '../services/event-bus.service';
 import RateAndRev from './RateAndRev.vue';
 import FancyBtn from './FancyBtn.vue';
 import GuestPicker from './GuestPicker.vue';
-import { utilService } from '../services/util.service'
-import { svgService } from '../services/svg.service'
 export default {
     props: ['stay'],
     data() {
@@ -93,6 +94,9 @@ export default {
         },
         updateQuery(newQuery) {
             this.$router.replace({ query: newQuery })
+        },
+        onReserve() {
+            eventBus.emit('reserve')
         }
     },
     computed: {
