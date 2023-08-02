@@ -34,8 +34,10 @@
         </section>
         <Destinations v-if="openDest"
             @chosenDest="updateFilterBy"
+            @openNextModal="openNextModal"
         />
-        <CheckIn v-if="openCheckin|| openCheckOut" />
+        <CheckIn v-if="openCheckin"/>
+        <CheckIn v-if="openCheckOut"/>
         <GuestPicker v-if="openGuests"
              @guest-count="updateFilterBy"
         />
@@ -53,13 +55,16 @@ import GuestPicker from './GuestPicker.vue'
 export default {
     data() {
         return {
-            openDest: false,
+            openDest: true,
             openCheckin:false,
             openGuests:false,
             openCheckOut: false,
             filterBy: {},
-
-            
+            // countMap: {
+            //     guest: 0,
+            //     infant: 0,
+            //     pet: 0,
+            // }
 
         }
     },
@@ -91,7 +96,7 @@ export default {
         },
         updateFilterBy(newQuery) {
             this.filterBy = { ...this.filterBy, ...newQuery }
-            // console.log('updatedFilterBy, filterBy:', this.filterBy);
+            
         },
         // updateGuestsFilterBy(newQuery) {
         //     this.filterBy.guests = { ...this.filterBy.guests, ...newQuery }
@@ -104,7 +109,24 @@ export default {
             this.$emit('closeHeader')
             this.$router.replace({ query: this.filterBy })
             await this.$store.dispatch({ type: 'loadStays', filterBy: this.filterBy })
-            console.log(this.filterBy)
+            this.filterBy = {}
+        },
+        openNextModal(){
+            if(this.openDest === true){
+                this.openDest = false
+                this.openCheckin = true
+                // return
+            }
+            if(this.openCheckin === true){
+                this.openCheckin = false
+                this.openCheckOut = true
+                // return
+            }
+            if(this.openCheckOut === true){
+                this.openCheckOut = false
+                this.openGuests = true
+                // return
+            }
         }
         
     },
@@ -115,6 +137,7 @@ export default {
                 infant: this.$route.query.infant,
                 pet: this.$route.query.pet,
             }
+            console.log(this.filterBy)
             return utilService.formatPlural(countMap, ', ')
         },
         destination(){
