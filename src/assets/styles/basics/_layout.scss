@@ -3,49 +3,52 @@
 }
 
 .home-layout {
-    padding: 10px;
+    // padding: 10px;
     display: grid;
-    grid-template-columns: 40px 1fr 40px;
+    grid-template-columns: 15px 1fr 15px;
     margin-bottom: 70px;
-
+    
     > * {
         grid-column: 2;
-
+        
         &.full {
             grid-column: 1 /-1;
         }
     }
-
+    
     @include for-mobile-layout {
         grid-template-columns: 
-            minmax(10px, 1fr)
-            minmax(auto, 720px)
-            minmax(10px, 1fr);
+        minmax(15px, 1fr)
+        minmax(auto, 720px)
+        minmax(15px, 1fr);
+        
+        
+        // minmax(10px, 1fr);
     }
-
+    
     @include for-narrow-layout {
         grid-template-columns: 
-            minmax(10px, 1fr)
-            minmax(auto, 960px)
-            minmax(10px, 1fr);
+        minmax(15px, 1fr)
+        minmax(auto, 960px)
+        minmax(15px, 1fr);
     }
     @include for-tablet-layout {
         grid-template-columns: 
-            minmax(10px, 1fr)
-            minmax(auto, 1200px)
-            minmax(10px, 1fr);
+        minmax(20px, 1fr)
+        minmax(auto, 1200px)
+        minmax(20px, 1fr);
     }
     @include for-normal-layout {
         grid-template-columns: 
-            minmax(10px, 1fr)
-            minmax(auto, 1360px)
-            minmax(10px, 1fr);
+        minmax(40px, 1fr)
+        minmax(auto, 1360px)
+        minmax(40px, 1fr);
     }
     @include for-wide-layout {
         grid-template-columns: 
-            minmax(10px, 1fr)
-            minmax(auto,1360px)
-            minmax(10px, 1fr);
+        minmax(40px, 1fr)
+        minmax(auto,1360px)
+        minmax(40px, 1fr);
     }
 }
 

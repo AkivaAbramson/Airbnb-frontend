@@ -35,7 +35,7 @@
             </section>
 
             <!-- wishlist preview' -->
-            <section v-else class="preview-data">
+            <section v-else class="preview-data"> 
                 <h3 class="black-bold preview-loc">{{ stay.name }}</h3>
                 <h3 class="light-gray">{{ stay.capacity }} guests</h3>
                 <h3 class="light-gray">{{ stay.days }} nights · Saved for {{ stayDates }}</h3>
@@ -137,7 +137,7 @@ export default {
         },
     
         rating() {
-            console.log('rating computed: this.stay', this._stay);
+            // console.log('rating computed: this.stay', this._stay);
             return utilService.calcRating({ ...this._stay })
         }
     },
