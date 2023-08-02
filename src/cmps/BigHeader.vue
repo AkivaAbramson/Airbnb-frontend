@@ -3,7 +3,7 @@
         <section class="search-container">
             <div class="destination" @click="searchDest" :class="{ pickedOption: openDest }">
                 <h3>Where</h3>
-                <h5 v-if="!destination || destination === ''">Search destinations</h5>
+                <h5 v-if="!destination || destination === `I'm flexible` ">Search destinations</h5>
                 <span v-else>{{ destination }}</span>
             </div>
             
@@ -120,7 +120,6 @@ export default {
         },
         destination(){
             let dest = this.filterBy.destination
-            console.log(this.filterBy.destination)
             return dest
 
         },
