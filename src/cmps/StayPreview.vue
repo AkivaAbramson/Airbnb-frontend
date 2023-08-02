@@ -134,6 +134,11 @@ export default {
         },
         trimName(){
             return utilService.trimTxt(this.stay.name)
+        },
+    
+        rating() {
+            console.log('rating computed: this.stay', this._stay);
+            return utilService.calcRating({ ...this._stay })
         }
     },
     components: {
