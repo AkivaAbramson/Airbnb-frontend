@@ -39,6 +39,7 @@ export default {
     },
     methods: {
         chooseDest(destination) {
+                if (destination === `I'm flexible`) destination = ''
                 this['destination'] = destination
                 const newQuery = Object.assign({}, this.$route.query)
                 newQuery['destination'] = this['destination']
