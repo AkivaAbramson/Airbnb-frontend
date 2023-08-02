@@ -92,17 +92,22 @@ export default {
         stayDates() {
             const monthsEnum = { 0: 'Jan', 1: 'Feb', 2: 'Mar', 3: 'Apr', 4: 'May', 5: 'Jun', 6: 'Jul', 7: 'Aug', 8: 'Sep', 9: 'Oct', 10: 'Nov', 11: 'Dec'}
             let dateStr
-            console.log(typeof this.stay.startDate);
-            const startDay = this.stay.startDate.getDate()
-            const endDay = this.stay.endDate.getDate()
+            const _stay = { ...this.stay }
 
-            if (this.stay.startDate.getMonth() === this.stay.endDate.getMonth()) {
-                const month = monthsEnum[this.stay.startDate.getMonth()]
+            console.log('_stay', _stay);
+            // console.log('typeof startDate', typeof _stay.startDate);
+            const date1 = new Date(_stay.startDate)
+            const date2 = new Date(_stay.endDate)
+            const startDay = date1.getDate()
+            const endDay = date2.getDate()
+
+            if (date1.getMonth() === date2.getMonth()) {
+                const month = monthsEnum[date1.getMonth()]
                 dateStr = `${month} ${startDay} - ${endDay}`
             }
             else {
-                const month1 = monthsEnum[this.stay.startDate.getMonth()]
-                const month2 = monthsEnum[this.stay.endDate.getMonth()]
+                const month1 = monthsEnum[date1.getMonth()]
+                const month2 = monthsEnum[date2.getMonth()]
                 dateStr = `${month1} ${startDay} - ${month2} ${endDay}`
             }
 

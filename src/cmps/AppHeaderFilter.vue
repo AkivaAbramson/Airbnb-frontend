@@ -1,5 +1,14 @@
 <template>
     <section class="header-filter main-layout flex">
+
+        <!-- <section class="main-labels" v-for="label in labels" :key="label">
+            <button class="label-button" @mouseenter="showArrowsPagination = true"
+                @mouseleave="showArrowsPagination = false">
+                <img :src="label.imgUrl">
+                <p>{{ label.name }}</p>
+            </button>
+        </section> -->
+
         <!-- <swiper class="parallax-slider" :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }" parallax grabCursor
             @swiper="onSwiperInitialized">
             <div class="parallax-slider-navigation">
@@ -21,23 +30,26 @@
                 </div>
             </swiper-slide>
         </swiper> -->
-        <!-- <carousel :breakpoints="breakpoints" :itemsToShow="12.5">
-            <slide class="main-labels" v-for="label in labels" :key="label">
-                <button class="label-button" @mouseenter="showArrowsPagination = true"
-                    @mouseleave="showArrowsPagination = false">
-                    <img :src="label.imgUrl">
-                    <p>{{ label.name }}</p>
-                </button>
-            </slide>
+        <!-- <section class="main-labels">
 
-            <template #addons>
-                <navigation />
-            </template>
+            <carousel :breakpoints="breakpoints" :itemsToShow="1">
+                <slide class="main-labels" v-for="label in labels" :key="label">
+                    <button class="label-button" @mouseenter="showArrowsPagination = true"
+                        @mouseleave="showArrowsPagination = false">
+                        <img :src="label.imgUrl">
+                        <p>{{ label.name }}</p>
+                    </button>
+                </slide>
 
-        </carousel> -->
+                <template #addons>
+                    <navigation />
+                </template>
+
+            </carousel>
+        </section>
 
 
-        <!-- <div class="main-filters">
+        <div class="main-filters">
             <button class="filter-button">
                 <div class="filter-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"

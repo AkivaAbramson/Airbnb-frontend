@@ -3,7 +3,7 @@
         <section class="search-container">
             <div class="destination" @click="searchDest" :class="{ pickedOption: openDest }">
                 <h3>Where</h3>
-                <h5 v-if="!destination || destination === ''">Search destinations</h5>
+                <h5 v-if="!destination || destination === `I'm flexible`">Search destinations</h5>
                 <span v-else>{{ destination }}</span>
             </div>
             
@@ -90,7 +90,6 @@ export default {
 
         },
         updateFilterBy(newQuery) {
- 
             this.filterBy = { ...this.filterBy, ...newQuery }
             // console.log('updatedFilterBy, filterBy:', this.filterBy);
         },
@@ -112,15 +111,14 @@ export default {
     computed: {
         guestCount() {
             let countMap = {
-                guest: parseInt(this.filterBy.adult) + parseInt(this.filterBy.child || 0),
-                infant: this.filterBy.infant,
-                pet: this.filterBy.pet,
+                guest: parseInt(this.$route.query.adult) + parseInt(this.$route.query.child || 0),
+                infant: this.$route.query.infant,
+                pet: this.$route.query.pet,
             }
             return utilService.formatPlural(countMap, ', ')
         },
         destination(){
-            let dest = this.filterBy.destination
-            console.log(this.filterBy.destination)
+            let dest = this.$route.query.destination
             return dest
 
         },
