@@ -28,6 +28,7 @@ export const stayStore = {
     actions: {
         async loadStays(context, filterBy) {
             try {
+                console.log('loadStays: filterBy', filterBy);
                 // const stays = await stayService.query(filterBy)
                 const stays = await stayService.query(filterBy)
                 context.commit({ type: 'setStays', stays })
