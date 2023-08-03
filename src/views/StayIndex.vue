@@ -1,7 +1,7 @@
 <template>
   <section class="stay-index home-layout">
     <!-- <pre>{{stays}}</pre> -->
-    
+    <AppHeaderFilter ></AppHeaderFilter>
     <!-- <StayFilter @filter="setFilterBy" /> -->
     <StayList v-if="stays" 
       :stays="stays"
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import AppHeaderFilter from '../cmps/AppHeaderFilter.vue'
 import StayList from '../cmps/StayList.vue'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { stayService } from '../services/stay.service.local'
@@ -20,7 +21,8 @@ export default {
   name: 'StayIndex',
   components: {
     StayList,
-  },
+    AppHeaderFilter
+},
   data() {
     return {
       

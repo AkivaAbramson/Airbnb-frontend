@@ -1,85 +1,27 @@
 <template>
-    <section class="header-filter main-layout flex">
-
-        <!-- <section class="main-labels" v-for="label in labels" :key="label">
-            <button class="label-button" @mouseenter="showArrowsPagination = true"
-                @mouseleave="showArrowsPagination = false">
-                <img :src="label.imgUrl">
+    <Carousel class="label-header home-layout" style="margin-bottom: 0px;" v-bind="settings" :breakpoints="breakpoints">
+        <Slide class="carousel__slide" v-for="label in labels" :key="label">
+            <div class="carousel__item">
+                <div class="label-icon">
+                    <img :src="label.imgUrl" alt="">
+                </div>
                 <p>{{ label.name }}</p>
-            </button>
-        </section> -->
-
-        <!-- <swiper class="parallax-slider" :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }" parallax grabCursor
-            @swiper="onSwiperInitialized">
-            <div class="parallax-slider-navigation">
-                <div class="nav-indicator prevArrow">
-                    <font-awesome-icon :icon="['fas', 'chevron-left']" />
-                </div>
-                <div class="nav-indicator nextArrow">
-                    <font-awesome-icon :icon="['fas', 'chevron-right']" />
-                </div>
             </div>
-            <swiper-slide class="parallax-slide" v-for="label in labels" :key="labels">
-                <div class="parallax-slide-image" :data-swiper-parallax="parallaxAmount"
-                    :data-swiper-parallax-opacity="0.5">
-                    <img :src="image.imageUrl" />
-                </div>
-                <div class="label-button">
-                    <img :src="label.imgUrl">
-                    <p>{{ label.name }}</p>
-                </div>
-            </swiper-slide>
-        </swiper> -->
-        <!-- <section class="main-labels">
+        </Slide>
 
-            <carousel :breakpoints="breakpoints" :itemsToShow="1">
-                <slide class="main-labels" v-for="label in labels" :key="label">
-                    <button class="label-button" @mouseenter="showArrowsPagination = true"
-                        @mouseleave="showArrowsPagination = false">
-                        <img :src="label.imgUrl">
-                        <p>{{ label.name }}</p>
-                    </button>
-                </slide>
-
-                <template #addons>
-                    <navigation />
-                </template>
-
-            </carousel>
-        </section>
-
-
-        <div class="main-filters">
-            <button class="filter-button">
-                <div class="filter-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
-                        style="height: 14px; width: 14px; fill: currentcolor;">
-                        <path
-                            d="M5 8a3 3 0 0 1 2.83 2H14v2H7.83A3 3 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.83 4H2V4h6.17A3 3 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z">
-                        </path>
-                    </svg>
-                </div>
-                <p>Filters</p>
-            </button>
-        </div> -->
-    </section>
+        <template #addons>
+            <Navigation />
+        </template>
+    </Carousel>
 </template>
 
 <script>
-// Import Swiper Vue.js components
-// import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
-// Import Swiper Vue.js components
-// import { Swiper, SwiperSlide } from 'swiper/vue';
-
-// Import Swiper styles
-// import 'swiper/scss';
-// import 'swiper/scss/navigation';
-// import 'swiper/scss/pagination';
-
-
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
 
 export default {
+    name: 'AppHeaderFilter',
     data() {
         return {
             labels: [
@@ -132,10 +74,6 @@ export default {
                     imgUrl: "https://a0.muscache.com/pictures/35919456-df89-4024-ad50-5fcb7a472df9.jpg"
                 },
                 {
-                    name: "Farms",
-                    imgUrl: "https://a0.muscache.com/pictures/aaa02c2d-9f0d-4c41-878a-68c12ec6c6bd.jpg"
-                },
-                {
                     name: "Play",
                     imgUrl: "https://a0.muscache.com/pictures/f0c5ca0f-5aa0-4fe5-b38d-654264bacddf.jpg"
                 },
@@ -184,27 +122,41 @@ export default {
                 //     imgUrl: ""
                 // }
             ],
+            settings: {
+                itemsToShow: 1,
+                snapAlign: 'center',
+                itemsToScroll: 1,
+            },
+            breakpoints: {
+                401: {
+                    itemsToShow: 3,
+                    snapAlign: 'center',
+                    itemsToScroll: 2,
+                },
+                501: {
+                    itemsToShow: 6,
+                    snapAlign: 'center',
+                    itemsToScroll: 5,
+                },
+                700: {
+                    itemsToShow: 8,
+                    snapAlign: 'center',
+                    itemsToScroll: 5,
+                },
+                // 1024 and up
+                1024: {
+                    itemsToShow: 12,
+                    snapAlign: 'center',
+                    itemsToScroll: 6,
+                },
+            },
         }
     },
     components: {
-        // Swiper,
-        // SwiperSlide,
+        Carousel,
+        Slide,
+        Navigation,
     },
-    // setup() {
-    //     const onSwiper = (swiper) => {
-    //         console.log(swiper);
-    //     };
-    //     const onSlideChange = () => {
-    //         console.log('slide change');
-    //     };
-    //     return {
-    //         onSwiper,
-    //         onSlideChange,
-    //         modules: [Navigation, Pagination, Scrollbar, A11y],
-    //     };
-    // },
+
 }
 </script>
-  
-
-

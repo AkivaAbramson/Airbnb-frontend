@@ -1,127 +1,128 @@
 // @import 'vue3-carousel/dist/carousel.css';
 
+.stay-preview {
+  .carousel {
 
-.carousel {
-
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-
-  .carousel__viewport {
-    /* Make the carousel track horizontal and remove the default browser list styles */
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    position: relative;
     width: 100%;
-    transition: all 0.3s ease;
+    overflow: hidden;
 
-    .carousel__slide {
-      /* Set the width of each slide */
-      flex: 0 0 100%;
-    }
-  }
+    .carousel__viewport {
+      /* Make the carousel track horizontal and remove the default browser list styles */
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      transition: all 0.3s ease;
 
-  .carousel__icon {
-    path {
-      transform-origin: center;
-      transform: scale(1.5);
-    }
-  }
-
-  .carousel__prev,
-  .carousel__next {
-    /* Position the arrows */
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: none;
-    margin: 0;
-    width: 27px;
-    height: 27px;
-    // font-size: 14px;
-    padding: 8px;
-    border-radius: 50%;
-    background-color: white;
-    transform: translateY(-50%) scale(1.2);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-
-
-    &.carousel__next--disabled {
-      display: none;
-      opacity: 0;
-
+      .carousel__slide {
+        /* Set the width of each slide */
+        flex: 0 0 100%;
+      }
     }
 
-    &.carousel__prev--disabled {
-      display: none;
-      opacity: 0;
+    .carousel__icon {
+      path {
+        transform-origin: center;
+        transform: scale(1.5);
+      }
     }
-
-  }
-
-  .carousel__prev {
-    left: 20px;
-  }
-
-  .carousel__next {
-    right: 20px;
-  }
-
-  /* Show the arrows and custom pagination only when hovering over the carousel images */
-  &:hover {
 
     .carousel__prev,
     .carousel__next {
-      display: flex;
+      /* Position the arrows */
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      display: none;
+      margin: 0;
+      width: 27px;
+      height: 27px;
+      // font-size: 14px;
+      padding: 8px;
+      border-radius: 50%;
+      background-color: white;
+      transform: translateY(-50%) scale(1.2);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+
+
+      &.carousel__next--disabled {
+        display: none;
+        opacity: 0;
+
+      }
+
+      &.carousel__prev--disabled {
+        display: none;
+        opacity: 0;
+      }
+
+    }
+
+    .carousel__prev {
+      left: 20px;
+    }
+
+    .carousel__next {
+      right: 20px;
+    }
+
+    /* Show the arrows and custom pagination only when hovering over the carousel images */
+    &:hover {
+
+      .carousel__prev,
+      .carousel__next {
+        display: flex;
+      }
+
+      .carousel__pagination {
+        display: flex;
+      }
     }
 
     .carousel__pagination {
+      /* Position the pagination */
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-    }
-  }
-
-  .carousel__pagination {
-    /* Position the pagination */
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    :nth-child(n+6) {
-      display: none;
-    }
-
-    .carousel__pagination-item {
-      margin: 0 4.5px;
+      list-style: none;
+      margin: 0;
       padding: 0;
-    }
 
-    .carousel__pagination-button {
-      /* Style each pagination circle */
-      border-radius: 50%;
-      background-color: #aaa;
-      cursor: pointer;
-      padding: 3px;
-      margin-inline-end: -4px;
-
-      &.carousel__pagination-button--active {
-        /* Style the active pagination circle */
-        background-color: white;
+      :nth-child(n+6) {
+        display: none;
       }
 
+      .carousel__pagination-item {
+        margin: 0 4.5px;
+        padding: 0;
+      }
 
+      .carousel__pagination-button {
+        /* Style each pagination circle */
+        border-radius: 50%;
+        background-color: #aaa;
+        cursor: pointer;
+        padding: 3px;
+        margin-inline-end: -4px;
+
+        &.carousel__pagination-button--active {
+          /* Style the active pagination circle */
+          background-color: white;
+        }
+
+
+      }
     }
-  }
 
-  button.carousel__pagination-button::after {
-    display: none;
+    button.carousel__pagination-button::after {
+      display: none;
+    }
   }
 }

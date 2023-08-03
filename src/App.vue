@@ -18,6 +18,7 @@ import { userService } from './services/user.service'
 import { store } from './store/store'
 
 import AppHeader from './cmps/AppHeader.vue'
+import AppHeaderFilter from './cmps/AppHeaderFilter.vue'
 import BigHeader from './cmps/BigHeader.vue'
 import UserMsg from './cmps/UserMsg.vue'
 
@@ -48,6 +49,7 @@ export default {
   },
   components: {
     AppHeader,
+    AppHeaderFilter,
     BigHeader,
     UserMsg
   },
