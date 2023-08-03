@@ -64,13 +64,13 @@
       </nav>
 
     </header>
-    <AppHeaderFilter class="home-layout"></AppHeaderFilter>
-
+    <!-- <AppHeaderFilter class="home-layout"></AppHeaderFilter> -->
+    
   </section>
 </template>
 
 <script>
-import AppHeaderFilter from './AppHeaderFilter.vue'
+// import AppHeaderFilter from './AppHeaderFilter.vue'
 import NavModal from './NavModal.vue'
 import { svgService } from '../services/svg.service'
 
@@ -154,7 +154,7 @@ export default {
     }
   },
   components: {
-    AppHeaderFilter,
+    // AppHeaderFilter,
     NavModal,
   }
 

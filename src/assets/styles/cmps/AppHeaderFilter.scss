@@ -1,24 +1,57 @@
-.header-filter {
-    .main-labels {
-        height: 6rem;
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: max-content;
-        overflow-y: hidden;
-        overflow-x: auto;
-        gap: 2rem;
-    
-        button {
-            border:0;
-            background-color: #fff;
-            height: 3rem;
-            width: max-content;
-    
-    
-            img {
-                height: 1.5rem;
-                width: 1.5rem;
-            }
-        }
+.label-header {
+
+  .carousel__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    width: max-content;
+    color: #717171;
+    font-family: Circular;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover{
+      img {
+        opacity: 1;
+      }
+      color: black;
+      border-radius: 0;
+      border-bottom: 2px solid black;
     }
+
+
+  }
+
+  .carousel__prev,
+  .carousel__next {
+    background: #FFFFFF;
+    border-radius: 50%;
+    box-sizing: content-box;
+    border: 5px solid white;
+  }
+
+  .carousel__prev, .carousel__prev--disabled {
+    box-shadow: -15px -5px 7px 20px #FFFFFF;
+    padding-left: 15px;
+  }
+
+  .carousel__next {
+    padding-right: 5px;
+    box-shadow: -7px 0px 12px 5px #FFFFFF;
+  }
+
+  .label-icon {
+    height: 1.5rem;
+    img {
+      opacity: .6;
+    }
+  }
+
+  .carousel__slide {
+    padding: 10px;
+  }
 }
