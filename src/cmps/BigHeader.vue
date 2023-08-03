@@ -2,34 +2,38 @@
     <section class="big-header home-layout">
         <section class="search-container">
             <div class="destination" @click="searchDest" :class="{ pickedOption: openDest }">
-                <h3>Where</h3>
-                <h5 v-if="!destination || destination === `I'm flexible` ">Search destinations</h5>
+                <h3 class="bold-title">Where</h3>
+                <h5 class="light-subtitle" v-if="!destination || destination === `I'm flexible` ">Search destinations</h5>
                 <span v-else>{{ destination }}</span>
+                <!-- <input class="iluujbk dir dir-ltr" aria-autocomplete="none" autocomplete="off" autocorrect="off" spellcheck="false" id="bigsearch-query-location-input" name="query" aria-describedby="bigsearch-query-location-description" placeholder="Search destinations" data-testid="structured-search-input-field-query" value="" aria-activedescendant="bigsearch-query-location-suggestion-1"> -->
             </div>
             
             <div class="check-in"  @click="checkIn" :class="{ pickedOption: openCheckin }">
-                <h3>Check in</h3>
-                <h5>Add dates</h5>
+                <h3 class="bold-title">Check in</h3>
+                <h5 class="light-subtitle">Add dates</h5>
             </div>
             
             <div class="check-out" @click="checkOut" :class="{ pickedOption: openCheckOut }">
-                <h3>Check out</h3>
-                <h5>Add dates</h5>
+                <h3 class="bold-title">Check out</h3>
+                <h5 class="light-subtitle">Add dates</h5>
             </div>
             
             <div class="who" @click="addGuests" :class="{ pickedOption: openGuests }">
-                <h3>Who</h3>
-                <h5 v-if="!guestCount || guestCount === '1 guest'">Add guests</h5>
-                <span v-else>{{ guestCount }}</span>
-            </div>
-            <div class="btn-wrapper" @click="loadFilteredStays">
-                <!-- <FancyBtn class="search-icon" :content="'Search'" /> -->
-                <span class="search-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation"
-                        focusable="false" style="fill: none; stroke: white; stroke-width: 4; overflow: visible;">
-                        <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path>
-                    </svg>
-                </span>
+                <div class="guests-wrapper">
+                    <h3 class="bold-title">Who</h3>
+                    <h5 class="light-subtitle" v-if="!guestCount || guestCount === '1 guest'">Add guests</h5>
+                    <span v-else>{{ guestCount }}</span>
+                    
+                </div>
+                <div class="btn-wrapper" @click.stop="loadFilteredStays">
+                    <!-- <FancyBtn class="search-icon" :content="'Search'" /> -->
+                    <span class="search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation"
+                            focusable="false" style="fill: none; stroke: white; stroke-width: 4; overflow: visible;">
+                            <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path>
+                        </svg>
+                    </span>
+                </div>
             </div>
         </section>
         <Destinations v-if="openDest"
@@ -95,7 +99,25 @@ export default {
 
         },
         updateFilterBy(newQuery) {
-            this.filterBy = { ...this.filterBy, ...newQuery }
+            console.log(newQuery)
+            if(!newQuery['adult'] && this.filterBy['adult'] === 1){
+                this.filterBy['adult'] = 1
+            }
+            if(!newQuery['child'] && this.filterBy['child'] === 1){
+                this.filterBy['child'] = 1
+            }
+            if(!newQuery['infant'] && this.filterBy['infant'] === 1){
+                this.filterBy['infant'] = 1
+            }
+            if(!newQuery['pet'] && this.filterBy['pet'] === 1){
+                this.filterBy['pet'] = 1
+            } else{
+
+                this.filterBy = { ...this.filterBy, ...newQuery }
+            }
+             
+
+            console.log(this.filterBy)
             
         },
         // updateGuestsFilterBy(newQuery) {
@@ -133,11 +155,11 @@ export default {
     computed: {
         guestCount() {
             let countMap = {
-                guest: parseInt(this.$route.query.adult) + parseInt(this.$route.query.child || 0),
-                infant: this.$route.query.infant,
-                pet: this.$route.query.pet,
+                guest: parseInt(this.filterBy.adult) + parseInt(this.filterBy.child || 0),
+                infant: this.filterBy.infant,
+                pet: this.filterBy.pet,
             }
-            console.log(this.filterBy)
+            // console.log(this.filterBy)
             return utilService.formatPlural(countMap, ', ')
         },
         destination(){

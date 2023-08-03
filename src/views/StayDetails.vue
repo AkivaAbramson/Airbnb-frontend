@@ -1,5 +1,33 @@
 <template>
     <section v-if="stay" class="stay-details" :key="stayId">
+        <section class="fixed-navbar shadow">
+            <div class="nav-content">
+                <ul class="clean-list flex">
+                    <li>
+                        <a @click="scrollTo($refs.photos)">Photos</a>
+                    </li>
+                    <li>
+                        <a @click="scrollTo($refs.amenities)">Amenities</a>
+                    </li>
+                    <li>
+                        <a @click="scrollToReviews()">Reviews</a>
+                    </li>
+                    <li>
+                        <a @click="scrollTo($refs.location)">Location</a>
+                    </li>
+                </ul>
+                <article class="fixed-order">
+                    <span class="fixed-details">
+                        <span class="top-price bold">${{ formatNumber(stay.price) }}</span>
+                        <RateAndRev :reviews="stay.reviews" />
+                    </span>
+                    <div class="btn-wrapper">
+                        Reserve
+                        <FancyBtn @click="onReserve()" :content="'Reserve'" />
+                    </div>
+                </article>
+            </div>
+        </section>
         <section class="header-details">
             <h1>{{ stay.name }}</h1>
             <div class="top-details flex justify-between align-end">
@@ -16,7 +44,7 @@
                 </div>
             </div>
         </section>
-        <section v-if="stayImages" class="image-gallery">
+        <section ref="photos" v-if="stayImages" class="image-gallery">
             <div v-for="i in 5" :class="getImgClass(i)">
                 <img :src="stayImages[i - 1]">
             </div>
@@ -62,10 +90,12 @@
                         </div>
                     </li>
                 </ul>
-                <article class="stay-desc shadow">
-                    <p>{{ stay.summary }}</p>
+                <article class="stay-summary shadow">
+                    <div :class="{ clamped: this.isClamped }">
+                        <span id="txt-summary">{{ stay.summary }}</span>
+                    </div>
                 </article>
-                <ul class="amenities clean-list">
+                <ul ref="amenities" class="amenities clean-list">
                     <h2>What this place offers</h2>
                     <li v-for="i in Math.min(10, stay.amenities.length)" class="flex align-center amenity">
                         <svg v-html="getSvg(stay.amenities[i - 1])"></svg>
@@ -75,8 +105,8 @@
             </section>
             <Order :stay="stay"></Order>
         </section>
-        <StayReviews class="small" :reviews="stay.reviews" />
-        <section class="stay-map">
+        <StayReviews id="small-reviews" class="small" :reviews="stay.reviews" />
+        <section ref="location" class="stay-map">
             Map
         </section>
     </section>
@@ -85,17 +115,36 @@
 <script>
 import { stayService } from '../services/stay.service.local'
 import { svgService } from '../services/svg.service'
+import { utilService } from '../services/util.service'
+import { eventBus } from '../services/event-bus.service'
 import Order from '../cmps/Order.vue'
 import RateAndRev from '../cmps/RateAndRev.vue'
 import StayReviews from './StayReviews.vue'
+import FancyBtn from '../cmps/FancyBtn.vue'
 export default {
     name: 'StayDetails',
+    mounted() {
+        window.addEventListener('resize', this.checkClamped)
+        window.addEventListener('resize', this.setBottoms)
+        window.addEventListener('scroll', this.setBottoms)
+        eventBus.on('reserve', this.onReserve)
+    },
+    unmounted() {
+        window.removeEventListener('resize', this.checkClamped)
+        window.removeEventListener('resize', this.setBottoms)
+        window.removeEventListener('scroll', this.setBottoms)
+    },
     data() {
         return {
             stay: null,
             stayId: this.$route.params.stayId,
             stayImages: null,
             hostImg: null,
+            isClamped: false,
+            elGallery: null,
+            elBtn: null,
+            elNavbar: null,
+            elTxt: null,
         }
     },
     async created() {
@@ -113,6 +162,8 @@ export default {
                 this.stayImages = await this.getStayImages()
                 this.hostImg = await this.getUserImg(this.stay.host.imgUrl)
                 this.updateQuery()
+                this.checkClamped()
+                this.setBottoms()
             } catch (err) {
                 throw 'Failed to load stay '
             }
@@ -155,6 +206,34 @@ export default {
             }
             this.$router.replace({ query: newQuery })
         },
+        checkClamped() {
+            const elTxt = this.elTxt || document.getElementById('txt-summary')
+            if (!elTxt) return
+            const lineHeight = parseFloat(getComputedStyle(elTxt).lineHeight)
+            this.isClamped = (elTxt.offsetHeight / lineHeight) > parseInt(getComputedStyle(elTxt).getPropertyValue('--max-lines'))
+        },
+        setBottoms() {
+            const elGallery = this.elGallery || (this.elGallery = document.querySelector('.image-gallery'))
+            const elBtn = this.elBtn || (this.elBtn = document.querySelector('.order .btn-fancy'))
+            const elNavbar = this.elNavbar || (this.elNavbar = document.querySelector('.fixed-navbar'))
+            elNavbar?.style.setProperty('--navbar-display', (elGallery?.getBoundingClientRect().bottom > 0 ? 'none' : 'grid'))
+            elNavbar?.style.setProperty('--btn-display', (elBtn?.getBoundingClientRect().bottom > 80 ? 'none' : 'grid'))
+        },
+        scrollTo(ref) {
+            window.scrollTo({ top: ref?.offsetTop - 128, behavior: 'smooth' })
+        },
+        scrollToReviews() {
+            if (!this.refReviews) {
+                this.refReviews = document.getElementById('small-reviews')
+            }
+            this.scrollTo(this.refReviews)
+        },
+        formatNumber(num) {
+            return utilService.formatNumber(num)
+        },
+        onReserve() {
+            this.$router.push({ name: 'StayBook', params: {stayId: this.stay._id}, query: this.$route.query })
+        }
     },
     computed: {
         locName() {
@@ -176,7 +255,8 @@ export default {
     components: {
         Order,
         RateAndRev,
-        StayReviews
+        StayReviews,
+        FancyBtn,
     }
 }
 </script>

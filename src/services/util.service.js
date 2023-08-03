@@ -88,7 +88,7 @@ function formatPlural(countMap, delim = '') {
     return plurals.join(delim)
 }
 
-function trimTxt(txt, maxLength = 20) {
+function trimTxt(txt, maxLength = 35) {
     if (txt.length <= maxLength) return txt
 
     return txt.slice(0, maxLength) + '...' 
@@ -99,6 +99,6 @@ function calcRating({reviews}) {
         acc += review.rate.Value
         return acc
     }, 0)
-    console.log('rateSum:', rateSum)
+    // console.log('rateSum:', rateSum)
     return (rateSum / reviews.length).toFixed(2)
 }

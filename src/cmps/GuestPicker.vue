@@ -37,7 +37,6 @@
                         <span v-html="getSvg('plus')"></span>
                     </button>
                 </div>
-
             </li>
             <li>
                 <div>
@@ -75,6 +74,7 @@
 
 <script>
 import { svgService } from '../services/svg.service'
+const params = ['adult', 'child', 'infant', 'pet']
 export default {
     props: ['capacity', 'showHeader'],
     created() {
@@ -105,11 +105,13 @@ export default {
                 this[guestType] -= dif
             } else {
                 const newQuery = Object.assign({}, this.$route.query)
-                newQuery[guestType] = this[guestType]
-                if (!this[guestType]) {
-                    delete newQuery[guestType]
+                for (const key of params) {
+                    if (this[key]) {
+                        newQuery[key] = this[key]
+                    } else {
+                        delete newQuery[key]
+                    }
                 }
-                // this.$router.replace({ query: newQuery })
                 this.$emit('guest-count', newQuery)
             }
         }

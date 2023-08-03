@@ -13,7 +13,7 @@
         <span @click="weekModal">Any week</span>
         <span class="search-divider"></span>
         <span @click="guestsModal" class="light-search-font">Add guests</span>
-        <span class="search-icon">
+        <span class="search-icon"  @click="hideContainer">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation"
             focusable="false" style="fill: none; stroke: white; stroke-width: 5.33333; overflow: visible;">
             <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path>
@@ -114,6 +114,7 @@ export default {
     },
     hideContainer() {
       this.isSearchOpened = false
+      this.$emit('bigHeader', this.location)
     },
     getSvg(iconName) {
       return svgService.getSvg(iconName)

@@ -1,18 +1,14 @@
 .stay-preview {
     display: grid;
     grid-template-rows: auto 1fr auto;
-
     font-family: 'Circular';
-
+    cursor: pointer;
+    
     .preview-details {
         display: grid;
         grid-template-columns: 1fr auto;
-
+        margin-top: 10px;
         color: $clr0;
-
-        // img{
-        //     // border-radius: 10px;
-        // }
 
         .preview-data {
 
@@ -23,7 +19,7 @@
             font-size: rem(13px);
 
             .preview-price{
-                margin-top: 6px;
+                margin-top: 8px;
             }
             
             .preview-note {
@@ -71,7 +67,7 @@
     }
     .prev-img-container{
         position: relative;
-
+        
         .preview-img {
             border-radius: 10px;
             object-fit: cover; 

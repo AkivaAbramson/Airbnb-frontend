@@ -42,6 +42,9 @@ export default {
         window.addEventListener('resize', this.checkClamped)
         this.checkClamped()
     },
+    unmounted() {
+        window.removeEventListener('resize', this.checkClamped)
+    },
     data() {
         return {
             isClamped: [],
