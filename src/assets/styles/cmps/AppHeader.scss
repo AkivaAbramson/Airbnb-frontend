@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 10;
     padding: 20px 80px 20px 80px;
     display: flex;
     justify-content: space-between;
@@ -149,6 +149,15 @@
         font-weight: 600;
         margin-top: 5px;
 
+    }
+    &.add-padding{
+        padding-inline: 200px;
+        position:absolute;
+    }
+
+    .mini-search{
+       max-width: 300px;
+       min-width: 300px;
     }
 
 

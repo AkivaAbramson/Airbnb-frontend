@@ -1,6 +1,6 @@
 <template>
   <section class="home-layout">
-    <header class="small-header">
+    <header class="small-header" :class="{ 'add-padding': onDetails }">
       <nav>
         <RouterLink to="/">
           <i class="logo" v-html="getSvg('logo')"></i>
@@ -13,7 +13,7 @@
         <span @click="weekModal">Any week</span>
         <span class="search-divider"></span>
         <span @click="guestsModal" class="light-search-font">Add guests</span>
-        <span class="search-icon"  @click="hideContainer">
+        <span class="search-icon" @click="hideContainer">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation"
             focusable="false" style="fill: none; stroke: white; stroke-width: 5.33333; overflow: visible;">
             <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path>
@@ -21,6 +21,17 @@
         </span>
       </section>
 
+      <section v-else-if="onDetails" class="search-container mini-search" @click="hideContainer">
+
+        <span>Start your search</span>
+        <span class="search-icon" @click="hideContainer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation"
+            focusable="false" style="fill: none; stroke: white; stroke-width: 5.33333; overflow: visible;">
+            <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path>
+          </svg>
+        </span>
+      </section>
+      
       <!-- <FilterModal v-if="location"/>
         <FilterModal v-if="week"/>
         <FilterModal v-if="guests"/> -->
@@ -76,6 +87,7 @@ export default {
       location: false,
       week: false,
       guests: false,
+      onDetails: false,
 
     }
 
@@ -126,6 +138,20 @@ export default {
         this.isSearchOpened = true
       }
     },
+    '$route': function (to) {
+      if (to.path.startsWith('/stay/')) {
+        this.onDetails = true
+        this.isSearchOpened = false
+        console.log('worked')
+      } else if (to.path.startsWith('/book/')) {
+        this.onDetails = false
+        this.isSearchOpened = false
+        console.log('got here')
+      } else {
+        this.isSearchOpened = true
+
+      }
+    }
   },
   components: {
     AppHeaderFilter,

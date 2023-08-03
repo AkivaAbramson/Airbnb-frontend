@@ -1,24 +1,26 @@
 <template>
     <section class="big-header home-layout">
         <section class="search-container">
-            <div class="destination" @click="searchDest" :class="{ pickedOption: openDest }">
+            <div class="destination search-option" @click="searchDest" :class="{ pickedOption: openDest }">
                 <h3 class="bold-title">Where</h3>
                 <h5 class="light-subtitle" v-if="!destination || destination === `I'm flexible` ">Search destinations</h5>
                 <span v-else>{{ destination }}</span>
+                <!-- <input placeholder="Search destinations" class="light-subtitle" v-if="!destination || destination === `I'm flexible` ">
+                <input v-else type="text" placeholder="{{destination}}"> -->
                 <!-- <input class="iluujbk dir dir-ltr" aria-autocomplete="none" autocomplete="off" autocorrect="off" spellcheck="false" id="bigsearch-query-location-input" name="query" aria-describedby="bigsearch-query-location-description" placeholder="Search destinations" data-testid="structured-search-input-field-query" value="" aria-activedescendant="bigsearch-query-location-suggestion-1"> -->
             </div>
             
-            <div class="check-in"  @click="checkIn" :class="{ pickedOption: openCheckin }">
+            <div class="check-in search-option"  @click="checkIn" :class="{ pickedOption: openCheckin }">
                 <h3 class="bold-title">Check in</h3>
                 <h5 class="light-subtitle">Add dates</h5>
             </div>
             
-            <div class="check-out" @click="checkOut" :class="{ pickedOption: openCheckOut }">
+            <div class="check-out search-option" @click="checkOut" :class="{ pickedOption: openCheckOut }">
                 <h3 class="bold-title">Check out</h3>
                 <h5 class="light-subtitle">Add dates</h5>
             </div>
             
-            <div class="who" @click="addGuests" :class="{ pickedOption: openGuests }">
+            <div class="who search-option" @click="addGuests" :class="{ pickedOption: openGuests }">
                 <div class="guests-wrapper">
                     <h3 class="bold-title">Who</h3>
                     <h5 class="light-subtitle" v-if="!guestCount || guestCount === '1 guest'">Add guests</h5>
@@ -98,32 +100,18 @@ export default {
             this.openDest = false
 
         },
-        updateFilterBy(newQuery) {
-            console.log(newQuery)
-            if(!newQuery['adult'] && this.filterBy['adult'] === 1){
-                this.filterBy['adult'] = 1
-            }
-            if(!newQuery['child'] && this.filterBy['child'] === 1){
-                this.filterBy['child'] = 1
-            }
-            if(!newQuery['infant'] && this.filterBy['infant'] === 1){
-                this.filterBy['infant'] = 1
-            }
-            if(!newQuery['pet'] && this.filterBy['pet'] === 1){
-                this.filterBy['pet'] = 1
-            } else{
+        updateFilterBy(newQuery) { 
 
-                this.filterBy = { ...this.filterBy, ...newQuery }
-            }
+                // if(this.filterBy['destination']){
+                    this.filterBy = { ...newQuery }
+
+
+                // }
+                console.log(this.filterBy)
              
-
-            console.log(this.filterBy)
             
         },
-        // updateGuestsFilterBy(newQuery) {
-        //     this.filterBy.guests = { ...this.filterBy.guests, ...newQuery }
-        //     // console.log(this.filterBy);
-        // },
+        
         formatNumber(num) {
             return utilService.formatNumber(num)
         },
