@@ -56,7 +56,7 @@
             input{
                 background-color: inherit;
                 border: none;
-                :focus{
+                &:focus{
                     outline: none;
                 }
             }

@@ -3,10 +3,10 @@
         <section class="search-container">
             <div class="destination search-option" @click="searchDest" :class="{ pickedOption: openDest }">
                 <h3 class="bold-title">Where</h3>
-                <h5 class="light-subtitle" v-if="!destination || destination === `I'm flexible` ">Search destinations</h5>
-                <span v-else>{{ destination }}</span>
-                <!-- <input placeholder="Search destinations" class="light-subtitle" v-if="!destination || destination === `I'm flexible` ">
-                <input v-else type="text" placeholder="{{destination}}"> -->
+                <!-- <h5 class="light-subtitle" v-if="!destination || destination === `I'm flexible` ">Search destinations</h5>
+                <span v-else>{{ destination }}</span> -->
+                <input placeholder="Search destinations" class="light-subtitle" v-if="!destination || destination === `I'm flexible` " v-model="searchedDest" @keyup.enter="saveDest">
+                <input v-else type="text" placeholder="Selected country">
                 <!-- <input class="iluujbk dir dir-ltr" aria-autocomplete="none" autocomplete="off" autocorrect="off" spellcheck="false" id="bigsearch-query-location-input" name="query" aria-describedby="bigsearch-query-location-description" placeholder="Search destinations" data-testid="structured-search-input-field-query" value="" aria-activedescendant="bigsearch-query-location-suggestion-1"> -->
             </div>
             
@@ -24,7 +24,7 @@
                 <div class="guests-wrapper">
                     <h3 class="bold-title">Who</h3>
                     <h5 class="light-subtitle" v-if="!guestCount || guestCount === '1 guest'">Add guests</h5>
-                    <span v-else>{{ guestCount }}</span>
+                    <span v-else>{{ trimGuests }}</span>
                     
                 </div>
                 <div class="btn-wrapper" @click.stop="loadFilteredStays">
@@ -65,6 +65,7 @@ export default {
             openCheckin:false,
             openGuests:false,
             openCheckOut: false,
+            searchedDest:'',
             filterBy: {},
             // countMap: {
             //     guest: 0,
@@ -125,19 +126,25 @@ export default {
             if(this.openDest === true){
                 this.openDest = false
                 this.openCheckin = true
-                // return
+                return
             }
             if(this.openCheckin === true){
                 this.openCheckin = false
                 this.openCheckOut = true
-                // return
+                return
             }
             if(this.openCheckOut === true){
                 this.openCheckOut = false
                 this.openGuests = true
-                // return
+                return
             }
-        }
+        },
+        saveDest(){
+            this.filterBy['destination'] = this.searchedDest
+            console.log(this.filterBy)
+            this.addGuests()
+        },
+
         
     },
     computed: {
@@ -155,6 +162,9 @@ export default {
             return dest
 
         },
+        trimGuests(){
+            return utilService.trimTxt(this.guestCount, 14)
+        }
         
         // checkin() {
         //     return new Date(this.dateIn).toLocaleDateString()

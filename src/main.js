@@ -8,6 +8,8 @@ import './assets/styles/main.scss'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import { setupCalendar, Calendar, DatePicker } from 'v-calendar';
+import 'v-calendar/style.css';
 
 const app = createApp(App)
 const clickOut = {
@@ -23,6 +25,14 @@ const clickOut = {
         document.removeEventListener("click", el.clickOut);
     },
 }
+
+// Use plugin defaults (optional)
+
+// Use the components
+// app.component('VCalendar', Calendar)
+app.component('VDatePicker', DatePicker)
+
+app.use(setupCalendar, {})
 app.use(router)
 app.use(store)
 app.use(ElementPlus)
