@@ -1,5 +1,5 @@
 <template>
-    <section class="charts">
+    <section class="chart-container">
       <PieChart class="pie-chart" :chartData="nightCategoryData" />
       <BarChart class="bar-chart" :chartData="monthlyData" />
     </section>
@@ -53,7 +53,7 @@
   .pie-chart,
   .bar-chart {
     max-width: 400px;
-    width: 100%;
+    
   }
 }
 </style>
