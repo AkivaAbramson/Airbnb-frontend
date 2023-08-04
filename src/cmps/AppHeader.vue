@@ -149,15 +149,15 @@ export default {
       }
     },
     '$route': function (to) {
-      console.log(to)
+      // console.log(to)
       if (to.path.startsWith('/stay/')) {
         this.onDetails = true
         // this.isSearchOpened = false
-        console.log('worked')
+        // console.log('worked')
       } else if (to.path.startsWith('/book/')) {
         this.onDetails = false
         // this.isSearchOpened = false
-        console.log('got here')
+        // console.log('got here')
       } else {
         // this.isSearchOpened = true
         this.onDetails = false

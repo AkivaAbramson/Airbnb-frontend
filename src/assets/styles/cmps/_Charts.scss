@@ -1,0 +1,35 @@
+.charts{
+    display: flex;
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    &.pie-chart{
+        // position: relative;
+        // top: 0;
+    
+        // left: 30%;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 50%;
+        background-color: lightgray;
+        padding-block-end: 10px;
+        margin-block-end: 20px;
+    }
+    &.bar-chart{
+        // position: relative;
+        // top: 0;
+        // left: 50%;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 50%;
+        background-color: lightgray;
+        padding-block-end: 10px;
+        margin-block-end: 20px;
+    }
+}

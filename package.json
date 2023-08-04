@@ -12,6 +12,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "axios": "^0.27.2",
+    "chart.js": "^3.9.1",
     "element-plus": "^2.3.8",
     "sass": "^1.53.0",
     "socket.io-client": "^4.5.1",
@@ -19,6 +20,7 @@
     "v-calendar": "^3.0.3",
     "v-dialogs": "^2.2.0",
     "vue": "^3.2.37",
+    "vue-chart-3": "^3.1.8",
     "vue-router": "^4.1.2",
     "vue3-carousel": "^0.3.1",
     "vuex": "^4.0.2"

@@ -1,7 +1,26 @@
 <template>
+    <Charts></Charts>
     <section v-if="stay" class="stay-edit flex justify-center align-center">
-        <!-- <ul>{{ stay.name }}</ul>
-        <ul>{{ stay.price }}</ul> -->
+        <table>
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="stay in user.stays" :key="stay._id">
+                <td>{{ stay.name }}</td>
+                <!-- <td>{{ item.quantity }}</td> -->
+                <td>{{ stay.price }}</td>
+              </tr>
+            </tbody>
+          </table> 
+
+          
+          
+        
         
         <form @submit.prevent="saveStay" class="flex space-between align-center">
             <label for="name">Name:</label>
@@ -15,6 +34,7 @@
     </section>
 </template>
 <script>
+import Charts from '../cmps/Charts.vue'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.local.js'
 // import { stayService } from '../services/stay.service.js'
@@ -22,6 +42,7 @@ export default {
     data() {
         return {
             stay: null,
+            user: null
         }
     },
     // watch: {
@@ -52,8 +73,9 @@ export default {
             }
         } else {
         this.stay = stayService.getEmptyStay()
-        console.log(this.stay)
+        // console.log(this.stay)
         }
+        this.user = this.$store.getters.loggedinUser
     },
     watch: {
         '$route.params'() {
@@ -75,9 +97,14 @@ export default {
             }
         },
         async saveStay() {
-            console.log(this.stay)
+            // console.log(this.stay)
             try {
                 await this.$store.dispatch({ type: 'saveStay', stay: this.stay })
+                await this.$store.dispatch({ type: 'setToUser', stay: this.stay })
+                const user = await this.$store.getters.loggedinUser
+                if(user){
+                    
+                }
                 showSuccessMsg('Added/Updated succssefully')
                 this.$router.push('/')
             } catch (err) {
@@ -85,6 +112,18 @@ export default {
                 
             }
         },
+    },
+    computed: {
+        stay(){
+            return this.$store.getters.loggedinUser
+        }
+    },
+    components:{
+        Charts,
+
     }
+
+    
 }
+
 </script>

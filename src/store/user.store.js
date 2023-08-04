@@ -57,7 +57,7 @@ export const userStore = {
         setWishlist(state, { wishlist }) {
             state.wishlist = wishlist;
         },
-        addToWishlist(state,  { stayToAdd }) {
+        addToWishlist(state, { stayToAdd }) {
             console.log('stayToAdd', stayToAdd);
             if (state.loggedinUser.wishlist) {
                 state.loggedinUser.wishlist.push(stayToAdd)
@@ -70,10 +70,15 @@ export const userStore = {
         },
         removeFromWishlist(state, { stayToRemove }) {
 
-        }
-        // setUserScore(state, { score }) {
-        //     state.loggedinUser.score = score
-        // },
+        },
+        saveToUser(state, { stay }) {
+            // console.log(stay)
+            // console.log('hi')
+            // const idx = state.users.findIndex(currUser => currUser._id === user._id)
+            // if (idx !== -1) state.users.splice(idx, 1, user)
+            // else state.users.push(user)
+        },
+        
     },
     actions: {
         async login({ commit }, { userCred }) {
@@ -157,6 +162,21 @@ export const userStore = {
                 console.log('userStroe: Error occured while trying to remove from Wishlist. Please try again later.', err)
                 throw err
             }
-        }
+        },
+        async setToUser({ commit, getters }, { stay }) {
+            try {
+                const user = getters.loggedinUser
+                console.log(user._id)
+                await userService.addUserStay(user._id,stay)
+            
+                // if(user){
+                //     commit({ type: 'saveToUser', stay: stay })
+                // }
+            } catch (err) {
+                console.log(err)
+                throw new Error(err)
+            }
+
+        },
     }
 }
