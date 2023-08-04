@@ -18,6 +18,14 @@
     font-size: 0.875rem;
     color: $clr0;
 
+    >* {
+        grid-column: 2;
+
+        &.full {
+            grid-column: 1 /-1;
+        }
+    }
+
     .fixed-navbar {
         display: var(--navbar-display, none);
         box-sizing: content-box;
@@ -161,14 +169,6 @@
         }
     }
 
-    >* {
-        grid-column: 2;
-
-        &.full {
-            grid-column: 1 /-1;
-        }
-    }
-
     .header-details {
         padding-block-end: 1.5rem;
         margin-block-start: 1.5rem;
@@ -286,6 +286,8 @@
 
             h2 {
                 grid-column: 1;
+                height: fit-content;
+                line-height: 1.625rem;
                 margin: 0;
             }
 
@@ -299,6 +301,19 @@
 
             ol {
                 grid-column: 1 / -1;
+                height: fit-content;
+                align-self: center;
+
+                .header-spacer {
+                    font-size: 1rem;
+                    line-height: 1.25rem;
+                }
+
+                .header-spacer::after {
+                    content: ' · ';
+                    white-space: preserve nowrap;
+                    margin-inline: 0;
+                }
             }
         }
 

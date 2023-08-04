@@ -54,8 +54,10 @@
                 <article class="grid-host shadow">
                     <h2>Entire stay hosted by {{ stay.host.fullname }}</h2>
                     <img v-if="hostImg" :src="hostImg">
-                    <ol class="clean-list">
-                        <li>{{ stay.capacity }} guests</li>
+                    <ol class="clean-list flex">
+                        <li class="header-spacer">{{ stay.capacity }} guests</li>
+                        <li class="header-spacer"> {{ stay.bedrooms }} bedrooms</li>
+                        <li> {{ stay.bathrooms }} baths</li>
                     </ol>
                 </article>
                 <ul class="notable-features shadow clean-list">

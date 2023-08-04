@@ -50,11 +50,11 @@ function randomPastTime() {
     return Date.now() - pastTime
 }
 
-function debounce(func, timeout = 300){
+function debounce(func, timeout = 300) {
     let timer
     return (...args) => {
-      clearTimeout(timer)
-      timer = setTimeout(() => { func.apply(this, args) }, timeout)
+        clearTimeout(timer)
+        timer = setTimeout(() => { func.apply(this, args) }, timeout)
     }
 }
 
@@ -67,8 +67,12 @@ function loadFromStorage(key) {
     return (data) ? JSON.parse(data) : undefined
 }
 
-function formatNumber(num) {
-    return num.toLocaleString()
+function formatNumber(num, decimal = 0, toLocale = true) {
+    const splitNum = num.toFixed(decimal).split('.')
+    if (toLocale) {
+        splitNum[0] = parseInt(splitNum[0]).toLocaleString()
+    }
+    return splitNum.join('.')
 }
 
 function timestampToDays(timestamp) {
@@ -91,9 +95,9 @@ function formatPlural(countMap, delim = '') {
 function trimTxt(txt, maxLength = 35) {
     if (txt.length <= maxLength) return txt
 
-    return txt.slice(0, maxLength) + '...' 
-  }
-function calcRating({reviews}) {
+    return txt.slice(0, maxLength) + '...'
+}
+function calcRating({ reviews }) {
     // console.log('util calcRating', reviews);
     let rateSum = reviews.reduce((acc, review) => {
         acc += review.rate.Value
