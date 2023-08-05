@@ -120,17 +120,14 @@ export default {
       this.location = false
       this.guests = false
       this.$emit('bigHeader', this.week)
-      console.log(this.week)
     },
     guestsModal() {
       this.guests = true
       this.location = false
       this.week = false
       this.$emit('bigHeader', this.guests)
-      console.log(this.guests)
     },
     hideContainer() {
-      // console.log('test')
       this.location = true
       this.week = false
       this.guests = false
@@ -145,21 +142,14 @@ export default {
     smallHeader: {
       handler() {
         this.isSearchOpened = true
-        console.log(this.isSearchOpened)
       }
     },
     '$route': function (to) {
-      console.log(to)
       if (to.path.startsWith('/stay/')) {
         this.onDetails = true
-        // this.isSearchOpened = false
-        console.log('worked')
       } else if (to.path.startsWith('/book/')) {
         this.onDetails = false
-        // this.isSearchOpened = false
-        console.log('got here')
       } else {
-        // this.isSearchOpened = true
         this.onDetails = false
 
       }
