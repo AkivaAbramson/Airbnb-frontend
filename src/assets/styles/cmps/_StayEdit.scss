@@ -1,0 +1,55 @@
+.seller-data {
+    font-family: 'Circular';
+    border-collapse: collapse;
+    width: 100%;
+    cursor: default;
+    td, th {
+     border: 1px solid #ddd;
+     padding: 8px;
+     text-align: center;
+   }
+    tr:nth-child(even){background-color: #F2F2F2;}
+    tr:hover {background-color: #ddd;}
+    th {
+     padding-top: 12px;
+     padding-bottom: 12px;
+     background-color: #04AA6D;
+     color: white;
+   }
+   .actions{
+        display: flex;
+        justify-content: space-evenly;
+        button{
+            border: none;
+            border-radius: 10px;
+            padding: 7px;
+            cursor: pointer;
+
+        }
+        
+        .approve-order{
+            background-color: green;
+        }
+        .decline-order{
+            background-color: red;
+       }
+   }
+  }
+  .seller-header{
+    display: flex;
+
+    .seller-title{
+      display: flex;
+      justify-content: center;
+      margin-block-end: 40px;
+    }
+  
+    .add-stay{
+      display: flex;
+      align-items: center;
+      margin-inline-start: 20px;
+      margin-inline-end: 550px;
+      margin-block-start: -50px;
+  
+    }
+  }

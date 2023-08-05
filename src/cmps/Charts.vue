@@ -1,7 +1,28 @@
 <template>
-    <section class="chart-container">
-      <PieChart class="pie-chart" :chartData="nightCategoryData" />
-      <BarChart class="bar-chart" :chartData="monthlyData" />
+    <section class="chart-container flex">
+      <div class="pie-chart" >
+        <PieChart :chartData="nightCategoryData" />
+      </div>
+      <div class="bar-chart" >
+        <BarChart :chartData="monthlyData" />
+      </div>
+      <div class="total-revenue">
+        <h1>Total revenue</h1>
+        <div class="revenue-info">
+            <h4>This month</h4>
+            <h4>$5355</h4>
+        </div>
+        <div class="revenue-info">
+            <h4>This year</h4>
+            <h4>$10,710</h4>
+        </div>
+        <div class="revenue-info">
+            <h4>Total income</h4>
+            <h4>$16,492</h4>
+        </div>
+
+
+    </div>
     </section>
   </template>
   
@@ -42,18 +63,5 @@
   </script>
   
   <style lang="scss">
-.chart-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 20px;
 
-  .pie-chart,
-  .bar-chart {
-    max-width: 400px;
-    
-  }
-}
 </style>

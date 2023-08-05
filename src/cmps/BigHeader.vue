@@ -7,7 +7,7 @@
                 <span v-else>{{ destination }}</span> -->
                 <input placeholder="Search destinations" class="light-subtitle"
                     v-if="!destination || destination === `I'm flexible`" v-model="searchedDest" @keyup.enter="saveDest">
-                <input v-else type="text" placeholder="Selected country">
+                <input v-else type="text" :placeholder="destination">
                 <!-- <input class="iluujbk dir dir-ltr" aria-autocomplete="none" autocomplete="off" autocorrect="off" spellcheck="false" id="bigsearch-query-location-input" name="query" aria-describedby="bigsearch-query-location-description" placeholder="Search destinations" data-testid="structured-search-input-field-query" value="" aria-activedescendant="bigsearch-query-location-suggestion-1"> -->
             </div>
 
