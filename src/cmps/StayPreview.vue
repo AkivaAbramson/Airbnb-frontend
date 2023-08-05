@@ -32,7 +32,8 @@
                 <h3 class="light-gray">{{ stay.capacity }} guests</h3>
                 <h3 class="black-bold preview-price">${{ stay.price }} <span class="black-regular">night</span></h3>
             </section>
-            <!-- wishlist preview' -->
+            
+            <!-- wishlist preview -->
             <section v-else class="preview-data">
                 <h3 class="black-bold preview-loc">{{ stay.name }}</h3>
                 <h3 class="light-gray">{{ stay.capacity }} guests</h3>

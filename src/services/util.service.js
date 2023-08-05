@@ -94,7 +94,7 @@ function trimTxt(txt, maxLength = 35) {
     return txt.slice(0, maxLength) + '...' 
   }
 function calcRating({reviews}) {
-    // console.log('util calcRating', reviews);
+    console.log('util calcRating', reviews);
     let rateSum = reviews.reduce((acc, review) => {
         acc += review.rate.Value
         return acc
