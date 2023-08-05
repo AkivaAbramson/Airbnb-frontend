@@ -1,10 +1,10 @@
-.demo-date-picker {
+.date-picker {
     background-color: white;
     position: absolute;
-    top: 90px;
-    right: 46%;
-    left: 21.5%;
-    height: 72vh;
+    top: 220px;
+    right: 30%;
+    max-width: 400px;
+    height: 40vh;
     border-radius: 32px;
     z-index: 3;
     font-family: Circular;
@@ -13,9 +13,11 @@
     border-bottom: 1px solid rgb(235, 235, 235);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.1);
     padding: 40px;
-    width: 200px;
+}
+.vc-container{
+    max-width: 400px;
 }
 
-.demo-date-picker[data-v-765f8c06] {
-    width: 50%;
-}
+// .demo-date-picker[data-v-765f8c06] {
+//     width: 50%;
+// }

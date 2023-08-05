@@ -1,6 +1,14 @@
 <template>
     <section v-if="stay" class="book">
-        <h1>Confirm and pay</h1>
+        <div class="btn-container">
+            <button class="btn btn-return"
+                @click="$router.push({ name: 'Stay', params: { stayId }, query: $route.query })">
+                <i v-html="getSvg('down')"></i>
+            </button>
+        </div>
+        <h1>
+            Request to book
+        </h1>
         <section class="book-content">
             <article class="shadow">
                 <h2>Your trip</h2>
@@ -16,7 +24,7 @@
                         <h3>Guests</h3>
                         {{ guestCount }}
                     </div>
-                    <button class="btn btn-edit bold underline">Edit</button>
+                    <button @click="modal = 'guest'" class="btn btn-edit bold underline">Edit</button>
                 </div>
             </article>
             <article class="sticky-details">
@@ -34,21 +42,38 @@
                     <div class="price-details shadow">
                         <h2>Price details</h2>
                         <div class="flex justify-between">
-                            <span>${{ formatNumber(stay.price.toFixed(2)) }} x {{ nightsTxt }}</span>
-                            <span>${{ formatNumber(priceNights().toFixed(2)) }}</span>
+                            <span>${{ formatNumber(price) }} x {{ nightsTxt }}</span>
+                            <span>${{ formatNumber(priceNights()) }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="underline">Airbnb service fee</span>
-                            <span>${{ formatNumber(parseFloat(priceNights() * 14 / 100).toFixed(2)) }}</span>
+                            <span>${{ formatNumber(priceNights() * 14 / 100) }}</span>
                         </div>
                     </div>
                     <div class="bold flex justify-between">
                         <span class="bold">Total</span>
-                        <span class="bold">${{ formatNumber(parseFloat(totalPrice()).toFixed(2)) }}</span>
+                        <span class="bold">${{ formatNumber(totalPrice()) }}</span>
                     </div>
                 </article>
             </article>
-            <FancyBtn :content="'Reserve'" @click="createOrder()" />
+            <div class="btn-wrapper">
+                Request to book
+                <FancyBtn :content="'Request to book'" @click="createOrder()" />
+            </div>
+            <section class="modal-edit" :class="{ show: modal }" @click.self="modal = null">
+                <div class="modal-wrapper" :class="{ show: modal }">
+                    <section class="modal-guest" :class="{ show: modal === 'guest' }">
+                        <header>Guests</header>
+                        <div class="notify">This place has a maximum of {{ stay.capacity }} guests. not including infants.
+                        </div>
+                        <GuestPicker @guest-count="updateCounts" />
+                        <footer class="full">
+                            <button class="btn btn-cancel bold underline" @click="modal = null">Cancel</button>
+                            <button class="btn btn-save bold" @click="updateQuery(), (modal = null)">Save</button>
+                        </footer>
+                    </section>
+                </div>
+            </section>
         </section>
     </section>
 </template>
@@ -58,8 +83,12 @@ import { stayService } from '../services/stay.service.local'
 import { userService } from '../services/user.service.local'
 import { storageService } from '../services/async-storage.service'
 import { utilService } from '../services/util.service'
+import { svgService } from '../services/svg.service'
 import FancyBtn from '../cmps/FancyBtn.vue'
 import RateAndRev from '../cmps/RateAndRev.vue'
+import GuestPicker from '../cmps/GuestPicker.vue'
+
+const guestTypes = ['adult', 'child', 'infant', 'pet']
 
 export default {
     data() {
@@ -67,11 +96,20 @@ export default {
             stay: null,
             stayId: null,
             stayImage: null,
+            modal: null,
+            adult: 1,
+            child: 0,
+            infant: 0,
+            pet: 0,
         }
     },
     async created() {
         try {
             await this.loadStay()
+            this.adult = this.$route.query.adult
+            this.child = this.$route.query.child
+            this.infant = this.$route.query.infant
+            this.pet = this.$route.query.pet
         } catch (err) {
             console.log(err)
             this.$router.push('/')
@@ -81,7 +119,9 @@ export default {
         async loadStay() {
             try {
                 this.stayId = this.$route.params.stayId
-                this.stay = await stayService.getById(this.stayId)
+                if (!this.$store.getters.stay || !this.$store.getters.stay._id === this.stayId) {
+                    this.stay = await this.$store.dispatch({ type: 'setStay', id: this.stayId })
+                }
                 this.stayImage = await this.getStayImage()
             } catch (err) {
                 throw 'Failed to load stay '
@@ -102,8 +142,8 @@ export default {
             const res = await fetch(this.stay.imgUrls[0])
             return res.status === 200 ? this.stay.imgUrls[0] : 'src/assets/defaultStay.png'
         },
-        formatNumber(num) {
-            return utilService.formatNumber(num)
+        formatNumber(num, decimal = 2) {
+            return utilService.formatNumber(num, decimal)
         },
         priceNights() {
             return this.nights() * this.stay.price
@@ -142,6 +182,25 @@ export default {
             await storageService.post('order', order)
             this.$router.push('/')
         },
+        updateCounts(query) {
+            for (let type of guestTypes) {
+                this[type] = query[type] ?? 0
+            }
+        },
+        updateQuery() {
+            const newQuery = Object.assign({}, this.$route.query)
+            for (const type of guestTypes) {
+                if (this[type]) {
+                    newQuery[type] = this[type]
+                } else {
+                    delete newQuery[type]
+                }
+            }
+            this.$router.replace({ query: newQuery })
+        },
+        getSvg(iconName) {
+            return svgService.getSvg(iconName)
+        },
     },
     computed: {
         dates() {
@@ -171,10 +230,14 @@ export default {
         nightsTxt() {
             return utilService.formatPlural({ night: this.nights() })
         },
+        price() {
+            return this.stay.price
+        }
     },
     components: {
         FancyBtn,
         RateAndRev,
+        GuestPicker,
     }
 }
 </script>

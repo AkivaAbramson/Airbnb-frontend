@@ -1,83 +1,46 @@
 <template>
-    <div class="demo-date-picker">
-      <div class="block">
-        <span class="demonstration">With quick options</span>
-        <el-date-picker
-          v-model="value2"
-          type="daterange"
-          unlink-panels
-          range-separator="To"
-          start-placeholder="Start date"
-          end-placeholder="End date"
-          :shortcuts="shortcuts"
-          :size="size"
-        />
+  <VDatePicker
+    class="date-picker"
+    v-model.range="range"
+    :select-attribute="selectDragAttribute"
+    :drag-attribute="selectDragAttribute"
+    @drag="dragValue = $event"
+    @click:date="handleDateClick"
+    @keyup.enter="handleDateClick"
+  >
+    <template #day-popover="{ format }">
+      <div class="text-sm">
+        {{ format(dragValue ? dragValue.start : range.start, 'MMM D') }}
+        -
+        {{ format(dragValue ? dragValue.end : range.end, 'MMM D') }}
       </div>
-    </div>
-  </template>
+    </template>
+  </VDatePicker>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue';
+
+const range = ref({
+  start: new Date(2023, 7, 8),
+  end: new Date(2023, 7, 9),
+});
+console.log(range)
+const dragValue = ref(null);
+const selectDragAttribute = computed(() => ({
+  popover: {
+    visibility: 'hover',
+    isInteractive: false,
+  },
+}));
+
+const handleDateClick = (date) => {
+  // Your custom logic here to handle the selected date
+  // this.$emit('chosenDate', range._value)
+  console.log('Selected date:', range._value);
+};
+</script>
+
+
   
-  <script lang="ts" setup>
-  import { ref } from 'vue'
-  
-  const size = ref<'default' | 'large' | 'small'>('default')
-  
-  const value2 = ref('')
-  
-  const shortcuts = [
-    {
-      text: 'Last week',
-      value: () => {
-        const end = new Date()
-        const start = new Date()
-        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-        return [start, end]
-      },
-    },
-    {
-      text: 'Last month',
-      value: () => {
-        const end = new Date()
-        const start = new Date()
-        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-        return [start, end]
-      },
-    },
-    {
-      text: 'Last 3 months',
-      value: () => {
-        const end = new Date()
-        const start = new Date()
-        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-        return [start, end]
-      },
-    },
-  ]
-  </script>
-  
-  <style scoped>
-  .demo-date-picker {
-    display: flex;
-    width: 60%;
-    padding: 0;
-    flex-wrap: wrap;
-  }
-  
-  .demo-date-picker .block {
-    padding: 30px 0;
-    text-align: center;
-    border-right: solid 1px var(--el-border-color);
-    flex: 1;
-  }
-  
-  .demo-date-picker .block:last-child {
-    border-right: none;
-  }
-  
-  .demo-date-picker .demonstration {
-    display: block;
-    color: var(--el-text-color-secondary);
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  </style>
   

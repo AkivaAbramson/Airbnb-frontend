@@ -1,29 +1,32 @@
 <template>
     <section class="big-header home-layout">
         <section class="search-container">
-            <div class="destination" @click="searchDest" :class="{ pickedOption: openDest }">
+            <div class="destination search-option" @click="searchDest" :class="{ pickedOption: openDest }">
                 <h3 class="bold-title">Where</h3>
-                <h5 class="light-subtitle" v-if="!destination || destination === `I'm flexible` ">Search destinations</h5>
-                <span v-else>{{ destination }}</span>
+                <!-- <h5 class="light-subtitle" v-if="!destination || destination === `I'm flexible` ">Search destinations</h5>
+                <span v-else>{{ destination }}</span> -->
+                <input placeholder="Search destinations" class="light-subtitle"
+                    v-if="!destination || destination === `I'm flexible`" v-model="searchedDest" @keyup.enter="saveDest">
+                <input v-else type="text" placeholder="Selected country">
                 <!-- <input class="iluujbk dir dir-ltr" aria-autocomplete="none" autocomplete="off" autocorrect="off" spellcheck="false" id="bigsearch-query-location-input" name="query" aria-describedby="bigsearch-query-location-description" placeholder="Search destinations" data-testid="structured-search-input-field-query" value="" aria-activedescendant="bigsearch-query-location-suggestion-1"> -->
             </div>
-            
-            <div class="check-in"  @click="checkIn" :class="{ pickedOption: openCheckin }">
+
+            <div class="check-in search-option" @click="checkIn" :class="{ pickedOption: openCheckin }">
                 <h3 class="bold-title">Check in</h3>
                 <h5 class="light-subtitle">Add dates</h5>
             </div>
-            
-            <div class="check-out" @click="checkOut" :class="{ pickedOption: openCheckOut }">
+
+            <div class="check-out search-option" @click="checkOut" :class="{ pickedOption: openCheckOut }">
                 <h3 class="bold-title">Check out</h3>
                 <h5 class="light-subtitle">Add dates</h5>
             </div>
-            
-            <div class="who" @click="addGuests" :class="{ pickedOption: openGuests }">
+
+            <div class="who search-option" @click="addGuests" :class="{ pickedOption: openGuests }">
                 <div class="guests-wrapper">
                     <h3 class="bold-title">Who</h3>
                     <h5 class="light-subtitle" v-if="!guestCount || guestCount === '1 guest'">Add guests</h5>
-                    <span v-else>{{ guestCount }}</span>
-                    
+                    <span v-else>{{ trimGuests }}</span>
+
                 </div>
                 <div class="btn-wrapper" @click.stop="loadFilteredStays">
                     <!-- <FancyBtn class="search-icon" :content="'Search'" /> -->
@@ -36,15 +39,10 @@
                 </div>
             </div>
         </section>
-        <Destinations v-if="openDest"
-            @chosenDest="updateFilterBy"
-            @openNextModal="openNextModal"
-        />
-        <CheckIn v-if="openCheckin"/>
-        <CheckIn v-if="openCheckOut"/>
-        <GuestPicker v-if="openGuests"
-             @guest-count="updateFilterBy"
-        />
+        <Destinations v-if="openDest" @chosenDest="updateFilterBy" @openNextModal="openNextModal" />
+        <CheckIn @chosenDate="chosenDate" v-if="openCheckin" />
+        <CheckIn v-if="openCheckOut" />
+        <GuestPicker v-if="openGuests" @guest-count="updateFilterBy" />
 
 
     </section>
@@ -56,13 +54,17 @@ import Destinations from './Destinations.vue'
 import FancyBtn from './FancyBtn.vue'
 import CheckIn from './CheckIn.vue'
 import GuestPicker from './GuestPicker.vue'
+
+const guestTypes = ['adult', 'child', 'infant', 'pet']
+
 export default {
     data() {
         return {
             openDest: true,
-            openCheckin:false,
-            openGuests:false,
+            openCheckin: false,
+            openGuests: false,
             openCheckOut: false,
+            searchedDest: '',
             filterBy: {},
             // countMap: {
             //     guest: 0,
@@ -79,19 +81,19 @@ export default {
             this.openGuests = false
             this.openCheckOut = false
         },
-        checkIn(){
+        checkIn() {
             this.openCheckin = true
             this.openDest = false
             this.openGuests = false
             this.openCheckOut = false
         },
-        checkOut(){
+        checkOut() {
             this.openCheckOut = true
             this.openCheckin = false
             this.openDest = false
             this.openGuests = false
         },
-        addGuests(){
+        addGuests() {
             this.openGuests = true
             this.openCheckOut = false
             this.openCheckin = false
@@ -99,58 +101,59 @@ export default {
 
         },
         updateFilterBy(newQuery) {
-            console.log(newQuery)
-            if(!newQuery['adult'] && this.filterBy['adult'] === 1){
-                this.filterBy['adult'] = 1
-            }
-            if(!newQuery['child'] && this.filterBy['child'] === 1){
-                this.filterBy['child'] = 1
-            }
-            if(!newQuery['infant'] && this.filterBy['infant'] === 1){
-                this.filterBy['infant'] = 1
-            }
-            if(!newQuery['pet'] && this.filterBy['pet'] === 1){
-                this.filterBy['pet'] = 1
-            } else{
 
-                this.filterBy = { ...this.filterBy, ...newQuery }
-            }
-             
 
+            // if(this.filterBy['destination']){
+            this.filterBy = { ...this.filterBy, ...newQuery }
+            for( const type of guestTypes){
+                if(!newQuery[type]){
+                    delete this.filterBy[type]
+                }
+            }
+
+
+            // }
             console.log(this.filterBy)
-            
+
+
         },
-        // updateGuestsFilterBy(newQuery) {
-        //     this.filterBy.guests = { ...this.filterBy.guests, ...newQuery }
-        //     // console.log(this.filterBy);
-        // },
+
         formatNumber(num) {
             return utilService.formatNumber(num)
         },
-        async loadFilteredStays(){
+        async loadFilteredStays() {
             this.$emit('closeHeader')
             this.$router.replace({ query: this.filterBy })
             await this.$store.dispatch({ type: 'loadStays', filterBy: this.filterBy })
             this.filterBy = {}
         },
-        openNextModal(){
-            if(this.openDest === true){
+        openNextModal() {
+            if (this.openDest === true) {
                 this.openDest = false
-                this.openCheckin = true
-                // return
-            }
-            if(this.openCheckin === true){
-                this.openCheckin = false
-                this.openCheckOut = true
-                // return
-            }
-            if(this.openCheckOut === true){
-                this.openCheckOut = false
                 this.openGuests = true
-                // return
+                return
             }
+            // if (this.openCheckin === true) {
+            //     this.openCheckin = false
+            //     this.openGuests = true
+            //     return
+            // }
+            // if (this.openCheckOut === true) {
+            //     this.openCheckOut = false
+            //     this.openGuests = true
+            //     return
+            // }
+        },
+        saveDest() {
+            this.filterBy['destination'] = this.searchedDest
+            console.log(this.filterBy)
+            this.addGuests()
+        },
+        chosenDate(range) {
+            console.log(range)
         }
-        
+
+
     },
     computed: {
         guestCount() {
@@ -162,12 +165,15 @@ export default {
             // console.log(this.filterBy)
             return utilService.formatPlural(countMap, ', ')
         },
-        destination(){
+        destination() {
             let dest = this.filterBy.destination
             return dest
 
         },
-        
+        trimGuests() {
+            return utilService.trimTxt(this.guestCount, 14)
+        }
+
         // checkin() {
         //     return new Date(this.dateIn).toLocaleDateString()
         // },

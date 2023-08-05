@@ -1,26 +1,42 @@
 <template>
   <section class="home-layout">
-    <header class="small-header">
+    <header class="small-header home-layout" :class="{ 'add-padding': onDetails }">
       <nav>
         <RouterLink to="/">
           <i class="logo" v-html="getSvg('logo')"></i>
         </RouterLink>
       </nav>
 
-      <section v-if="isSearchOpened" class="search-container" @click="hideContainer">
-        <span @click="locModal">Anywhere</span>
-        <span class="search-divider"></span>
-        <span @click="weekModal">Any week</span>
-        <span class="search-divider"></span>
-        <span @click="guestsModal" class="light-search-font">Add guests</span>
-        <span class="search-icon"  @click="hideContainer">
+
+      
+
+        <section v-if="isSearchOpened && this.$route.name === 'StayIndex'" class="search-container" @click="hideContainer">
+          <span @click="locModal">Anywhere</span>
+          <span class="search-divider"></span>
+          <span @click="weekModal">Any week</span>
+          <span class="search-divider"></span>
+          <span @click="guestsModal" class="light-search-font">Add guests</span>
+          <span class="search-icon" @click="hideContainer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation"
+            focusable="false" style="fill: none; stroke: white; stroke-width: 5.33333; overflow: visible;">
+            <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path>
+          </svg>
+        </span>
+      </section>
+ 
+      
+      <!-- $route.name=details -->
+      <section v-if="onDetails && this.$route.name === 'Stay'&& isSearchOpened" class="search-container mini-search" @click="hideContainer">
+
+        <span>Start your search</span>
+        <span class="search-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation"
             focusable="false" style="fill: none; stroke: white; stroke-width: 5.33333; overflow: visible;">
             <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path>
           </svg>
         </span>
       </section>
-
+      
       <!-- <FilterModal v-if="location"/>
         <FilterModal v-if="week"/>
         <FilterModal v-if="guests"/> -->
@@ -53,13 +69,13 @@
       </nav>
 
     </header>
-    <!-- <AppHeaderFilter class="home-layout"></AppHeaderFilter> -->
-    
+    <AppHeaderFilter class="home-layout"></AppHeaderFilter>
+
   </section>
 </template>
 
 <script>
-// import AppHeaderFilter from './AppHeaderFilter.vue'
+import AppHeaderFilter from './AppHeaderFilter.vue'
 import NavModal from './NavModal.vue'
 import { svgService } from '../services/svg.service'
 
@@ -76,6 +92,7 @@ export default {
       location: false,
       week: false,
       guests: false,
+      onDetails: false,
 
     }
 
@@ -113,7 +130,11 @@ export default {
       console.log(this.guests)
     },
     hideContainer() {
-      this.isSearchOpened = false
+      // console.log('test')
+      this.location = true
+      this.week = false
+      this.guests = false
+      this.isSearchOpened = !this.isSearchOpened
       this.$emit('bigHeader', this.location)
     },
     getSvg(iconName) {
@@ -124,11 +145,28 @@ export default {
     smallHeader: {
       handler() {
         this.isSearchOpened = true
+        console.log(this.isSearchOpened)
       }
     },
+    '$route': function (to) {
+      // console.log(to)
+      if (to.path.startsWith('/stay/')) {
+        this.onDetails = true
+        // this.isSearchOpened = false
+        // console.log('worked')
+      } else if (to.path.startsWith('/book/')) {
+        this.onDetails = false
+        // this.isSearchOpened = false
+        // console.log('got here')
+      } else {
+        // this.isSearchOpened = true
+        this.onDetails = false
+
+      }
+    }
   },
   components: {
-    // AppHeaderFilter,
+    AppHeaderFilter,
     NavModal,
   }
 
