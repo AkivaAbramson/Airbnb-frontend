@@ -16,7 +16,8 @@ export const userService = {
     remove,
     update,
     addToWishlist,
-    removeFromWishlist
+    removeFromWishlist,
+    addUserStay
 }
 
 window.userService = userService
@@ -112,13 +113,23 @@ async function removeFromWishlist(stayId) {
 }
 
 function saveLocalUser(user) {
-    user = {_id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, wishlist: user.wishlist}
+    user = {_id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, wishlist: user.wishlist, stays:user.stays}
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+}
+
+async function addUserStay(userId, stay){
+    // console.log(userId)
+    const currUser = await getById(userId)
+    console.log(currUser)
+    if(currUser['stays']){
+        currUser['stays'].push(stay)
+    } else currUser['stays'] = [stay]
+    await update(currUser)
 }
 
 // Initial data

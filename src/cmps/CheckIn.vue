@@ -36,7 +36,8 @@ const selectDragAttribute = computed(() => ({
 
 const handleDateClick = (date) => {
   // Your custom logic here to handle the selected date
-  console.log('Selected date:', range);
+  // this.$emit('chosenDate', range._value)
+  console.log('Selected date:', range._value);
 };
 </script> -->
 

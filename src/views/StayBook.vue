@@ -109,7 +109,7 @@ export default {
             this.adult = this.$route.query.adult
             this.child = this.$route.query.child
             this.infant = this.$route.query.infant
-            this.pet = this.$route.query.pett
+            this.pet = this.$route.query.pet
         } catch (err) {
             console.log(err)
             this.$router.push('/')
