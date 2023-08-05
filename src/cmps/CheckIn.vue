@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <VDatePicker
     class="date-picker"
     v-model.range="range"
@@ -39,7 +39,7 @@ const handleDateClick = (date) => {
   // this.$emit('chosenDate', range._value)
   console.log('Selected date:', range._value);
 };
-</script>
+</script> -->
 
 
   

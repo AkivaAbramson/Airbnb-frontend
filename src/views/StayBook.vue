@@ -66,7 +66,7 @@
                         <header>Guests</header>
                         <div class="notify">This place has a maximum of {{ stay.capacity }} guests. not including infants.
                         </div>
-                        <GuestPicker @guest-count="updateCounts" />
+                        <GuestPicker :capacity="stay.capacity" @guest-count="updateCounts" />
                         <footer class="full">
                             <button class="btn btn-cancel bold underline" @click="modal = null">Cancel</button>
                             <button class="btn btn-save bold" @click="updateQuery(), (modal = null)">Save</button>

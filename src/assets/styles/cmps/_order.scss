@@ -56,9 +56,10 @@
         border: 1px solid $clr8;
         border-radius: 0.5rem;
         margin: 1.5rem 0 1rem;
+        z-index: 3;
 
         .dates {
-
+            position: relative;
             .checkin {
                 border-inline-end: 1px solid $clr8;
             }
@@ -76,6 +77,7 @@
         }
 
         .guest-input {
+            position: relative;
             border-block-start: 1px solid $clr8;
         }
 
@@ -88,7 +90,6 @@
             cursor: pointer;
             font-family: 'Circular';
             font-size: 0.875rem;
-            overflow: hidden;
 
             span {
                 width: 100%;
@@ -146,5 +147,9 @@
                 margin-block-end: 1rem;
             }
         }
+    }
+
+    .date-picker {
+        z-index: 10;
     }
 }
