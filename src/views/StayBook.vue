@@ -1,8 +1,7 @@
 <template>
     <section v-if="stay" class="book">
         <div class="btn-container">
-            <button class="btn btn-return"
-                @click="$router.push({ name: 'Stay', params: { stayId }, query: $route.query })">
+            <button class="btn btn-return" @click="$router.push({ name: 'Stay', params: { stayId }, query: $route.query })">
                 <i v-html="getSvg('down')"></i>
             </button>
         </div>
@@ -17,7 +16,7 @@
                         <h3>Dates</h3>
                         {{ dates }}
                     </div>
-                    <button class="btn btn-edit bold underline">Edit</button>
+                    <button @click="modal = 'date'" class="btn btn-edit bold underline">Edit</button>
                 </div>
                 <div class="trip-details flex justify-between">
                     <div class="flex column justify-between">
@@ -61,8 +60,8 @@
                 <FancyBtn :content="'Request to book'" @click="createOrder()" />
             </div>
             <section class="modal-edit" :class="{ show: modal }" @click.self="modal = null">
-                <div class="modal-wrapper" :class="{ show: modal }">
-                    <section class="modal-guest" :class="{ show: modal === 'guest' }">
+                <div class="modal-wrapper" :class="{ show: modal }" @click.self="modal = null">
+                    <section v-if="modal === 'guest'" class="modal-guest" :class="{ show: modal === 'guest' }">
                         <header>Guests</header>
                         <div class="notify">This place has a maximum of {{ stay.capacity }} guests. not including infants.
                         </div>
@@ -72,6 +71,9 @@
                             <button class="btn btn-save bold" @click="updateQuery(), (modal = null)">Save</button>
                         </footer>
                     </section>
+                    <DatePicker v-if="modal === 'date'" :columns="2" :range="range" :attributes="attributes"
+                        :header="{ title: nightsTxt, subtitle: subtitle }" :footer="{ clear: true, save: true }"
+                        :class="{ show: modal === 'date' }" @close="modal = null" @date-change="onDateChange" @save-changes="updateQuery" />
                 </div>
             </section>
         </section>
@@ -84,13 +86,27 @@ import { userService } from '../services/user.service.local'
 import { storageService } from '../services/async-storage.service'
 import { utilService } from '../services/util.service'
 import { svgService } from '../services/svg.service'
+import { ref } from 'vue'
 import FancyBtn from '../cmps/FancyBtn.vue'
 import RateAndRev from '../cmps/RateAndRev.vue'
 import GuestPicker from '../cmps/GuestPicker.vue'
+import DatePicker from '../cmps/DatePicker.vue'
 
 const guestTypes = ['adult', 'child', 'infant', 'pet']
 
 export default {
+    setup() {
+        const range = ref({
+            start: '',
+            end: '',
+        })
+        const attributes = ref([{
+            attributes: {
+                dates: range
+            }
+        }])
+        return { range, attributes }
+    },
     data() {
         return {
             stay: null,
@@ -110,6 +126,8 @@ export default {
             this.child = this.$route.query.child
             this.infant = this.$route.query.infant
             this.pet = this.$route.query.pet
+            this.range.start = this.$route.query.startDate
+            this.range.end = this.$route.query.endDate
         } catch (err) {
             console.log(err)
             this.$router.push('/')
@@ -130,6 +148,7 @@ export default {
         nights() {
             const checkin = new Date(this.getCheckin()).getTime()
             const checkout = new Date(this.getCheckout()).getTime()
+            if (!checkin || !checkout) return
             return parseInt((checkout - checkin) / 1000 / 60 / 60 / 24)
         },
         getCheckin() {
@@ -187,6 +206,12 @@ export default {
                 this[type] = query[type] ?? 0
             }
         },
+        onDateChange({ startDate, endDate }) {
+            if (startDate && endDate) {
+                this.range.start = startDate
+                this.range.end = endDate
+            }
+        },
         updateQuery() {
             const newQuery = Object.assign({}, this.$route.query)
             for (const type of guestTypes) {
@@ -196,6 +221,11 @@ export default {
                     delete newQuery[type]
                 }
             }
+            if (this.range.start && this.range.end) {
+                newQuery.startDate = this.range.start
+                newQuery.endDate = this.range.end
+            }
+            this.modal = null
             this.$router.replace({ query: newQuery })
         },
         getSvg(iconName) {
@@ -228,7 +258,11 @@ export default {
             return utilService.formatPlural(countMap, ', ')
         },
         nightsTxt() {
-            return utilService.formatPlural({ night: this.nights() })
+            const night = this.nights()
+            return night ? utilService.formatPlural({ night }) : 'Select dates'
+        },
+        subtitle() {
+            return this.nights() ? `${this.stay.bedrooms} bedrooms · ${this.stay.bathrooms} baths` : 'Add your travel dates for exact pricing'
         },
         price() {
             return this.stay.price
@@ -238,6 +272,7 @@ export default {
         FancyBtn,
         RateAndRev,
         GuestPicker,
+        DatePicker,
     }
 }
 </script>

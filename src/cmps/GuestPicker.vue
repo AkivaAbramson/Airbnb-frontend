@@ -69,6 +69,14 @@
                 </div>
             </li>
         </ul>
+        <footer v-if="footer">
+            <div
+            v-if="footer.close"
+            class="btn-close underline"
+            @click="$emit('close')">
+            Close
+            </div>
+        </footer>
     </section>
 </template>
 
@@ -76,7 +84,7 @@
 import { svgService } from '../services/svg.service'
 const params = ['adult', 'child', 'infant', 'pet']
 export default {
-    props: ['capacity', 'showHeader'],
+    props: ['capacity', 'showHeader', 'footer'],
     created() {
         for (const key in this.$data) {
             this[key] = parseInt(this.$route.query[key]) || 0

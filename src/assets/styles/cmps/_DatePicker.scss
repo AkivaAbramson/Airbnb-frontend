@@ -11,7 +11,6 @@
 
     position: absolute;
     display: grid;
-    grid-template-rows: repeat(auto-fill, auto);
     top: calc(-1.5rem - 1px);
     right: calc(-2rem + 1px);
     min-width: var(--min-width);
@@ -51,7 +50,7 @@
             line-height: 1.125rem;
             cursor: pointer;
 
-            &.btn-close {
+            &.btn-black {
                 color: white;
                 background: $clr0;
                 padding: 0.5rem 1rem;

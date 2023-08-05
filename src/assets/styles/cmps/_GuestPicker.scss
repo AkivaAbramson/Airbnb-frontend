@@ -16,9 +16,37 @@
         word-wrap: nowrap;
     }
 
+    footer {
+        display: grid;
+        grid-auto-flow: column;
+        height: 2.125rem;
+        align-items: center;
+        justify-content: end;
+        column-gap: 0.5rem;
+
+        div {
+            border-radius: 0.5rem;
+            font-weight: bold;
+            line-height: 1.125rem;
+            cursor: pointer;
+
+            &.btn-close {
+                color: $clr0;
+                background: white;
+                padding: 0.625rem;
+                font-size: 1rem;
+    
+                &:hover {
+                    background-color: $clr7;
+                }
+            }
+        }
+    }
+
     .capacity {
         grid-row: 2;
         font-size: 0.75rem;
+        margin-block-end: 1rem;
     }
 
     ul {

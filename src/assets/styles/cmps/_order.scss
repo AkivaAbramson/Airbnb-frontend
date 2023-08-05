@@ -63,6 +63,10 @@
             .checkin {
                 border-inline-end: 1px solid $clr8;
             }
+
+            .empty {
+                color: $clr4;
+            }
         }
 
         .dates:focus-within, .guest-input:focus-within {
