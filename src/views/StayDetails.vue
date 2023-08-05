@@ -200,11 +200,11 @@ export default {
             const dayMilli = 1000 * 60 * 60 * 24
             const startDate = (new Date(this.$route.query.startDate || 0)).getTime()
             const endDate = (new Date(this.$route.query.endDate || 0)).getTime()
-            if (!((startDate >= (new Date((new Date()).toLocaleDateString()).getTime())) && (endDate - startDate) / dayMilli >= 1)) {
+            if (!((startDate >= (new Date((new Date()).toLocaleDateString()).getTime())) && (!endDate || (endDate - startDate) / dayMilli >= 1))) {
                 delete newQuery.startDate
                 delete newQuery.endDate
-                newQuery.startDate = '2023-09-07'
-                newQuery.endDate = '2023-09-23'
+                newQuery.startDate = '2023-8-9'
+                newQuery.endDate = '2023-8-14'
             }
             this.$router.replace({ query: newQuery })
         },

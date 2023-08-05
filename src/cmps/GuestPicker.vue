@@ -17,7 +17,7 @@
                     :class="{ disable: adult <= 1 }">
                     <span v-html="getSvg('minus')"></span>
                 </button>
-                <span class="counter">{{ adultCount }}</span>
+                <div class="counter">{{ adultCount }}</div>
                 <button class="btn" @click="changeGuestCount('adult', 1, 1, capacity - child)" :class="{ disable: adult + child >= capacity }">
                     <span v-html="getSvg('plus')"></span>
                 </button>
@@ -32,7 +32,7 @@
                     <button class="btn" @click="changeGuestCount('child', -1, 0, capacity - adult)" :class="{ disable: !child }">
                         <span v-html="getSvg('minus')"></span>
                     </button>
-                    <span class="counter">{{ childCount }}</span>
+                    <div class="counter">{{ childCount }}</div>
                     <button class="btn" @click="changeGuestCount('child', 1, 0, capacity - adult)" :class="{ disable: adult + child >= capacity }">
                         <span v-html="getSvg('plus')"></span>
                     </button>
@@ -47,7 +47,7 @@
                     <button class="btn" @click="changeGuestCount('infant', -1, 0, 5)" :class="{ disable: !infant }">
                         <span v-html="getSvg('minus')"></span>
                     </button>
-                    <span class="counter">{{ infantCount }}</span>
+                    <div class="counter">{{ infantCount }}</div>
                     <button class="btn" @click="changeGuestCount('infant', 1, 0, 5)" :class="{ disable: infant >= 5 }">
                         <span v-html="getSvg('plus')"></span>
                     </button>
@@ -62,7 +62,7 @@
                     <button class="btn" @click="changeGuestCount('pet', -1, 0, 5)" :class="{ disable: !pet }">
                         <span v-html="getSvg('minus')"></span>
                     </button>
-                    <span class="counter">{{ petCount }}</span>
+                    <div class="counter">{{ petCount }}</div>
                     <button class="btn" @click="changeGuestCount('pet', 1, 0, 5)" :class="{ disable: pet >= 5 }">
                         <span v-html="getSvg('plus')"></span>
                     </button>

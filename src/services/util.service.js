@@ -100,9 +100,13 @@ function trimTxt(txt, maxLength = 35) {
 function calcRating({ reviews }) {
     // console.log('util calcRating', reviews);
     let rateSum = reviews.reduce((acc, review) => {
-        acc += review.rate.Value
+        const revKeys = Object.keys(review.rate)
+        let currSum = 0
+        revKeys.forEach(key => currSum += review.rate[key])
+        currSum /= revKeys.length
+        acc += currSum
         return acc
     }, 0)
     // console.log('rateSum:', rateSum)
-    return (rateSum / reviews.length).toFixed(2)
+    return Number.parseFloat((rateSum / reviews.length).toFixed(2))
 }
