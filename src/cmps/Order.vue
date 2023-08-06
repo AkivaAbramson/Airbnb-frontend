@@ -1,9 +1,5 @@
 <template>
-    <section class='order'>
-        <!-- <VDatePicker v-model.range="range"
-        :attributes="attributes"
-        :min-date="minDate"
-        :min-page="minPage" /> -->
+    <section ref="dates" class='order'>
         <article class="order-top flex justify-between">
             <span class="top-price bold">${{ formatNumber(price) }}</span>
             <RateAndRev :reviews="stay.reviews" />
@@ -43,7 +39,7 @@
             <GuestPicker v-if="showGuestModal" v-clickout="() => toggleGuestModal(false)" @guest-count="updateQuery"
                 @close="toggleGuestModal(false)" :capacity="stay.capacity" :footer="{ close: true }" />
         </article>
-        <FancyBtn :content="'Reserve'" @click="onReserve()" />
+        <FancyBtn :content="btnOrderText" @click.stop="onReserve()" />
         <article class="price" v-if="nights()">
             <div class="notify">{{ `You won't be charged yet` }}</div>
             <div class="price-calc shadow">
@@ -125,7 +121,11 @@ export default {
             this.$router.replace({ query: newQuery })
         },
         onReserve() {
-            eventBus.emit('reserve')
+            if (this.range.start && this.range.end) {
+                eventBus.emit('reserve')
+            } else {
+                this.showDateModal = true
+            }
         },
         onDateChange({ startDate, endDate }) {
             if (!startDate || !endDate) return
@@ -170,6 +170,9 @@ export default {
             const checkin = this.range.start ? (new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(this.range.start).getTime())) : 'Add date'
             const checkout = this.range.end ? (new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(this.range.end).getTime())) : 'Add date'
             return checkin + ' - ' + checkout
+        },
+        btnOrderText() {
+            return (this.range.start && this.range.end ? 'Reserve' : 'Check availability')
         }
     },
     components: {

@@ -149,4 +149,8 @@
         -webkit-line-clamp: calc(var(--max-lines) - 1);
         -webkit-box-orient: vertical;
     }
+
+    .btn-showall {
+        line-height: 1.125rem;
+    }
 }

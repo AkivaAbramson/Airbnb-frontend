@@ -1,6 +1,6 @@
 <template>
     <section v-if="stay" class="stay-details" :key="stayId">
-        <section class="fixed-navbar shadow">
+        <section ref="navbar" class="fixed-navbar shadow">
             <div class="nav-content">
                 <ul class="clean-list flex">
                     <li>
@@ -22,8 +22,8 @@
                         <RateAndRev :reviews="stay.reviews" />
                     </span>
                     <div class="btn-wrapper">
-                        Reserve
-                        <FancyBtn @click="onReserve()" :content="'Reserve'" />
+                        {{ btnOrderText }}
+                        <FancyBtn @click.stop="onReserve()" :content="btnOrderText" />
                     </div>
                 </article>
             </div>
@@ -54,10 +54,11 @@
                 <article class="grid-host shadow">
                     <h2>Entire stay hosted by {{ stay.host.fullname }}</h2>
                     <img v-if="hostImg" :src="hostImg">
-                    <ol class="clean-list flex">
-                        <li class="header-spacer">{{ stay.capacity }} guests</li>
-                        <li class="header-spacer"> {{ stay.bedrooms }} bedrooms</li>
-                        <li> {{ stay.bathrooms }} baths</li>
+                    <ol class="clean-list flex align-center">
+                        <li v-if="stay.capacity" class="header-spacer">{{ stay.capacity }} guests</li>
+                        <li v-if="stay.bedrooms" class="header-spacer"> {{ stay.bedrooms }} bedrooms</li>
+                        <li v-if="stay.beds" class="header-spacer"> {{ stay.beds }} beds</li>
+                        <li v-if="stay.bathrooms"> {{ stay.bathrooms }} baths</li>
                     </ol>
                 </article>
                 <ul class="notable-features shadow clean-list">
@@ -103,9 +104,12 @@
                         <svg v-html="getSvg(stay.amenities[i - 1])"></svg>
                         {{ stay.amenities[i - 1] }}
                     </li>
+                    <button class="btn btn-showall bold" v-if="stay.amenities.length > 10">
+                        Show all {{ stay.amenities.length }} amenities
+                    </button>
                 </ul>
             </section>
-            <Order :stay="stay"></Order>
+            <Order ref="refOrder" :stay="stay" @btn-mounted="(ref) => elBtn = ref"></Order>
         </section>
         <StayReviews id="small-reviews" class="small" :reviews="stay.reviews" />
         <section ref="location" class="stay-map">
@@ -119,22 +123,31 @@ import { stayService } from '../services/stay.service.local'
 import { svgService } from '../services/svg.service'
 import { utilService } from '../services/util.service'
 import { eventBus } from '../services/event-bus.service'
+import { ref } from 'vue'
 import Order from '../cmps/Order.vue'
 import RateAndRev from '../cmps/RateAndRev.vue'
 import StayReviews from './StayReviews.vue'
 import FancyBtn from '../cmps/FancyBtn.vue'
 export default {
     name: 'StayDetails',
+    setup() {
+        const refOrder = ref()
+        const elBtn = ref()
+        return { refOrder, elBtn }
+    },
     mounted() {
         window.addEventListener('resize', this.checkClamped)
-        window.addEventListener('resize', this.setBottoms)
-        window.addEventListener('scroll', this.setBottoms)
+        window.addEventListener('resize', this.setNavbar)
+        window.addEventListener('scroll', this.setNavbar)
         eventBus.on('reserve', this.onReserve)
+        eventBus.on('btn-mounted', ref => this.elBtn = ref)
     },
     unmounted() {
         window.removeEventListener('resize', this.checkClamped)
-        window.removeEventListener('resize', this.setBottoms)
-        window.removeEventListener('scroll', this.setBottoms)
+        window.removeEventListener('resize', this.setNavbar)
+        window.removeEventListener('scroll', this.setNavbar)
+        eventBus.off('reserve')
+        eventBus.off('btn-mounted')
     },
     data() {
         return {
@@ -143,9 +156,6 @@ export default {
             stayImages: null,
             hostImg: null,
             isClamped: false,
-            elGallery: null,
-            elBtn: null,
-            elNavbar: null,
             elTxt: null,
         }
     },
@@ -165,7 +175,7 @@ export default {
                 this.hostImg = await this.getUserImg(this.stay.host.imgUrl)
                 this.updateQuery()
                 this.checkClamped()
-                this.setBottoms()
+                this.setNavbar()
             } catch (err) {
                 throw 'Failed to load stay '
             }
@@ -214,15 +224,19 @@ export default {
             const lineHeight = parseFloat(getComputedStyle(elTxt).lineHeight)
             this.isClamped = (elTxt.offsetHeight / lineHeight) > parseInt(getComputedStyle(elTxt).getPropertyValue('--max-lines'))
         },
-        setBottoms() {
-            const elGallery = this.elGallery || (this.elGallery = document.querySelector('.image-gallery'))
-            const elBtn = this.elBtn || (this.elBtn = document.querySelector('.order .btn-fancy'))
-            const elNavbar = this.elNavbar || (this.elNavbar = document.querySelector('.fixed-navbar'))
-            elNavbar?.style.setProperty('--navbar-display', (elGallery?.getBoundingClientRect().bottom > 0 ? 'none' : 'grid'))
-            elNavbar?.style.setProperty('--btn-display', (elBtn?.getBoundingClientRect().bottom > 80 ? 'none' : 'grid'))
+        setNavbar() {
+            let navbarProperty = this.$refs.photos.getBoundingClientRect().bottom > 0 ? 'none': 'grid'
+            let btnProperty = this.elBtn.getBoundingClientRect().bottom > 80 ? 'none' : 'grid'
+            if (window.innerWidth < 745) {
+                btnProperty = 'grid'
+                navbarProperty = 'grid'
+            }
+            this.$refs.navbar?.style.setProperty('--navbar-display', navbarProperty)
+            this.$refs.navbar?.style.setProperty('--btn-display', btnProperty)
         },
         scrollTo(ref) {
             window.scrollTo({ top: ref?.offsetTop - 128, behavior: 'smooth' })
+            console.log(ref, ref?.offsetTop - 128)
         },
         scrollToReviews() {
             if (!this.refReviews) {
@@ -234,13 +248,22 @@ export default {
             return utilService.formatNumber(num)
         },
         onReserve() {
-            this.$router.push({ name: 'StayBook', params: {stayId: this.stay._id}, query: this.$route.query })
+            if (this.$route.query.startDate && this.$route.query.endDate) {
+                this.$router.push({ name: 'StayBook', params: {stayId: this.stay._id}, query: this.$route.query })
+            } else {
+                window.scrollBy({ top: this.$refs.refOrder.$refs.dates.getBoundingClientRect().top - 128, behavior:'smooth' })
+                this.$refs.refOrder.showDateModal = true
+            }
         }
     },
     computed: {
         locName() {
             return this.stay.loc.city + ', ' + this.stay.loc.country
         },
+        btnOrderText() {
+            return (this.$route.query.startDate && this.$route.query.endDate ? 
+            'Reserve' : 'Check availability')
+        }
     },
     async beforeRouteUpdate(to, from) {
         if (this.stayId === to.params.stayId) return

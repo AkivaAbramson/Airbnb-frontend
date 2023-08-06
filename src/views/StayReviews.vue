@@ -27,6 +27,9 @@
                     <div v-if="isClamped[i - 1]" class="show bold underline">Show more</div>
                 </li>
             </ul>
+            <button class="btn btn-showall bold" v-if="reviews.length > 6">
+                Show all {{ reviews.length }} reviews
+            </button>
         </article>
         <h2 v-else>No reviews (yet)</h2>
     </section>

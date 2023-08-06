@@ -1,21 +1,25 @@
 <template>
-    <button class="btn btn-fancy" @mousemove="onHover($event)" :style="`--content: ${txt}`">
+    <button ref="fancyBtn" class="btn btn-fancy" @mousemove="onHover($event)" :style="`--content: ${txtContent}`">
     </button>
 </template>
 
 <script>
+import { eventBus } from '../services/event-bus.service'
 export default {
     props: ['content'],
-    data() {
-        return {
-            txt: JSON.stringify(this.content)
-        }
+    mounted() {
+        eventBus.emit('btn-mounted', this.$refs.fancyBtn)
     },
     methods: {
         onHover(ev) {
             const btn = ev.target
             btn.style.setProperty('--mouse-x', ev.offsetX)
             btn.style.setProperty('--mouse-y', ev.offsetY)
+        }
+    },
+    computed: {
+        txtContent() {
+            return JSON.stringify(this.content)
         }
     }
 }
