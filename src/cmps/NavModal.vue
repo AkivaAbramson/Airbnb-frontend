@@ -7,10 +7,12 @@
             
             <a href="#" v-if="!this.loggedinUser" @click="showSignupModal">Sign Up</a>
             <a href="#" v-if="!this.loggedinUser" @click="showLoginModal">Login</a>
-            <a href="#">Trips</a>
-            <a href="#" @click="goToWishlist">Wishlist</a>
+            <!-- <a href="#" @click="goToTrips">Trips</a> -->
+            <RouterLink to="/trips/" @click="closeModal">Trips</RouterLink>
+            <RouterLink to="/wishlist/" @click="closeModal">Wishlist</RouterLink>
+            <!-- <a href="#" @click="goToWishlist">Wishlist</a> -->
             <hr>
-            <RouterLink to="/stay/edit/">Airanbnb your home</RouterLink>
+            <RouterLink to="/stay/edit/" @click="closeModal">Airanbnb your home</RouterLink>
             <a class="logout-btn" v-if="this.loggedinUser" @click="doLogout">Logout</a>
         </div>
 
@@ -105,8 +107,10 @@ export default {
                 this.msg = 'Failed to login'
             }
         },
-        doLogout() {
-            this.$store.dispatch({ type: 'logout' })
+        async doLogout() {
+            await this.$store.dispatch({ type: 'logout' })
+            this.closeModal()
+
         },
         async doSignup() {
             if (!this.signupCred.fullname || !this.signupCred.password || !this.signupCred.username) {
@@ -121,6 +125,9 @@ export default {
         },
         goToWishlist(){
             this.$router.push('/wishlist')
+        },
+        goToTrips(){
+            this.$router.push({ name: 'Trips'})
         },
         loadUsers() {
             this.$store.dispatch({ type: "loadUsers" })
@@ -146,6 +153,7 @@ export default {
         closeModal() {
             this.showSignup = false
             this.showLogin = false
+            this.$emit('toggleModal')
         },
 
 

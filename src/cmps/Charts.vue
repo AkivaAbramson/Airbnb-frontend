@@ -7,10 +7,10 @@
         <BarChart :chartData="monthlyData" />
       </div>
       <div class="total-revenue">
-        <h1>Total revenue</h1>
+        <h1 class="revenue-title">Total revenue</h1>
         <div class="revenue-info">
             <h4>This month</h4>
-            <h4>$5355</h4>
+            <h4>$5,355</h4>
         </div>
         <div class="revenue-info">
             <h4>This year</h4>

@@ -63,7 +63,7 @@
               </path>
             </svg>
           </section>
-          <NavModal v-if="modalVisible" />
+          <NavModal v-if="modalVisible" @toggleModal="toggleModal" />
         </div>
 
       </nav>
@@ -154,6 +154,9 @@ export default {
         this.onDetails = false
         // this.isSearchOpened = false
         // console.log('got here')
+      } else if (to.path.startsWith('/stay/edit')){
+        this.onDetails = false
+
       } else {
         this.onDetails = false
 

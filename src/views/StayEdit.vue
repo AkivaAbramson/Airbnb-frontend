@@ -1,5 +1,5 @@
-<template>
-    <header class="seller-header">
+<template >
+    <header class="seller-header home-layout">
         <div class="add-stay">
             <span v-html="getSvg('plus')"></span>
             <span>Add Stay</span>
@@ -8,7 +8,7 @@
 
     </header>
     <Charts></Charts>
-    <section v-if="stay" class="stay-edit">
+    <section v-if="stay" class="stay-edit home-layout">
 
 
         <table class="seller-data">
