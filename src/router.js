@@ -9,6 +9,7 @@ import StayDetails from './views/StayDetails.vue'
 import StayEdit from './views/StayEdit.vue'
 import StayBook from './views/StayBook.vue'
 import Wishlist from './views/Wishlist.vue'
+import Trips from './views/Trips.vue'
 
 const routes = [
   {
@@ -45,6 +46,11 @@ const routes = [
     path: '/wishlist',
     name: 'Wishlist',
     component: Wishlist
+  },
+  {
+    path: '/trips',
+    name: 'Trips',
+    component: Trips
   }
 ]
 
