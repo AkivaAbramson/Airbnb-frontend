@@ -1,16 +1,19 @@
 @font-face {
     font-family: 'Circular';
-    src: url(src/assets/fonts/Circular/Airbnb_Cereal-Medium.woff2) format(woff2);
+    // src: url(../../fonts/Circular/Airbnb_Cereal-Medium.woff2) format(woff2);
+    src: url(/src/assets/fonts/Cereal/AirbnbCereal-Medium.ttf);
     font-weight: bold;
 }
 
 @font-face {
     font-family: 'Circular';
-    src: url(src/assets/fonts/Circular/Airbnb_Cereal-Bold.woff2) format(woff2);
+    // src: url(../../fonts/Circular/Airbnb_Cereal-Bold.woff2) format(woff2);
+    src: url(/src/assets/fonts/Cereal/AirbnbCereal-Bold.ttf);
     font-weight: 800;
 }
 
 @font-face {
     font-family: 'Circular';
-    src: url(src/assets/fonts/Circular/Airbnb_Cereal-Book.woff2) format(woff2);
+    // src: url(../../fonts/Circular/Airbnb_Cereal-Book.woff2) format(woff2);
+    src: url(/src/assets/fonts/Cereal/AirbnbCereal-Book.ttf);
 }
