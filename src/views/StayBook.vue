@@ -199,7 +199,7 @@ export default {
                 status: "pending"
             }
             await storageService.post('order', order)
-            this.$router.push('/')
+            this.$router.push('/trips')
         },
         updateCounts(query) {
             for (let type of guestTypes) {

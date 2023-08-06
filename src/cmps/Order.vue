@@ -39,7 +39,7 @@
             <GuestPicker v-if="showGuestModal" v-clickout="() => toggleGuestModal(false)" @guest-count="updateQuery"
                 @close="toggleGuestModal(false)" :capacity="stay.capacity" :footer="{ close: true }" />
         </article>
-        <FancyBtn :content="btnOrderText" @click.stop="onReserve()" />
+        <FancyBtn :emit-ref="true" :content="btnOrderText" @click.stop="onReserve()" />
         <article class="price" v-if="nights()">
             <div class="notify">{{ `You won't be charged yet` }}</div>
             <div class="price-calc shadow">

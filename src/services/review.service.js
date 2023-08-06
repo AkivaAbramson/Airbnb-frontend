@@ -17,11 +17,14 @@ import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU
 
 })()
 
+const reviewCats = ['Cleanliness', 'Accuracy', 'Communication', 'Location', 'Check-in', 'Value']
+
 export const reviewService = {
   add,
   query,
   remove,
-  getEmptyReview
+  getEmptyReview,
+  reviewCats,
 }
 
 function query(filterBy) {
