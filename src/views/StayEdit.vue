@@ -64,8 +64,8 @@
 <script>
 import Charts from '../cmps/Charts.vue'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-import { stayService } from '../services/stay.service.local.js'
-// import { stayService } from '../services/stay.service.js'
+// import { stayService } from '../services/stay.service.local.js'
+import { stayService } from '../services/stay.service.js'
 export default {
     data() {
         return {

@@ -115,7 +115,8 @@
 </template>
   
 <script>
-import { stayService } from '../services/stay.service.local'
+// import { stayService } from '../services/stay.service.local'
+import { stayService } from '../services/stay.service'
 import { svgService } from '../services/svg.service'
 import { utilService } from '../services/util.service'
 import { eventBus } from '../services/event-bus.service'
@@ -173,14 +174,14 @@ export default {
         async getStayImages() {
             const stayImages = []
             for (let i = 0; i < Math.max(5, this.stay.imgUrls.length); i++) {
-                const res = await fetch(this.stay.imgUrls[i])
-                stayImages[i] = res.status === 200 ? this.stay.imgUrls[i] : 'src/assets/defaultStay.png'
+                // const res = await fetch(this.stay.imgUrls[i])
+                stayImages[i] = this.stay.imgUrls[i] || 'src/assets/defaultStay.png'
             }
             return stayImages
         },
         async getUserImg(imgUrl) {
-            const res = await fetch(imgUrl)
-            return (res.status === 200 ? imgUrl : 'src/assets/defaultUser.svg')
+            // const res = await fetch(imgUrl)
+            return imgUrl || 'src/assets/defaultUser.svg'
         },
         getImgClass(i) {
             return {

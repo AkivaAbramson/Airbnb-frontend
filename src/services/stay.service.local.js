@@ -17,7 +17,7 @@ export const stayService = {
 window.cs = stayService
 
 
-async function query(filterBy = { txt: '', price: 0, loc: '', destination: '', }) {
+async function query(filterBy = { txt: '', price: 0, destination: '', }) {
 
   var stays = await storageService.query(STORAGE_KEY)
 
@@ -59,10 +59,6 @@ async function query(filterBy = { txt: '', price: 0, loc: '', destination: '', }
     }, 0)
     console.log(guestSum);
     stays = stays.filter((stay) => stay.capacity >= guestSum)
-    // stays = stays.filter((stay) => {
-    //   console.log('stay:', stay);
-    //   return true
-    // })
   }
 
   stays.forEach(stay => {
@@ -74,6 +70,7 @@ async function query(filterBy = { txt: '', price: 0, loc: '', destination: '', }
 
   return stays
 }
+
 function save(stay) {
   if (stay._id) {
     // console.log(stay._id);
@@ -146,13 +143,13 @@ function getEmptyStay() {
 }
 
 // Initial data
-; (async () => {
-  let stays = await query()
-  if (!stays?.length) {
-    stays = await (await fetch('src/assets/data/stay.json')).json()
-    for (const stay of stays) {
-      await storageService.post(STORAGE_KEY, stay)
-    }
-  }
-})()
+// ; (async () => {
+//   let stays = await query()
+//   if (!stays?.length) {
+//     stays = await (await fetch('src/assets/data/stay.json')).json()
+//     for (const stay of stays) {
+//       await storageService.post(STORAGE_KEY, stay)
+//     }
+//   }
+// })()
 
