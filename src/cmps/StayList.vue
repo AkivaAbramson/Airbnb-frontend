@@ -1,7 +1,7 @@
 <template lang="">
     <section class="stay-list">
         <ul v-if="stays.length" class="ul-list">
-            <StayPreview 
+            <StayPreview class="li-list"
             v-for="stay in stays" 
             :key="stay._id"   
             :stay="stay" 

@@ -70,7 +70,7 @@
       </nav>
 
     </header>
-    <AppHeaderFilter class="home-layout"></AppHeaderFilter>
+    <AppHeaderFilter class="home-layout bad-filter"></AppHeaderFilter>
 
   </section>
 </template>
@@ -201,3 +201,13 @@ export default {
 
 }
 </script>
+
+<style>
+.bad-filter {
+    height: 80px !important;
+    max-height: 80px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    z-index: -1000 !important;
+}
+</style>

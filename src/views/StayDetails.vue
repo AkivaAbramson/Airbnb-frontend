@@ -1,53 +1,27 @@
 <template>
     <section v-if="stay" class="stay-details" :key="stayId">
-        <section ref="navbar" class="fixed-navbar shadow">
-            <div class="nav-content">
-                <ul class="clean-list flex">
-                    <li>
-                        <a @click="scrollTo($refs.photos)">Photos</a>
-                    </li>
-                    <li>
-                        <a @click="scrollTo($refs.amenities)">Amenities</a>
-                    </li>
-                    <li>
-                        <a @click="scrollToReviews()">Reviews</a>
-                    </li>
-                    <li>
-                        <a @click="scrollTo($refs.location)">Location</a>
-                    </li>
-                </ul>
-                <article class="fixed-order">
-                    <span class="fixed-details">
-                        <span class="top-price bold">${{ formatNumber(stay.price) }}</span>
-                        <RateAndRev :reviews="stay.reviews" />
-                    </span>
-                    <div class="btn-wrapper">
-                        {{ btnOrderText }}
-                        <FancyBtn @click.stop="onReserve()" :content="btnOrderText" />
+        <section class="top-container full">
+            <section class="header-details">
+                <h1>{{ stay.name }}</h1>
+                <div class="top-details flex justify-between align-end">
+                    <div>
+                        <RateAndRev class="header-spacer" :reviews="stay.reviews" />
+                        <span class="bold underline">{{ locName }}</span>
                     </div>
-                </article>
-            </div>
-        </section>
-        <section class="header-details">
-            <h1>{{ stay.name }}</h1>
-            <div class="top-details flex justify-between align-end">
-                <div>
-                    <RateAndRev class="header-spacer" :reviews="stay.reviews" />
-                    <span class="bold underline">{{ locName }}</span>
+                    <div>
+                        <RouterLink v-if="false" :to="'/stay/edit/' + stay._id" class="btn btn-top underline">Edit</RouterLink>
+                        <button class="btn btn-top underline">
+                            <svg v-html="getSvg('heart')"></svg>
+                            <span>Save</span>
+                        </button>
+                    </div>
                 </div>
-                <div>
-                    <RouterLink v-if="false" :to="'/stay/edit/' + stay._id" class="btn btn-top underline">Edit</RouterLink>
-                    <button class="btn btn-top underline">
-                        <svg v-html="getSvg('heart')"></svg>
-                        <span>Save</span>
-                    </button>
+            </section>
+            <section ref="photos" v-if="stayImages" class="image-gallery">
+                <div v-for="i in 5" :class="getImgClass(i)">
+                    <img :src="stayImages[i - 1]">
                 </div>
-            </div>
-        </section>
-        <section ref="photos" v-if="stayImages" class="image-gallery">
-            <div v-for="i in 5" :class="getImgClass(i)">
-                <img :src="stayImages[i - 1]">
-            </div>
+            </section>
         </section>
         <section class="main-details shadow">
             <section>
@@ -115,6 +89,34 @@
         <section ref="location" class="stay-map">
             Map
         </section>
+        <section ref="navbar" class="fixed-navbar full shadow">
+            <div class="nav-content">
+                <ul class="clean-list flex">
+                    <li>
+                        <a @click="scrollTo($refs.photos)">Photos</a>
+                    </li>
+                    <li>
+                        <a @click="scrollTo($refs.amenities)">Amenities</a>
+                    </li>
+                    <li>
+                        <a @click="scrollToReviews()">Reviews</a>
+                    </li>
+                    <li>
+                        <a @click="scrollTo($refs.location)">Location</a>
+                    </li>
+                </ul>
+                <article class="fixed-order">
+                    <span class="fixed-details">
+                        <span class="top-price bold">${{ formatNumber(stay.price) }}</span>
+                        <RateAndRev :reviews="stay.reviews" />
+                    </span>
+                    <div class="btn-wrapper">
+                        {{ btnOrderText }}
+                        <FancyBtn @click.stop="onReserve()" :content="btnOrderText" />
+                    </div>
+                </article>
+            </div>
+        </section>
     </section>
 </template>
   
@@ -157,6 +159,7 @@ export default {
             stayImages: null,
             hostImg: null,
             isClamped: false,
+            MAP_KEY: 'AIzaSyAnbTuVXoF2tUKkZvxkYf3PkP-GX0nAvsA',
             elTxt: null,
         }
     },
@@ -184,13 +187,11 @@ export default {
         async getStayImages() {
             const stayImages = []
             for (let i = 0; i < Math.max(5, this.stay.imgUrls.length); i++) {
-                // const res = await fetch(this.stay.imgUrls[i])
                 stayImages[i] = this.stay.imgUrls[i] || 'src/assets/defaultStay.png'
             }
             return stayImages
         },
         async getUserImg(imgUrl) {
-            // const res = await fetch(imgUrl)
             return imgUrl || 'src/assets/defaultUser.svg'
         },
         getImgClass(i) {
@@ -226,8 +227,8 @@ export default {
             this.isClamped = (elTxt.offsetHeight / lineHeight) > parseInt(getComputedStyle(elTxt).getPropertyValue('--max-lines'))
         },
         setNavbar() {
-            let navbarProperty = this.$refs.photos.getBoundingClientRect().bottom > 0 ? 'none': 'grid'
-            let btnProperty = this.elBtn.getBoundingClientRect().bottom > 80 ? 'none' : 'grid'
+            let navbarProperty = this.$refs.photos?.getBoundingClientRect().bottom > 0 ? 'none': 'grid'
+            let btnProperty = this.elBtn?.getBoundingClientRect().bottom > 80 ? 'none' : 'grid'
             if (window.innerWidth < 745) {
                 btnProperty = 'grid'
                 navbarProperty = 'grid'
