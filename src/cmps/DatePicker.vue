@@ -27,15 +27,21 @@
         <footer v-if="footer" class="picker-footer">
             <div
             v-if="footer.clear"
-            @click="$emit('clear')"
+            @click="onClear()"
             class="btn-clear underline">
             Clear dates
             </div>
             <div
             v-if="footer.close"
-            class="btn-close"
+            class="btn-black"
             @click="$emit('close')">
             Close
+            </div>
+            <div
+            v-if="footer.save"
+            class="btn-black"
+            @click="$emit('save-changes')">
+            Save
             </div>
         </footer>
     </div>
@@ -44,6 +50,13 @@
 <script>
 export default {
     props: ['range', 'attributes', 'header', 'footer', 'columns'],
+    methods: {
+        onClear() {
+            this.range.start = ''
+            this.range.end = ''
+            this.$emit('clear')
+        }
+    },
     computed: {
         minDate() {
             return new Date()
