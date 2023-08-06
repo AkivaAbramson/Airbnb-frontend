@@ -2,9 +2,10 @@
   <section class="home-layout">
     <header class="small-header home-layout" :class="{ 'add-padding': onDetails }">
       <nav>
-        <RouterLink to="/">
-          <i class="logo" v-html="getSvg('logo')"></i>
-        </RouterLink>
+        <div class="logo-container" @click="goHome">
+          <img class="logo logo-img" src="https://www.vectorlogo.zone/logos/airbnb/airbnb-icon.svg">
+          <h1 class="logo logo-title">fairbnb</h1>
+        </div>
       </nav>
 
 
@@ -44,7 +45,7 @@
       <nav class="profile-options">
         <div class="add-home">
           <RouterLink to="/stay/edit/">
-            Airbnb your home
+            fairbnb your home
           </RouterLink>
         </div>
         <div class="profile-menu" @click="toggleModal">
@@ -109,6 +110,9 @@ export default {
     toggleModal() {
       this.modalVisible = !this.modalVisible
     },
+    goHome() {
+      this.$router.push('/');
+    },
     locModal() {
       this.location = true
       this.week = false
@@ -154,7 +158,7 @@ export default {
         this.onDetails = false
         // this.isSearchOpened = false
         // console.log('got here')
-      } else if (to.path.startsWith('/stay/edit')){
+      } else if (to.path.startsWith('/stay/edit/')){
         this.onDetails = false
 
       } else {

@@ -12,7 +12,7 @@
             <RouterLink to="/wishlist/" @click="closeModal">Wishlist</RouterLink>
             <!-- <a href="#" @click="goToWishlist">Wishlist</a> -->
             <hr>
-            <RouterLink to="/stay/edit/" @click="closeModal">Airanbnb your home</RouterLink>
+            <RouterLink to="/stay/edit/" @click="closeModal">fairbnb your home</RouterLink>
             <a class="logout-btn" v-if="this.loggedinUser" @click="doLogout">Logout</a>
         </div>
 

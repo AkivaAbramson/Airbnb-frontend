@@ -42,6 +42,14 @@
   .carousel__next {
     padding-right: 5px;
     box-shadow: -7px 0px 12px 5px #FFFFFF;
+    position: absolute;
+    top: 45px;
+    right: -25px;
+  }
+  .carousel__prev{
+    position: absolute;
+    top: 45px;
+    left: -70px;
   }
 
   .label-icon {
