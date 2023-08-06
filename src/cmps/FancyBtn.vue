@@ -6,9 +6,11 @@
 <script>
 import { eventBus } from '../services/event-bus.service'
 export default {
-    props: ['content'],
+    props: ['content', 'emitRef'],
     mounted() {
-        eventBus.emit('btn-mounted', this.$refs.fancyBtn)
+        if (this.emitRef) {
+            eventBus.emit('btn-mounted', this.$refs.fancyBtn)
+        }
     },
     methods: {
         onHover(ev) {

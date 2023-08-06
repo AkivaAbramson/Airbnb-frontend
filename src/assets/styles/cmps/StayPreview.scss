@@ -6,12 +6,20 @@
     
     .preview-details {
         display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: minmax(0, 1fr) auto;
         margin-top: 10px;
         color: $clr0;
+        word-wrap: break-word;
 
         .preview-data {
-
+            h3 {
+                display: -webkit-box;
+                max-width: 100%;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
 
             display: flex;
             flex-direction: column;
