@@ -21,6 +21,8 @@ async function query(filterBy = { txt: '', price: 0, loc: '', destination: '', }
 
   var stays = await storageService.query(STORAGE_KEY)
 
+
+
   // if (filterBy.txt) {
   //   const txtRegex = new RegExp(filterBy.txt, 'i')
   //   stays = stays.filter(stay => txtRegex.test(stay.vendor) || txtRegex.test(stay.description))
@@ -30,31 +32,51 @@ async function query(filterBy = { txt: '', price: 0, loc: '', destination: '', }
     stays = stays.filter(stay => stay.price <= filterBy.price)
   }
 
-  // if (filterBy.loc) {
-  //   const locRegex = new RegExp(filterBy.loc, 'i')
-  //   const locKeys = ['country', 'countryCode', 'city', 'address']
-  //   stays = stays.filter((stay) => {
-  //     locKeys.forEach((key) => {
-  //       locRegex.test(stay.loc[key])
-  //     })
-  //   })
-  // }
-
   if (filterBy.destination) {
-    stays = stays.filter((stay) => stay.loc.country === filterBy.destination)
+    const locRegex = new RegExp(filterBy.destination, 'i')
+    const locKeys = ['country', 'countryCode', 'city', 'address']
+    stays = stays.filter((stay) => {
+      locKeys.forEach((key) => {
+        locRegex.test(stay.loc[key])
+      })
+    })
   }
 
-  // if (filterBy.guests) {
-  //   const guestKeys = ['adult', 'child', 'infant', 'pet']
-  //   stays = stays.filter((stay) => {
-  //     guestKeys.forEach((key) => stay.guests[key] >= filterBy.guests[key])
-  //   })
+  // if (filterBy.destination) {
+  //   stays = stays.filter((stay) => stay.loc.country === filterBy.destination)
   // }
+
+  if (filterBy.adult || filterBy.child || filterBy.infant) {
+    const guests = {
+      adult: filterBy.adult,
+      child: filterBy.child || 0,
+      infant: filterBy.infant || 0,
+    }
+    const guestKeys = ['adult', 'child', 'infant']
+    const guestSum = guestKeys.reduce((acc, key) => {
+      acc += +guests[key]
+      return acc
+    }, 0)
+    console.log(guestSum);
+    stays = stays.filter((stay) => stay.capacity >= guestSum)
+    // stays = stays.filter((stay) => {
+    //   console.log('stay:', stay);
+    //   return true
+    // })
+  }
+
+  stays.forEach(stay => {
+    stay.rate = +utilService.calcRating(stay)
+    // save(stay)
+  })
+  stays.sort((a,b) => b.rate - a.rate)
+  console.log(stays);
 
   return stays
 }
 function save(stay) {
   if (stay._id) {
+    // console.log(stay._id);
     return storageService.put(STORAGE_KEY, stay)
   } else {
     return storageService.post(STORAGE_KEY, stay)

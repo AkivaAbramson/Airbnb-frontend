@@ -41,7 +41,7 @@
                 </div>
             </button>
             <GuestPicker v-if="showGuestModal" v-clickout="() => toggleGuestModal(false)" @guest-count="updateQuery"
-                :capacity="stay.capacity" />
+                @close="toggleGuestModal(false)" :capacity="stay.capacity" :footer="{ close: true }" />
         </article>
         <FancyBtn :content="'Reserve'" @click="onReserve()" />
         <article class="price" v-if="nights()">
@@ -161,10 +161,10 @@ export default {
             return this.nights() * this.stay.price
         },
         checkin() {
-            return this.range.start ? new Date(this.range.start).toLocaleDateString() : ''
+            return this.range.start ? new Date(this.range.start).toLocaleDateString() : 'Add date'
         },
         checkout() {
-            return this.range.end ? new Date(this.range.end).toLocaleDateString() : ''
+            return this.range.end ? new Date(this.range.end).toLocaleDateString() : 'Add date'
         },
         subtitle() {
             const checkin = this.range.start ? (new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(this.range.start).getTime())) : 'Add date'
