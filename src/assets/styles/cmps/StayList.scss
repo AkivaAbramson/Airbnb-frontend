@@ -4,13 +4,8 @@
     padding: 0;
     margin: 0;
     display: grid;
-<<<<<<< HEAD
+    grid-gap: 40px 24px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-gap: 40px 24px;
-=======
-    grid-gap: 40px 24px;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
->>>>>>> 708efefd801264e8b28812ee4cc8682ba61fd62f
   }
 
 }
