@@ -103,10 +103,11 @@ function calcRating({ reviews }) {
         const revKeys = Object.keys(review.rate)
         let currSum = 0
         revKeys.forEach(key => currSum += review.rate[key])
-        currSum /= revKeys.length
-        acc += currSum
+        acc += currSum / revKeys.length
         return acc
     }, 0)
     // console.log('rateSum:', rateSum)
-    return Number.parseFloat((rateSum / reviews.length).toFixed(2))
+    let rate = Number((rateSum / reviews.length).toFixed(2))
+    if (!(rate % 1)) rate = rate.toFixed(1)
+    return rate
 }

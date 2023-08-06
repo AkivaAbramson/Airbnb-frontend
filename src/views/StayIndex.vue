@@ -15,7 +15,7 @@
 import AppHeaderFilter from '../cmps/AppHeaderFilter.vue'
 import StayList from '../cmps/StayList.vue'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { stayService } from '../services/stay.service.local'
+// import { stayService } from '../services/stay.service.local'
 // import { getActionRemoveCar, getActionUpdateCar, getActionAddCarMsg } from '../store/car.store'
 export default {
   name: 'StayIndex',

@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import { reviewService } from '../services/review.service.local'
+// import { reviewService } from '../services/review.service.local'
+import { reviewService } from '../services/review.service'
 import RateAndRev from '../cmps/RateAndRev.vue'
 export default {
     name: 'StayReviews',

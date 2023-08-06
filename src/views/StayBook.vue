@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { stayService } from '../services/stay.service.local'
+// import { stayService } from '../services/stay.service.local'
 import { userService } from '../services/user.service.local'
 import { storageService } from '../services/async-storage.service'
 import { utilService } from '../services/util.service'

@@ -1,19 +1,18 @@
-// .date-picker {
-//     background-color: white;
-//     position: absolute;
-//     top: 220px;
-//     right: 30%;
-//     max-width: 400px;
-//     height: 40vh;
-//     border-radius: 32px;
-//     z-index: 3;
-//     font-family: Circular;
-//     font-weight: normal;
-//     font-size: 1rem;
-//     border-bottom: 1px solid rgb(235, 235, 235);
-//     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.1);
-//     padding: 40px;
-// }
+.home-date-picker {
+    position: absolute;
+    top: 110px;
+    right: 30%;
+    // max-width: 400px;
+    min-height: 200px;
+    border-radius: 32px;
+    // z-index: 3;
+    // font-family: Circular;
+    // font-weight: normal;
+    // font-size: 1rem;
+    // border-bottom: 1px solid rgb(235, 235, 235);
+    // box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.1);
+    // padding: 40px;
+}
 // .vc-container{
 //     max-width: 400px;
 // }

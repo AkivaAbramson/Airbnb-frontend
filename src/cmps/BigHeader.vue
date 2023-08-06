@@ -7,7 +7,7 @@
                 <span v-else>{{ destination }}</span> -->
                 <input placeholder="Search destinations" class="light-subtitle"
                     v-if="!destination || destination === `I'm flexible`" v-model="searchedDest" @keyup.enter="saveDest">
-                <input v-else type="text" placeholder="Selected country">
+                <input v-else type="text" :placeholder="destination">
                 <!-- <input class="iluujbk dir dir-ltr" aria-autocomplete="none" autocomplete="off" autocorrect="off" spellcheck="false" id="bigsearch-query-location-input" name="query" aria-describedby="bigsearch-query-location-description" placeholder="Search destinations" data-testid="structured-search-input-field-query" value="" aria-activedescendant="bigsearch-query-location-suggestion-1"> -->
             </div>
 
@@ -40,8 +40,16 @@
             </div>
         </section>
         <Destinations v-if="openDest" @chosenDest="updateFilterBy" @openNextModal="openNextModal" />
-        <CheckIn @chosenDate="chosenDate" v-if="openCheckin" />
-        <CheckIn v-if="openCheckOut" />
+        <div  class="home-date-picker" >
+            <DatePicker @date-change="chosenDate" v-if="openCheckin"
+            :columns="2"
+            :range="range"
+            :attributes="attributes"
+            :footer="{ clear: true, close: true}"
+            @close="showDateModal = false"
+            />
+        </div>
+        <!-- <DatePicker v-if="openCheckOut" /> -->
         <GuestPicker v-if="openGuests" @guest-count="updateFilterBy" />
 
 
@@ -50,14 +58,27 @@
 
 <script>
 import { utilService } from '../services/util.service'
+import { ref } from 'vue'
 import Destinations from './Destinations.vue'
 import FancyBtn from './FancyBtn.vue'
-import CheckIn from './CheckIn.vue'
+import DatePicker from './DatePicker.vue'
 import GuestPicker from './GuestPicker.vue'
 
 const guestTypes = ['adult', 'child', 'infant', 'pet']
 
 export default {
+    setup() {
+        const range = ref({
+            start: '',
+            end: '',
+        })
+        const attributes = ref([{
+            attributes: {
+                dates: range
+            }
+        }])
+        return { range, attributes }
+    },
     data() {
         return {
             openDest: true,
@@ -130,14 +151,14 @@ export default {
         openNextModal() {
             if (this.openDest === true) {
                 this.openDest = false
+                this.openCheckin = true
+                return
+            }
+            if (this.openCheckin === true) {
+                this.openCheckin = false
                 this.openGuests = true
                 return
             }
-            // if (this.openCheckin === true) {
-            //     this.openCheckin = false
-            //     this.openGuests = true
-            //     return
-            // }
             // if (this.openCheckOut === true) {
             //     this.openCheckOut = false
             //     this.openGuests = true
@@ -183,7 +204,7 @@ export default {
     },
     components: {
         Destinations,
-        CheckIn,
+        DatePicker,
         GuestPicker,
         FancyBtn
     }
