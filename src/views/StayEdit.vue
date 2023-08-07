@@ -31,18 +31,19 @@
                         <!-- <tr v-for="stay in user.stays" :key="stay._id"> -->
                         <tr v-for="i in orders.length" :key="orders[i - 1]._id">
                             <td class="td-img">
-                                <img class="buyer-img" :src="orders[i-1].buyer.imgUrl">
                                 {{ orders[i - 1].buyer.fullname }}
+                                <img class="buyer-img" :src="orders[i-1].buyer.imgUrl">
                             </td>
                             <td>{{ orders[i - 1].startDate }}</td>
                             <td>{{ orders[i - 1].endDate }}</td>
                             <td>{{ orders[i - 1].guests.adults }}</td>
                             <td>${{ orders[i - 1].totalPrice }}</td>
                             <td>{{ orders[i - 1].stay.name }}</td>
-                            <td class="actions"
-                                :class="{ approve: orders[i - 1].status == 'declined', decline: orders[i - 1].status == 'approved' }">
-                                <button class="approve-order" @click="orders[i - 1].status = 'approved'">Approve</button>
-                                <button class="decline-order" @click="orders[i - 1].status = 'declined'">Decline</button>
+                            <td>
+                                <div class="actions" :class="{ approve: orders[i - 1].status == 'declined', decline: orders[i - 1].status == 'approved' }">
+                                    <button class="approve-order" @click="orders[i - 1].status = 'approved'">Approve</button>
+                                    <button class="decline-order" @click="orders[i - 1].status = 'declined'">Decline</button>
+                                </div>
                             </td>
                             <td>{{ orders[i - 1].status }}</td>
 
