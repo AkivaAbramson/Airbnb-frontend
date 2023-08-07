@@ -1,55 +1,96 @@
-.seller-data {
-    font-family: 'Circular';
+.stay-edit {
+  font-family: 'Circular';
+
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: 
+      "charts table";
+
+  }
+  .table-container {
+    grid-area: table;
+  }
+  .charts {
+    grid-area: charts;
+  }
+
+
+  .seller-data {
     border-collapse: collapse;
     width: 100%;
     cursor: default;
-    td, th {
-     border: 1px solid #ddd;
-     padding: 8px;
-     text-align: center;
-   }
-    tr:nth-child(even){background-color: #F2F2F2;}
-    tr:hover {background-color: #ddd;}
-    th {
-     padding-top: 12px;
-     padding-bottom: 12px;
-     background-color: #04AA6D;
-     color: white;
-   }
-   .actions{
-        display: flex;
-        justify-content: space-evenly;
-        button{
-            border: none;
-            border-radius: 10px;
-            padding: 7px;
-            cursor: pointer;
 
-        }
-        
-        .approve-order{
-            background-color: green;
-        }
-        .decline-order{
-            background-color: red;
-       }
-   }
+    td,
+    th {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    td:last-child, th:last-child {
+      text-align: right;
+    }
+
+    tr:nth-child(even) {
+      background-color: #F2F2F2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background-color: #FF385C;
+      // background-color: #04AA6D;
+      color: white;
+
+      &.margin-action::after{
+        content: '';
+        margin-right: 1.25rem;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-around;
+
+      button {
+        border: none;
+        border-radius: 10px;
+        padding: 7px;
+        cursor: pointer;
+
+      }
+
+      .approve-order {
+        background-color: #9ED5C5;
+      }
+
+      .decline-order {
+        background-color: #F7A4A4;
+      }
+    }
   }
-  .seller-header{
+
+  .seller-header {
     // display: flex;
 
-    .seller-title{
+    .seller-title {
       display: flex;
       justify-content: center;
       margin-block-end: 40px;
     }
-  
-    .add-stay{
+
+    .add-stay {
       display: flex;
       align-items: center;
       // margin-inline-start: 20px;
       // margin-inline-end: 550px;
       // margin-block-start: 50px;
-  
+
     }
   }
+}

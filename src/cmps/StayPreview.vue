@@ -1,7 +1,7 @@
 <template>
     <li class="stay-preview">
         <div class="prev-img-container">
-            <MainGallery :stay="stay" @goToDetails="$router.push('/stay/' + stay._id)" />
+            <MainGallery :stay="stay" @goToDetails="$router.push({name:'Stay', params:{stayId:stay._id}, query: $route.query })"/>
             <div class="heart-icon">
                 <svg @click.prevent="toggleHeart" :class="{ liked: isLiked }" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"

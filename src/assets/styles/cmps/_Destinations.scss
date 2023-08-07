@@ -5,7 +5,7 @@
         top: 85px;
         right: 46%;
         left: 21.5%;
-        height: 72vh;
+        height: 65vh;
         border-radius: 32px;
         z-index: 3;
         font-family: Circular;
@@ -14,6 +14,10 @@
         border-bottom: 1px solid rgb(235,235,235);
         box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 8px 16px rgba(0,0,0,0.1);
         padding: 40px;
+
+        .dest-title{
+            margin-inline-start: 12px;
+        }
         
         .map-container{
             display: grid;
@@ -29,6 +33,7 @@
                     height: 125px;
                     border-radius: 20px;
                     border: 1px solid lightgray;
+                    cursor: pointer;
                     &:hover{
                         border: 1px solid black;
 
