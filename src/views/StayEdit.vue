@@ -74,13 +74,110 @@ export default {
                 "createdAt": "1670422436153",
                 "buyer": {
                     "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
+                    "fullname": "Akiva Abramson",
+                    "imgUrl": "https://res.cloudinary.com/dqjq5smb5/image/upload/v1691356949/akiva_bglys6.png"
                 },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
+                "totalPrice": "946",
+                "startDate": "11/8/2023",
+                "endDate": "15/12/2023",
                 "guests": {
-                    "adults": 1,
+                    "adults": 5,
+                    "kids": 3
+                },
+                "stay": {
+                    "_id": "622f337a75c7d36e498aaaf8",
+                    "name": "Beautiful Seaside Villa with Private Pool",
+                    "price": 1200.7
+                },
+                "msgs": [],
+                "status": "approved"
+            },
+            {
+                "_id": "64cbe108d24925039955b3b2",
+                "hostId": "622f3403e36c59e6164faf93",
+                "createdAt": "1670422436153",
+                "buyer": {
+                    "_id": "622f3403e36c59e6164faf93",
+                    "fullname": "Rafael Urias",
+                    "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308653/Fairbnb/userImages/Beau_afrsws.webp"
+                },
+                "totalPrice": "1260.4",
+                "startDate": "30/4/2023",
+                "endDate": "3/5/2023",
+                "guests": {
+                    "adults": 2,
+                    "kids": 0,
+                },
+                "stay": {
+                    "_id": "622f337a75c7d36e498aaaf8",
+                    "name": "Westin Kaanapali KORVN 2BR",
+                    "price": 595
+                },
+                "msgs": [],
+                "status": "approved"
+            },
+            {
+                "_id": "64cbe108d24925039955b3b2",
+                "hostId": "622f3403e36c59e6164faf93",
+                "createdAt": "1670422436153",
+                "buyer": {
+                    "_id": "622f3403e36c59e6164faf93",
+                    "fullname": "Alex Rodriguez",
+                    "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308654/Fairbnb/userImages/Rehan_hk89kv.webp"
+                },
+                "totalPrice": "790",
+                "startDate": "06/10/2022",
+                "endDate": "11/10/2022",
+                "guests": {
+                    "adults": 3,
+                    "kids": 1
+                },
+                "stay": {
+                    "_id": "622f337a75c7d36e498aaaf8",
+                    "name": "Triple room Barcelona Guell park",
+                    "price": 360
+                },
+                "msgs": [],
+                "status": "approved"
+            },
+            {
+                "_id": "64cbe108d24925039955b3b2",
+                "hostId": "622f3403e36c59e6164faf93",
+                "createdAt": "1670422436153",
+                "buyer": {
+                    "_id": "622f3403e36c59e6164faf93",
+                    "fullname": "Sheila Turner",
+                    "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308655/Fairbnb/userImages/Stacy_pgenqp.webp"
+                },
+                "totalPrice": '2468.5',
+                "startDate": "27/6/2022",
+                "endDate": "24/6/2022",
+                "guests": {
+                    "adults": 8,
+                    "kids": 4
+                },
+                "stay": {
+                    "_id": "622f337a75c7d36e498aaaf8",
+                    "name": "Westin Kaanapali KORVN 2BR",
+                    "price": 520
+                },
+                "msgs": [],
+                "status": "approved"
+            },
+            {
+                "_id": "64cbe108d24925039955b3b2",
+                "hostId": "622f3403e36c59e6164faf93",
+                "createdAt": "1670422436153",
+                "buyer": {
+                    "_id": "622f3403e36c59e6164faf93",
+                    "fullname": "Laura Benson",
+                    "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308654/Fairbnb/userImages/Robert_jv0ggk.webp"
+                },
+                "totalPrice": "360",
+                "startDate": "12/3/2022",
+                "endDate": "16/3/2022",
+                "guests": {
+                    "adults": 3,
                     "kids": 0
                 },
                 "stay": {
@@ -97,110 +194,19 @@ export default {
                 "createdAt": "1670422436153",
                 "buyer": {
                     "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
+                    "fullname": "John Andif",
+                    "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308654/Fairbnb/userImages/Eyad_uml7mu.webp"
                 },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
+                "totalPrice": "1355.4",
+                "startDate": "07/8/2021",
+                "endDate": "09/8/2021",
                 "guests": {
-                    "adults": 1,
+                    "adults": 2,
                     "kids": 0
                 },
                 "stay": {
                     "_id": "622f337a75c7d36e498aaaf8",
-                    "name": "Westin Kaanapali KORVN 2BR",
-                    "price": 595
-                },
-                "msgs": [],
-                "status": "approved"
-            },
-            {
-                "_id": "64cbe108d24925039955b3b2",
-                "hostId": "622f3403e36c59e6164faf93",
-                "createdAt": "1670422436153",
-                "buyer": {
-                    "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
-                },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
-                "guests": {
-                    "adults": 1,
-                    "kids": 0
-                },
-                "stay": {
-                    "_id": "622f337a75c7d36e498aaaf8",
-                    "name": "Westin Kaanapali KORVN 2BR",
-                    "price": 595
-                },
-                "msgs": [],
-                "status": "approved"
-            },
-            {
-                "_id": "64cbe108d24925039955b3b2",
-                "hostId": "622f3403e36c59e6164faf93",
-                "createdAt": "1670422436153",
-                "buyer": {
-                    "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
-                },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
-                "guests": {
-                    "adults": 1,
-                    "kids": 0
-                },
-                "stay": {
-                    "_id": "622f337a75c7d36e498aaaf8",
-                    "name": "Westin Kaanapali KORVN 2BR",
-                    "price": 595
-                },
-                "msgs": [],
-                "status": "approved"
-            },
-            {
-                "_id": "64cbe108d24925039955b3b2",
-                "hostId": "622f3403e36c59e6164faf93",
-                "createdAt": "1670422436153",
-                "buyer": {
-                    "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
-                },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
-                "guests": {
-                    "adults": 1,
-                    "kids": 0
-                },
-                "stay": {
-                    "_id": "622f337a75c7d36e498aaaf8",
-                    "name": "Westin Kaanapali KORVN 2BR",
-                    "price": 595
-                },
-                "msgs": [],
-                "status": "approved"
-            },
-            {
-                "_id": "64cbe108d24925039955b3b2",
-                "hostId": "622f3403e36c59e6164faf93",
-                "createdAt": "1670422436153",
-                "buyer": {
-                    "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
-                },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
-                "guests": {
-                    "adults": 1,
-                    "kids": 0
-                },
-                "stay": {
-                    "_id": "622f337a75c7d36e498aaaf8",
-                    "name": "Westin Kaanapali KORVN 2BR",
+                    "name": "Beautiful Seaside Villa with Private Pool",
                     "price": 595
                 },
                 "msgs": [],
