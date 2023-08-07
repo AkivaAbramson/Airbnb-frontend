@@ -77,7 +77,7 @@ export default {
                     "fullname": "Akiva Abramson",
                     "imgUrl": "https://res.cloudinary.com/dqjq5smb5/image/upload/v1691356949/akiva_bglys6.png"
                 },
-                "totalPrice": "948",
+                "totalPrice": "1,080.72",
                 "startDate": "10/8/2023",
                 "endDate": "14/8/2023",
                 "guests": {
@@ -101,7 +101,7 @@ export default {
                     "fullname": "Rafael Urias",
                     "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308653/Fairbnb/userImages/Beau_afrsws.webp"
                 },
-                "totalPrice": "1260.4",
+                "totalPrice": "1,260.4",
                 "startDate": "30/4/2023",
                 "endDate": "03/5/2023",
                 "guests": {
@@ -149,7 +149,7 @@ export default {
                     "fullname": "Sheila Turner",
                     "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308655/Fairbnb/userImages/Stacy_pgenqp.webp"
                 },
-                "totalPrice": '2468.5',
+                "totalPrice": '2,468.5',
                 "startDate": "24/6/2022",
                 "endDate": "29/6/2022",
                 "guests": {
@@ -197,7 +197,7 @@ export default {
                     "fullname": "John Andif",
                     "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308654/Fairbnb/userImages/Eyad_uml7mu.webp"
                 },
-                "totalPrice": "1355.4",
+                "totalPrice": "1,355.4",
                 "startDate": "12/8/2021",
                 "endDate": "16/8/2021",
                 "guests": {
