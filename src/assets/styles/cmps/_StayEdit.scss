@@ -53,6 +53,10 @@
       }
     }
 
+    td {
+      text-transform: capitalize;
+    }
+
     .actions {
       display: flex;
       justify-content: space-around;
@@ -72,6 +76,20 @@
       .decline-order {
         background-color: #F7A4A4;
       }
+
+      &.approve {
+        .approve-order {
+          background-color: grey;
+          pointer-events: none;
+        }
+      }
+
+      &.decline {
+        .decline-order {
+          background-color: grey;
+          pointer-events: none;
+        }
+      }
     }
   }
 
@@ -82,6 +100,8 @@
       display: flex;
       justify-content: center;
       margin-block-end: 40px;
+      margin-block-start: 15px;
+      font-size: 30px;
     }
 
     .add-stay {

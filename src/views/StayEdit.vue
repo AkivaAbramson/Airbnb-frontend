@@ -1,10 +1,10 @@
 <template >
     <section class="stay-edit home-layout">
         <header class="seller-header home-layout">
-            <div class="add-stay">
+            <!-- <div class="add-stay">
                 <span v-html="getSvg('plus')"></span>
                 <span>Add Stay</span>
-            </div>
+            </div> -->
             <h1 class="seller-title">My Dashboard</h1>
 
         </header>
@@ -28,17 +28,20 @@
                     </thead>
                     <tbody>
                         <!-- <tr v-for="stay in user.stays" :key="stay._id"> -->
-                        <tr v-for="order in orders" :key="order._id">
-                            <td>{{ order.buyer.fullname }}</td>
-                            <td>{{ order.startDate }}</td>
-                            <td>{{ order.endDate }}</td>
-                            <td>{{ order.guests.adults }}</td>
-                            <td>${{ order.totalPrice }}</td>
-                            <td>{{ order.stay.name }}</td>
-                            <td>{{ order.status }}</td>
-                            <td class="actions"><button class="approve-order">Approve</button><button
-                                    class="decline-order">Decline</button></td>
-                            
+                        <tr v-for="i in orders.length" :key="orders[i - 1]._id">
+                            <td>{{ orders[i - 1].buyer.fullname }}</td>
+                            <td>{{ orders[i - 1].startDate }}</td>
+                            <td>{{ orders[i - 1].endDate }}</td>
+                            <td>{{ orders[i - 1].guests.adults }}</td>
+                            <td>${{ orders[i - 1].totalPrice }}</td>
+                            <td>{{ orders[i - 1].stay.name }}</td>
+                            <td>{{ orders[i - 1].status }}</td>
+                            <td class="actions"
+                                :class="{ approve: orders[i - 1].status == 'approved', decline: orders[i - 1].status == 'declined' }">
+                                <button class="approve-order" @click="orders[i - 1].status = 'approved'">Approve</button>
+                                <button class="decline-order" @click="orders[i - 1].status = 'declined'">Decline</button>
+                            </td>
+
                         </tr>
                     </tbody>
                 </table>
@@ -68,19 +71,117 @@ export default {
         return {
             stay: null,
             user: null,
+            orderStatus: {},
             orders: [{
                 "_id": "64cbe108d24925039955b3b2",
                 "hostId": "622f3403e36c59e6164faf93",
                 "createdAt": "1670422436153",
                 "buyer": {
                     "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
+                    "fullname": "Akiva Abramson",
+                    "imgUrl": "https://res.cloudinary.com/dqjq5smb5/image/upload/v1691356949/akiva_bglys6.png"
                 },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
+                "totalPrice": "948",
+                "startDate": "10/8/2023",
+                "endDate": "14/8/2023",
                 "guests": {
-                    "adults": 1,
+                    "adults": 5,
+                    "kids": 3
+                },
+                "stay": {
+                    "_id": "622f337a75c7d36e498aaaf8",
+                    "name": "Beautiful Seaside Villa with Private Pool",
+                    "price": 1200.7
+                },
+                "msgs": [],
+                "status": "pending..."
+            },
+            {
+                "_id": "64cbe108d24925039955b3b2",
+                "hostId": "622f3403e36c59e6164faf93",
+                "createdAt": "1670422436153",
+                "buyer": {
+                    "_id": "622f3403e36c59e6164faf93",
+                    "fullname": "Rafael Urias",
+                    "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308653/Fairbnb/userImages/Beau_afrsws.webp"
+                },
+                "totalPrice": "1260.4",
+                "startDate": "30/4/2023",
+                "endDate": "03/5/2023",
+                "guests": {
+                    "adults": 2,
+                    "kids": 0,
+                },
+                "stay": {
+                    "_id": "622f337a75c7d36e498aaaf8",
+                    "name": "Westin Kaanapali KORVN 2BR",
+                    "price": 595
+                },
+                "msgs": [],
+                "status": "approved"
+            },
+            {
+                "_id": "64cbe108d24925039955b3b2",
+                "hostId": "622f3403e36c59e6164faf93",
+                "createdAt": "1670422436153",
+                "buyer": {
+                    "_id": "622f3403e36c59e6164faf93",
+                    "fullname": "Alex Rodriguez",
+                    "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308654/Fairbnb/userImages/Rehan_hk89kv.webp"
+                },
+                "totalPrice": "790",
+                "startDate": "06/10/2022",
+                "endDate": "11/10/2022",
+                "guests": {
+                    "adults": 3,
+                    "kids": 1
+                },
+                "stay": {
+                    "_id": "622f337a75c7d36e498aaaf8",
+                    "name": "Triple room Barcelona Guell park",
+                    "price": 360
+                },
+                "msgs": [],
+                "status": "approved"
+            },
+            {
+                "_id": "64cbe108d24925039955b3b2",
+                "hostId": "622f3403e36c59e6164faf93",
+                "createdAt": "1670422436153",
+                "buyer": {
+                    "_id": "622f3403e36c59e6164faf93",
+                    "fullname": "Sheila Turner",
+                    "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308655/Fairbnb/userImages/Stacy_pgenqp.webp"
+                },
+                "totalPrice": '2468.5',
+                "startDate": "24/6/2022",
+                "endDate": "29/6/2022",
+                "guests": {
+                    "adults": 8,
+                    "kids": 4
+                },
+                "stay": {
+                    "_id": "622f337a75c7d36e498aaaf8",
+                    "name": "Westin Kaanapali KORVN 2BR",
+                    "price": 520
+                },
+                "msgs": [],
+                "status": "approved"
+            },
+            {
+                "_id": "64cbe108d24925039955b3b2",
+                "hostId": "622f3403e36c59e6164faf93",
+                "createdAt": "1670422436153",
+                "buyer": {
+                    "_id": "622f3403e36c59e6164faf93",
+                    "fullname": "Laura Benson",
+                    "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308654/Fairbnb/userImages/Robert_jv0ggk.webp"
+                },
+                "totalPrice": "360",
+                "startDate": "07/3/2022",
+                "endDate": "09/3/2022",
+                "guests": {
+                    "adults": 3,
                     "kids": 0
                 },
                 "stay": {
@@ -97,119 +198,28 @@ export default {
                 "createdAt": "1670422436153",
                 "buyer": {
                     "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
+                    "fullname": "John Andif",
+                    "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308654/Fairbnb/userImages/Eyad_uml7mu.webp"
                 },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
+                "totalPrice": "1355.4",
+                "startDate": "12/8/2021",
+                "endDate": "16/8/2021",
                 "guests": {
-                    "adults": 1,
+                    "adults": 2,
                     "kids": 0
                 },
                 "stay": {
                     "_id": "622f337a75c7d36e498aaaf8",
-                    "name": "Westin Kaanapali KORVN 2BR",
+                    "name": "Beautiful Seaside Villa with Private Pool",
                     "price": 595
                 },
                 "msgs": [],
                 "status": "approved"
             },
-            {
-                "_id": "64cbe108d24925039955b3b2",
-                "hostId": "622f3403e36c59e6164faf93",
-                "createdAt": "1670422436153",
-                "buyer": {
-                    "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
-                },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
-                "guests": {
-                    "adults": 1,
-                    "kids": 0
-                },
-                "stay": {
-                    "_id": "622f337a75c7d36e498aaaf8",
-                    "name": "Westin Kaanapali KORVN 2BR",
-                    "price": 595
-                },
-                "msgs": [],
-                "status": "approved"
-            },
-            {
-                "_id": "64cbe108d24925039955b3b2",
-                "hostId": "622f3403e36c59e6164faf93",
-                "createdAt": "1670422436153",
-                "buyer": {
-                    "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
-                },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
-                "guests": {
-                    "adults": 1,
-                    "kids": 0
-                },
-                "stay": {
-                    "_id": "622f337a75c7d36e498aaaf8",
-                    "name": "Westin Kaanapali KORVN 2BR",
-                    "price": 595
-                },
-                "msgs": [],
-                "status": "approved"
-            },
-            {
-                "_id": "64cbe108d24925039955b3b2",
-                "hostId": "622f3403e36c59e6164faf93",
-                "createdAt": "1670422436153",
-                "buyer": {
-                    "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
-                },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
-                "guests": {
-                    "adults": 1,
-                    "kids": 0
-                },
-                "stay": {
-                    "_id": "622f337a75c7d36e498aaaf8",
-                    "name": "Westin Kaanapali KORVN 2BR",
-                    "price": 595
-                },
-                "msgs": [],
-                "status": "approved"
-            },
-            {
-                "_id": "64cbe108d24925039955b3b2",
-                "hostId": "622f3403e36c59e6164faf93",
-                "createdAt": "1670422436153",
-                "buyer": {
-                    "_id": "622f3403e36c59e6164faf93",
-                    "fullname": "Patty And Beckett"
-                },
-                "totalPrice": "1200.7",
-                "startDate": "07/12/2022",
-                "endDate": "09/12/2022",
-                "guests": {
-                    "adults": 1,
-                    "kids": 0
-                },
-                "stay": {
-                    "_id": "622f337a75c7d36e498aaaf8",
-                    "name": "Westin Kaanapali KORVN 2BR",
-                    "price": 595
-                },
-                "msgs": [],
-                "status": "approved"
-            },
-        ]
+            ]
         }
     },
-    
+
     async created() {
         const { stayId } = this.$route.params;
         if (stayId) {
