@@ -28,6 +28,7 @@
         
         .pie-title{
             margin-block-end: 5px;
+            margin-bottom: .5rem;
             
         }
 
@@ -40,7 +41,7 @@
         grid-area: chart2;
         height: clamp(8rem, 20vw, 230px);
         .bar-title{
-            margin-block-start: -5px;
+            margin-block-start: -2px;
         }
 
         .chart {
@@ -85,7 +86,7 @@
             // justify-content: s 
         }
         .title {
-            margin-bottom: 8px;
+            margin-top: -2px;
         }
 
         

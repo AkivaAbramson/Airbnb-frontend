@@ -1,6 +1,9 @@
 .stay-edit {
   font-family: 'Circular';
 
+  .seller-header {
+    margin-top: .75rem;
+  }
   .main {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -47,14 +50,34 @@
       // background-color: #04AA6D;
       color: white;
 
-      &.margin-action::after{
+      &.margin-action::before{
         content: '';
-        margin-right: 1.25rem;
+        margin-left: 1rem;
+      }
+      &.margin-status::after {
+        content: '';
+        margin-right: 2px;
       }
     }
-
+    // tr{
+    //   height: max-content;
+    // }
     td {
       text-transform: capitalize;
+      // height: max-content;
+       &.td-img{
+          // display: flex;
+          // // align-content: center;
+          // align-items: center;
+          // justify-content: space-between;
+          
+
+        }
+        // .buyer-img {
+        //   border-radius: 50%;
+        //   height: 2em;
+        //   width: 2em;
+        // }
     }
 
     .actions {
