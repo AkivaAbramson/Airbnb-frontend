@@ -4,8 +4,8 @@
             <!-- <div class="add-stay">
                 <span v-html="getSvg('plus')"></span>
                 <span>Add Stay</span>
-            </div> -->
-            <h1 class="seller-title">My Dashboard</h1>
+            </div>
+            <h1 class="seller-title">My Dashboard</h1> -->
 
         </header>
         <main>
@@ -28,17 +28,20 @@
                     </thead>
                     <tbody>
                         <!-- <tr v-for="stay in user.stays" :key="stay._id"> -->
-                        <tr v-for="order in orders" :key="order._id">
-                            <td>{{ order.buyer.fullname }}</td>
-                            <td>{{ order.startDate }}</td>
-                            <td>{{ order.endDate }}</td>
-                            <td>{{ order.guests.adults }}</td>
-                            <td>${{ order.totalPrice }}</td>
-                            <td>{{ order.stay.name }}</td>
-                            <td>{{ order.status }}</td>
-                            <td class="actions"><button class="approve-order">Approve</button><button
-                                    class="decline-order">Decline</button></td>
-                            
+                        <tr v-for="i in orders.length" :key="orders[i - 1]._id">
+                            <td>{{ orders[i - 1].buyer.fullname }}</td>
+                            <td>{{ orders[i - 1].startDate }}</td>
+                            <td>{{ orders[i - 1].endDate }}</td>
+                            <td>{{ orders[i - 1].guests.adults }}</td>
+                            <td>${{ orders[i - 1].totalPrice }}</td>
+                            <td>{{ orders[i - 1].stay.name }}</td>
+                            <td>{{ orders[i - 1].status }}</td>
+                            <td class="actions"
+                                :class="{ approve: orders[i - 1].status == 'approved', decline: orders[i - 1].status == 'declined' }">
+                                <button class="approve-order" @click="orders[i - 1].status = 'approved'">Approve</button>
+                                <button class="decline-order" @click="orders[i - 1].status = 'declined'">Decline</button>
+                            </td>
+
                         </tr>
                     </tbody>
                 </table>
@@ -68,6 +71,7 @@ export default {
         return {
             stay: null,
             user: null,
+            orderStatus: {},
             orders: [{
                 "_id": "64cbe108d24925039955b3b2",
                 "hostId": "622f3403e36c59e6164faf93",
@@ -212,10 +216,10 @@ export default {
                 "msgs": [],
                 "status": "approved"
             },
-        ]
+            ]
         }
     },
-    
+
     async created() {
         const { stayId } = this.$route.params;
         if (stayId) {
