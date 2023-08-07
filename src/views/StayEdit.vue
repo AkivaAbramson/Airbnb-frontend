@@ -1,10 +1,10 @@
 <template >
     <section class="stay-edit home-layout">
         <header class="seller-header home-layout">
-            <div class="add-stay">
+            <!-- <div class="add-stay">
                 <span v-html="getSvg('plus')"></span>
                 <span>Add Stay</span>
-            </div>
+            </div> -->
             <h1 class="seller-title">My Dashboard</h1>
 
         </header>
@@ -79,7 +79,7 @@ export default {
                 },
                 "totalPrice": "946",
                 "startDate": "11/8/2023",
-                "endDate": "15/12/2023",
+                "endDate": "15/8/2023",
                 "guests": {
                     "adults": 5,
                     "kids": 3
@@ -90,7 +90,7 @@ export default {
                     "price": 1200.7
                 },
                 "msgs": [],
-                "status": "approved"
+                "status": "pending..."
             },
             {
                 "_id": "64cbe108d24925039955b3b2",
@@ -103,7 +103,7 @@ export default {
                 },
                 "totalPrice": "1260.4",
                 "startDate": "30/4/2023",
-                "endDate": "3/5/2023",
+                "endDate": "03/5/2023",
                 "guests": {
                     "adults": 2,
                     "kids": 0,
@@ -150,8 +150,8 @@ export default {
                     "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308655/Fairbnb/userImages/Stacy_pgenqp.webp"
                 },
                 "totalPrice": '2468.5',
-                "startDate": "27/6/2022",
-                "endDate": "24/6/2022",
+                "startDate": "24/6/2022",
+                "endDate": "29/6/2022",
                 "guests": {
                     "adults": 8,
                     "kids": 4
@@ -174,8 +174,8 @@ export default {
                     "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308654/Fairbnb/userImages/Robert_jv0ggk.webp"
                 },
                 "totalPrice": "360",
-                "startDate": "12/3/2022",
-                "endDate": "16/3/2022",
+                "startDate": "07/3/2022",
+                "endDate": "09/3/2022",
                 "guests": {
                     "adults": 3,
                     "kids": 0
@@ -198,8 +198,8 @@ export default {
                     "imgUrl": "https://res.cloudinary.com/dcp3qxsbc/image/upload/v1691308654/Fairbnb/userImages/Eyad_uml7mu.webp"
                 },
                 "totalPrice": "1355.4",
-                "startDate": "07/8/2021",
-                "endDate": "09/8/2021",
+                "startDate": "12/8/2021",
+                "endDate": "16/8/2021",
                 "guests": {
                     "adults": 2,
                     "kids": 0
