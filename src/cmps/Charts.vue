@@ -2,12 +2,12 @@
   <section class="host-charts-container">
 
     <div class="pie-chart">
-      <h1 class="pie-title">Nights per stay:</h1>
+      <h1 class="pie-title">Nights per order:</h1>
       <PieChart class="chart" :chartData="nightCategoryData" :options="pieOptions" />
     </div>
 
     <div class="bar-chart">
-      <h1 class="bar-title">Compare my stays:</h1>
+      <h1 class="bar-title">My homes this year:</h1>
       <BarChart class="chart" :chartData="stayRevenue" :options="barOptions" />
     </div>
 
@@ -38,7 +38,7 @@
           <h4>52</h4>
         </div>
         <div class="info">
-          <h4 class="grey">Unoccupied stays</h4>
+          <h4 class="grey">Unoccupied homes</h4>
           <h4>4</h4>
         </div>
         <div class="info">
@@ -143,7 +143,7 @@ export default defineComponent({
 
 
     const stayRevenue = {
-      labels: ['stay1', 'stay2', 'stay3', 'stay4'],
+      labels: [ 'Cottage', 'Suite', 'Studio','Villa'],
       datasets: [
         {
           data: [5, 31, 12, 22], // Sample data for bookings per month (can be your actual data)

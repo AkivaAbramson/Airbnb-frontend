@@ -77,9 +77,9 @@ export default {
                     "fullname": "Akiva Abramson",
                     "imgUrl": "https://res.cloudinary.com/dqjq5smb5/image/upload/v1691356949/akiva_bglys6.png"
                 },
-                "totalPrice": "946",
-                "startDate": "11/8/2023",
-                "endDate": "15/8/2023",
+                "totalPrice": "948",
+                "startDate": "10/8/2023",
+                "endDate": "14/8/2023",
                 "guests": {
                     "adults": 5,
                     "kids": 3
