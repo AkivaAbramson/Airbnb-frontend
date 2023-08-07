@@ -43,12 +43,11 @@ async function query(filterBy = { destination: '', }) {
   if (filterBy.destination && filterBy.destination !== "I'm flexible") {
     console.log('filterBy.destination', stays)
     const locRegex = new RegExp(filterBy.destination, 'i')
-    const locKeys = ['country', 'countryCode', 'city', 'address']
+    // const locKeys = ['country', 'countryCode', 'city', 'address']
     stays = stays.filter((stay) => {
       // return locKeys.forEach((key) => {
       //   locRegex.test(stay.loc[key])
       // })
-      if (stay.rate >= 4.8) console.log('ourstay:', stay, 'capacity:', stay.capacity, 'destination:', stay.loc.country);
       return locRegex.test(stay.loc.country)
     })
   }
