@@ -138,4 +138,28 @@
             }
         }
     }
+
+    .vc-container * {
+        font-family: Circular;
+        font-weight: bold;
+
+        --vc-color: #222222;
+        --vc-accent-600: #222222;
+        --vc-accent-200: #f7f7f7;
+    }
+
+    .vc-container {
+        .vc-weekday {
+            color: $clr4;
+            font-size: 0.75rem;
+        }
+
+        .vc-day {
+            min-height: 3.5rem;
+        }
+
+        .vc-highlight-content-light {
+            --vc-highlight-light-content-color: #222222;
+        }
+    }
 }

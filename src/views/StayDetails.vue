@@ -251,8 +251,6 @@ export default {
             if (!((startDate >= (new Date((new Date()).toLocaleDateString()).getTime())) && (!endDate || (endDate - startDate) / dayMilli >= 1))) {
                 delete newQuery.startDate
                 delete newQuery.endDate
-                newQuery.startDate = '2023-8-9'
-                newQuery.endDate = '2023-8-14'
             }
             this.$router.replace({ query: newQuery })
         },
