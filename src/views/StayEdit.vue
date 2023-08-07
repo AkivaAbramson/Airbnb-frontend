@@ -4,7 +4,7 @@
             <!-- <div class="add-stay">
                 <span v-html="getSvg('plus')"></span>
                 <span>Add Stay</span>
-            </div> -->
+            </div>
             <h1 class="seller-title">My Dashboard</h1>
 
         </header>
