@@ -66,18 +66,18 @@
       text-transform: capitalize;
       // height: max-content;
        &.td-img{
-          // display: flex;
-          // // align-content: center;
-          // align-items: center;
-          // justify-content: space-between;
+          display: flex;
+          // align-content: center;
+          align-items: center;
+          justify-content: space-between;
           
 
         }
-        // .buyer-img {
-        //   border-radius: 50%;
-        //   height: 2em;
-        //   width: 2em;
-        // }
+        .buyer-img {
+          border-radius: 50%;
+          height: 2.5em;
+          width: 2.5em;
+        }
     }
 
     .actions {
