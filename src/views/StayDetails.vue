@@ -87,9 +87,9 @@
             <Order ref="refOrder" :stay="stay" @btn-mounted="(ref) => elBtn = ref"></Order>
         </section>
         <StayReviews id="small-reviews" class="small" :reviews="stay.reviews" />
-        <section ref="location" class="stay-map">
+        <section v-if="center" ref="location" class="stay-map">
             <h2>Where you’ll be</h2>
-            <GoogleMap v-if="center" class="google-map" :apiKey="'AIzaSyAnbTuVXoF2tUKkZvxkYf3PkP-GX0nAvsA'" :center="center"
+            <GoogleMap class="google-map" :apiKey="'AIzaSyAnbTuVXoF2tUKkZvxkYf3PkP-GX0nAvsA'" :center="center"
                 :zoom="15">
                 <CustomMarker :options="{ position: center }">
                     <div class="marker-container">
