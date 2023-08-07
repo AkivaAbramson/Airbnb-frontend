@@ -171,6 +171,7 @@
     .top-container {
         display: grid;
         grid-template-columns: minmax($min-margin-sides, 1fr) minmax(auto, $normal-width) minmax($min-margin-sides, 1fr);
+        grid-auto-rows: auto;
 
         .header-details {
             grid-column: 2;
@@ -222,14 +223,23 @@
         margin-block-start: 1.5rem;
 
         .top-details {
-            height: 28px;
+            min-height: 28px;
             line-height: 1.125rem;
+            margin-block-start: 0.5rem;
 
             .svg-star svg {
                 width: 0.875rem;
                 height: 0.875rem;
                 margin: 0;
             }
+
+            // .btn-top {
+            //     position: absolute;
+            //     top: 1rem;
+            //     right: 1rem;
+            //     z-index: 1000;
+            //     color: white;
+            // }
         }
     }
 
@@ -279,6 +289,20 @@
         margin-inline: 0.5rem;
     }
 
+    .stay-map {
+        padding-block: 1.5rem 3rem;
+        
+        h2 {
+            padding-block: 1.5rem;
+        }
+
+        h3 {
+            padding-block-start: 2rem;
+            font-size: 1rem;
+            line-height: 1.25rem;
+        }
+    }
+
     .main-details {
         display: grid;
         grid-auto-flow: column;
@@ -286,15 +310,43 @@
         padding-block-start: 1.5rem;
 
         .order {
-            display: none;
+            position: absolute;
+            top: -1000px;
+            left: 50%;
+            max-width: 0;
+            max-height: 0;
+            z-index: 1000;
 
+            .date-picker {
+                position: fixed;
+                left: 0;
+                top: 5vh;
+                height: 95vh;
+                width: 100vw;
+                z-index: 1000;
+            }
         }
 
         @media (min-width: 745px) {
             grid-template-columns: minmax(calc((58 + 1/3)*1%), 1fr) calc((41 + 2/3)*1%);
 
             .order {
-                display: initial;
+                position: sticky;
+                top: 128px;
+                left: initial;
+                max-width: initial;
+                max-height: initial;
+                z-index: initial;
+
+                .date-picker {
+                    position: absolute;
+                    display: grid;
+                    top: calc(-1.5rem - 1px);
+                    left: initial;
+                    height: initial;
+                    width: initial;
+                    z-index: 10;
+                }
             }
         }
 
@@ -436,8 +488,67 @@
         }
     }
 
+    .google-map {
+        width: 100%;
+        height: 218px;
+
+        .marker-container {
+            --airbnb-delay: 0s;
+            --home-delay: 0.15s;
+            position: relative;
+            width: 3rem;
+            height: 3rem;
+            background: $wishlist;
+            border-radius: 50%;
+            // box-shadow: rgba(255, 56, 92, 0.18) 0px 0px 0px 32px;
+
+            .map-marker {
+                position: absolute;
+                width: 1rem;
+                height: 1rem;
+                top: 50%;
+                left: 50%;
+                margin: 0;
+                padding: 0;
+                color: white;
+                translate: -50% -50%;
+            }
+
+            .airbnb-marker {
+                opacity: 0;
+                scale: 0 1;
+                transition: all 0.15s var(--airbnb-delay);
+            }
+
+            .home-marker {
+                scale: 1 1;
+                transition: all 0.15s var(--home-delay);
+            }
+
+            &:hover {
+                --airbnb-delay: 0.15s;
+                --home-delay: 0s;
+
+                .airbnb-marker {
+                    opacity: 1;
+                    scale: 1 1;
+                }
+
+                .home-marker {
+                    opacity: 0;
+                    scale: 0 1;
+                }
+            }
+        }
+    }
+
     @media (min-width: 745px) {
         --min-margin-sides: 40px;
+
+        .google-map {
+            width: 100%;
+            height: 480px;
+        }
 
         .top-container {
             .header-details {

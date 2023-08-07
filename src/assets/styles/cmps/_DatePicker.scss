@@ -34,6 +34,30 @@
             color: $clr4;
             margin-block-start: 0.5rem;
         }
+
+        .empty {
+            ::before {
+                content: 'Add date';
+            }
+
+            &:focus::before {
+                content: 'MM/DD/YYYY'
+            }
+        }
+        
+        .date-input {
+            &:empty {
+                &::before {
+                    content: 'Add date';
+                }
+            }
+        }
+
+        .btn-input:focus-within {
+            .date-input:empty::before {
+                content: 'MM/DD/YYYY';
+            }
+        }
     }
 
     .picker-footer {
@@ -78,7 +102,6 @@
         }
         box-shadow: 0px 0px 0px 1px $clr8 inset;
         border-radius: 0.5rem;
-        // min-width: 270px;
         flex-basis: calc(((100vw - var(--flex-basis)) / 12) * 4 + 1px);
 
         button {
