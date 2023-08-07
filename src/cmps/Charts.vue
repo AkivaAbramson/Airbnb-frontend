@@ -2,18 +2,18 @@
   <section class="host-charts-container">
 
     <div class="pie-chart">
-      <h1 class="pie-title">Nights per order:</h1>
+      <h1 class="pie-title">Nights per order</h1>
       <PieChart class="chart" :chartData="nightCategoryData" :options="pieOptions" />
     </div>
 
     <div class="bar-chart">
-      <h1 class="bar-title">My homes this year:</h1>
+      <h1 class="bar-title">Revenue per home</h1>
       <BarChart class="chart" :chartData="stayRevenue" :options="barOptions" />
     </div>
 
     <div class="total-revenue">
       <div class="rev-container">
-        <h1 class="title">Total revenue:</h1>
+        <h1 class="title">Total revenue</h1>
         <div class="info">
           <h4 class="grey">This month</h4>
           <h4>$5,355</h4>
@@ -32,7 +32,7 @@
 
     <div class="order-state">
       <div>
-        <h1 class="title">Orders State:</h1>
+        <h1 class="title">Orders State</h1>
         <div class="info">
           <h4 class="grey">Total orders</h4>
           <h4>52</h4>
@@ -146,7 +146,7 @@ export default defineComponent({
       labels: [ 'Cottage', 'Suite', 'Studio','Villa'],
       datasets: [
         {
-          data: [5, 31, 12, 22], // Sample data for bookings per month (can be your actual data)
+          data: [3509, 4278, 2383, 6322], // Sample data for bookings per month (can be your actual data)
           backgroundColor: [clr1, clr2, clr3, clr4],
         },
       ],

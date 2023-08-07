@@ -151,7 +151,7 @@ export default {
         openNextModal() {
             if (this.openDest === true) {
                 this.openDest = false
-                this.openCheckin = true
+                this.openGuests = true
                 return
             }
             if (this.openCheckin === true) {
