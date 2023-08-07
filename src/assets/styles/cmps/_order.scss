@@ -65,8 +65,12 @@
                 border-inline-end: 1px solid $clr8;
             }
 
-            .empty {
+            .btn-input .empty {
                 color: $clr4;
+
+                &::before {
+                    content: 'Add date';
+                }
             }
         }
 

@@ -29,13 +29,14 @@
         display: grid;
         grid-column: 1;
         justify-content: end;
+        margin-block-start: 4rem;
     }
 
     button.btn.btn-return {
         display: grid;
         align-items: center;
         justify-content: center;
-        margin-block-start: -0.125rem;
+        margin-block-start: -0.25rem;
         height: 3rem;
         width: 3rem;
         border-radius: 50%;
@@ -58,7 +59,7 @@
 
     h1 {
         font-size: 2rem;
-        padding-block-end: 3rem;
+        padding-block: 4rem 3rem;
         line-height: 2.25rem;
     }
 

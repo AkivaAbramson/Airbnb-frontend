@@ -6,13 +6,13 @@
                 <h3 class="picker-subtitle">{{ header.subtitle }}</h3>
             </div>
             <div class="btn-modes flex">
-                <button class="btn-checkin flex column">
+                <button class="btn-input btn-checkin flex column">
                     <span class="title">check-in</span>
-                    <span :class="{ empty: !range.start }">{{ dateFormat(range.start) }}</span>
+                    <span class="date-input" :class="{ empty: !range.start }">{{ dateFormat(range.start) }}</span>
                 </button>
-                <button class="btn-checkout flex column">
+                <button class="btn-input btn-checkout flex column">
                     <span class="title">check-out</span>
-                    <span :class="{ empty: !range.end }">{{ dateFormat(range.end) }}</span>
+                    <span class="date-input" :class="{ empty: !range.end }">{{ dateFormat(range.end) }}</span>
                 </button>
             </div>
         </header>

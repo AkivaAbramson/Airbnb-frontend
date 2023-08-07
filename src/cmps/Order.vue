@@ -8,11 +8,11 @@
             <div class="dates flex"
             @click="showDateModal = true"
             v-clickout="() => showDateModal = false">
-                <button class="checkin flex column">
+                <button class="btn-input checkin flex column">
                     <span class="title">check-in</span>
                     <span :class="{ empty: !range.start }">{{ checkin }}</span>
                 </button>
-                <button class="flex column">
+                <button class="btn-input flex column">
                     <span class="title">check-out</span>
                     <span :class="{ empty: !range.end }">{{ checkout }}</span>
                 </button>
@@ -21,7 +21,7 @@
                 :columns="2"
                 :range="range"
                 :attributes="attributes"
-                :header="{ title: nightsTxt, subtitle: subtitle }"
+                :header="{ title: (nightsTxt || 'Select dates'), subtitle: (subtitle || 'Add your travel dates for exact pricing') }"
                 :footer="{ clear: true, close: true}"
                 @close="showDateModal = false"
                 @clear="onDateClear"
@@ -44,7 +44,7 @@
             <div class="notify">{{ `You won't be charged yet` }}</div>
             <div class="price-calc shadow">
                 <div class="flex justify-between">
-                    <span class="underline">${{ formatNumber(price) }} x {{ nightsTxt }}</span>
+                    <span class="underline">${{ formatNumber(price) }} x {{ (nightsTxt) }}</span>
                     <span>${{ formatNumber(priceNights) }}</span>
                 </div>
                 <div class="flex justify-between">
@@ -161,15 +161,15 @@ export default {
             return this.nights() * this.stay.price
         },
         checkin() {
-            return this.range.start ? new Date(this.range.start).toLocaleDateString() : 'Add date'
+            return this.range.start ? new Date(this.range.start).toLocaleDateString() : ''
         },
         checkout() {
-            return this.range.end ? new Date(this.range.end).toLocaleDateString() : 'Add date'
+            return this.range.end ? new Date(this.range.end).toLocaleDateString() : ''
         },
         subtitle() {
-            const checkin = this.range.start ? (new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(this.range.start).getTime())) : 'Add date'
-            const checkout = this.range.end ? (new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(this.range.end).getTime())) : 'Add date'
-            return checkin + ' - ' + checkout
+            const checkin = this.range.start ? (new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(this.range.start).getTime())) : ''
+            const checkout = this.range.end ? (new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(this.range.end).getTime())) : ''
+            return (checkin && checkout) ?  checkin + ' - ' + checkout : ''
         },
         btnOrderText() {
             return (this.range.start && this.range.end ? 'Reserve' : 'Check availability')
