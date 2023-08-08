@@ -71,22 +71,33 @@ async function query(filterBy = { destination: '', }) {
     // save(stay)
   })
 
-  stays.sort((a,b) =>{
+  stays.sort((a, b) => {
+    if (a.rate >= 4.4 || b.rate >= 4.4) return b.rate - a.rate
     if ((a.rate >= 4 && b.rate >= 4) || (a.rate < 4 && b.rate < 4)) {
-      return Math.random < 0.5 ? 1 : -1
+      return Math.random() < 0.5 ? 1 : -1
     }
     else {
       return b.rate - a.rate
     }
   })
   console.log('len', stays.length);
-  if (stays.length >= 10) {
+
+  if (stays.length >= 12) {
     console.log('len', stays.length);
+
+    let greatRevIdx = stays.findIndex((stay) => stay.rate < 4.3)
+    greatRevIdx += 5
+    let staySlice = stays.slice(0, greatRevIdx)
+    console.log('staySlice', staySlice);
+    staySlice.sort((a, b) => Math.random() < 0.5 ? 1 : -1)
+    stays = stays.slice(greatRevIdx)
+    stays = staySlice.concat(stays)
+
     const idx = stays.findIndex((stay) => stay._id === '64d08628d61b6217f498f1d5')
     const ourStay = stays[idx]
     stays.splice(idx, 1)
     console.log('ourStay:', ourStay);
-    stays.splice(6, 0, ourStay)
+    stays.splice(11, 0, ourStay)
   }
 
   console.log(stays);

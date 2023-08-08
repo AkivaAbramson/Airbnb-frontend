@@ -82,6 +82,8 @@ export default {
         this._stay = { ...this.stay }
         this.date1 = new Date(this._stay.startDate)
         this.date2 = new Date(this._stay.endDate)
+        if (this.stay._id === '64d08628d61b6217f498f1d5') this.isLiked = true
+        if (Math.random() <= 0.17) this.isLiked = true
     },
     methods: {
         toggleHeart() {
