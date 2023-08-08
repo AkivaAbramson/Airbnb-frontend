@@ -27,7 +27,7 @@
     }
     
     @include for-narrow-layout {
-        grid-template-columns: 
+        grid-template-columns:
         minmax(15px, 1fr)
         minmax(auto, 960px)
         minmax(15px, 1fr);

@@ -158,8 +158,7 @@ export default {
             return this.$route.query.endDate
         },
         async getStayImage() {
-            const res = await fetch(this.stay.imgUrls[0])
-            return res.status === 200 ? this.stay.imgUrls[0] : 'src/assets/defaultStay.png'
+            return this.stay.imgUrls[0] || 'src/assets/defaultStay.png'
         },
         formatNumber(num, decimal = 2) {
             return utilService.formatNumber(num, decimal)

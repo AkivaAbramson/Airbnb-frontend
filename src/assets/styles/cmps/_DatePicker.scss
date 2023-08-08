@@ -144,8 +144,12 @@
         font-weight: bold;
 
         --vc-color: #222222;
+        --vc-gray-400: #b0b0b0;
         --vc-accent-600: #222222;
         --vc-accent-200: #f7f7f7;
+        --vc-day-content-disabled-color: #b0b0b0;
+        --vc-highlight-outline-bg: #222222;
+        
     }
 
     .vc-container {
@@ -155,11 +159,62 @@
         }
 
         .vc-day {
-            min-height: 3.5rem;
+            min-height: 2.5rem;
+        }
+
+        .vc-day-content {
+            height: 2.5rem;
+            width: 2.5rem;
+
+            &:hover {
+                background-color: initial;
+                border: 1px solid $clr0;
+            }
+        }
+
+        .vc-disabled {
+            text-decoration: line-through;
         }
 
         .vc-highlight-content-light {
             --vc-highlight-light-content-color: #222222;
+
+            &:hover {
+                background-color: white;
+            }
+        }
+
+        .vc-highlight-content-outline {
+            color: white;
+        }
+
+        .vc-focus:focus-within {
+            box-shadow: none;
+        }
+
+        .vc-highlight {
+            height: 100%;
+            width: 100%;
+        }
+
+        .vc-highlight-bg-solid {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        .vc-header {
+            margin-block: 2.25rem 0.75rem;
+            >* {
+                background-color: transparent;
+            }
+            button {
+                min-height: 0;
+            }
+
+            .vc-title {
+                font-size: 1rem;
+                color: $clr0;
+            }
         }
     }
 }
