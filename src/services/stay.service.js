@@ -67,12 +67,7 @@ async function query(filterBy = { destination: '', }) {
   }
 
   stays.forEach(stay => {
-    stay.rate = +utilService.calcRating(stay)
-    // if (stay.rate >= 4.3 && stay.rate <= 4.6 && Math.random() <= 0.3) {
-    //   console.log('changing stay rate', stay.rate);
-    //   stay.rate += 0.3
-    //   console.log('new rate:', stay.rate);
-    // } 
+    stay.rate = +utilService.calcRating(stay, true)
     // save(stay)
   })
 

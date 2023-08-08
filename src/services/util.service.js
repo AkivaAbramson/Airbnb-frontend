@@ -97,7 +97,7 @@ function trimTxt(txt, maxLength = 35) {
 
     return txt.slice(0, maxLength) + '...'
 }
-function calcRating({ reviews }) {
+function calcRating({ reviews }, changeRate = true) {
     // console.log('util calcRating', reviews);
     let rateSum = reviews.reduce((acc, review) => {
         const revKeys = Object.keys(review.rate)
@@ -108,6 +108,16 @@ function calcRating({ reviews }) {
     }, 0)
     // console.log('rateSum:', rateSum)
     let rate = Number((rateSum / reviews.length).toFixed(2))
-    if (!(rate % 1)) rate = rate.toFixed(1)
+    // TODO - the adjacent if statement below is a quick plaster for bad data. DELETE in 5 hours
+    
+    if (changeRate && rate >= 4.3 && rate <= 4.7 && Math.random() <= 0.6) {
+      console.log('changing stay rate', rate);
+      rate += 0.3
+      rate = Number(rate.toFixed(2))
+      console.log('new rate:', rate);
+    }
+    let tmpRate = Number((rate * 10).toFixed(1))
+    // if (!(tmpRate % 1)) rate = rate.toFixed(1)
+    if (!(rate % 1) || !(tmpRate % 1)) rate = rate.toFixed(1)
     return rate
 }
