@@ -45,7 +45,7 @@
                                     <button class="decline-order" @click="orders[i - 1].status = 'declined'">Decline</button>
                                 </div>
                             </td>
-                            <td>{{ orders[i - 1].status }}</td>
+                            <td class="order-status" :class="classStatus(orders[i - 1].status)">{{ orders[i - 1].status }}</td>
 
                         </tr>
                     </tbody>
@@ -282,6 +282,15 @@ export default {
     computed: {
         stay() {
             return this.$store.getters.loggedinUser
+        },
+        classStatus() {
+            return (status) => {
+                switch(status) {
+                    case ('approved'): return 'approved'
+                    case ('declined'): return 'declined'
+                    case ('pending'): return 'pending'
+                }
+            }
         }
     },
     components: {

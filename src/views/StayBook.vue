@@ -61,7 +61,7 @@
             </div>
             <section class="modal-edit" :class="{ show: modal }" @click.self="modal = null">
                 <div class="modal-wrapper" :class="{ show: modal }" @click.self="modal = null">
-                    <section v-if="modal === 'guest'" class="modal-guest" :class="{ show: modal === 'guest' }">
+                    <section class="modal-guest" :class="{ show: modal === 'guest' }">
                         <header>Guests</header>
                         <div class="notify">This place has a maximum of {{ stay.capacity }} guests. not including infants.
                         </div>
@@ -71,7 +71,7 @@
                             <button class="btn btn-save bold" @click="updateQuery(), (modal = null)">Save</button>
                         </footer>
                     </section>
-                    <DatePicker v-if="modal === 'date'" :columns="2" :range="range" :attributes="attributes"
+                    <DatePicker :columns="2" :range="range" :attributes="attributes"
                         :header="{ title: nightsTxt, subtitle: subtitle }" :footer="{ clear: true, save: true }"
                         :class="{ show: modal === 'date' }" @close="modal = null" @date-change="onDateChange" @save-changes="updateQuery" />
                 </div>

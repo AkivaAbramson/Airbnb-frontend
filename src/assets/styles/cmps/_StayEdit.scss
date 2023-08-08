@@ -71,6 +71,21 @@
         }
     }
 
+    .order-status {
+      font-weight: bold;
+      color: #faa37c;
+      -webkit-text-stroke-color: $clr0;
+      -webkit-text-stroke-width: 0.1px;
+
+      &.approved {
+        color: #9ED5C5;
+      }
+
+      &.declined {
+        color: #F7A4A4;
+      }
+    }
+
     .actions {
       display: flex;
       justify-content: space-around;
